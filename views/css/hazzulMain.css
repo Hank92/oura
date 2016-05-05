@@ -90,7 +90,7 @@
   .affix-content .container {
     width: 1000px;
     overflow: auto;
-    padding-top :20px;
+    padding-top :0px;
   }
 
   .affix-content .container .page-header{

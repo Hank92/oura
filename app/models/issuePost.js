@@ -6,10 +6,6 @@ var issueSchema = mongoose.Schema({
 	url  : String,
 	img_url: [String],
 	posted: { type: Date, default: Date.now },
-	comments: [{
-		name: String,
-		content: String
-	}],
 	userComments: [{
 		userPost: String
 	}]

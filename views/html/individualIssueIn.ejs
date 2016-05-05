@@ -51,7 +51,7 @@
   </div>
 
 <div class="panel panel-primary">
-<div class="panel-heading"><font size = "5">댓글 <%= issuepostModel.comments.length + issuepostModel.userComments.length %></font></div>
+<div class="panel-heading"><font size = "5">댓글 <%= issuepostModel.userComments.length %></font></div>
   <div class="panel-body">
     
   <% for( var i = 0; i < issuepostModel.userComments.length; i++ ) { %>
@@ -59,13 +59,7 @@
             <p><font size ="5" color = "#FFFFFF"><%= issuepostModel.userComments[issuepostModel.userComments.length-i-1].userPost %></font></p>
 </div>
 <% }%>
-
-  <% for( var i = 0; i < issuepostModel.comments.length; i++ ) { %>
-    <div class ="media">
-           <p>   <font size ="5" color="#FFFFFF"><%= issuepostModel.comments[i].content %></p>
-              </font>
-            </div>
-   <% } %>      
+     
 
 </div>
 </div>
