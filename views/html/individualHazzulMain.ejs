@@ -25,11 +25,13 @@
     <div class ="thumbnail">
     </br>
     <% for( var i = 0; i < postModel.image_url.length; i++ ) { %> 
-      
+      <font color ="#FFFFFF"><%= postModel.image_url[i] %></font>
             <img src = "<%= postModel.image_url[i] %>" alt = "이미지 로딩중.." class="img-responsive">
           
          </br></br>   
+         
          <% }%> 
+         </br>
         출처: <%= postModel.url %>
     </div>
     </div></div>
