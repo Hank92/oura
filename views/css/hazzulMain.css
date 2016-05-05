@@ -1,8 +1,8 @@
 @media (min-width: 768px){
   .affix-content .container {
-    width: 1000px;
+    width: 700px;
     overflow: auto;
-    padding-top :70px;
+    padding-top :20px;
   }   
 
   html,body{
@@ -25,64 +25,37 @@
 
   } 
 
-@media (min-width: 769px){
-  .affix-content .container {
-    width: 600px;
-  }
-    .affix-content .container .page-header{
-    margin-top: 0;
-  }  
+  .thumbnail { background-color: #484848   ; float:left; padding : 1%; width:200px; height:auto; overflow: hidden; }
+.thumbnail img {height:auto; width:100%; margin:10 auto; }
+
+.thumbnail {
+   width: 160px;
+   height: 210px;
+   overflow: auto;
+   margin: 20px;
+ }
+
+.thumbnail > img {
+   width: 100px;
+   height: 80px;
+ }
+
+
+ .text-center {
+     font-size: 12px;
+     margin: 2px;
+      }
 }
 
 @media (min-width: 992px){
   .affix-content .container {
   width: 900px;
+  overflow: auto;
+    padding-top :20px;
   }
     .affix-content .container .page-header{
     margin-top: 0;
   }
-}
-
-@media (min-width: 1220px){
-  
-
-  .affix-content{
-    overflow: auto;
-  }
-
-  .affix-content .container {
-    width: 1000px;
-  }
-
-  .affix-content .container .page-header{
-    margin-top: 0;
-  }
-  .affix-content{
-    padding-right: 30px;
-    padding-left: 30px;
-  }  
-  
-}
-
-h1 {
-  color: rgb(102, 189, 221);
-  font-size: 48px;
-}
-h5  {
-  color: rgb(102, 189, 221);
-}
-h7 {
-  color:rgb(102, 189, 221);
-}
-
-h2 {
-  color:rgb(102, 189, 221);
-}
-
-p {
-  color:rgb(102, 189, 221);
-}
-
 
 
   .thumbnail { background-color: #484848   ; float:left; padding : 1%; width:200px; height:auto; overflow: hidden; }
@@ -105,5 +78,70 @@ p {
      font-size: 12px;
      margin: 2px;
       }
+}
+
+@media (min-width: 1220px){
+  
+
+  .affix-content{
+    overflow: auto;
+  }
+
+  .affix-content .container {
+    width: 1000px;
+    overflow: auto;
+    padding-top :20px;
+  }
+
+  .affix-content .container .page-header{
+    margin-top: 0;
+  }
+  .affix-content{
+    padding-right: 30px;
+    padding-left: 30px;
+  }  
+
+
+  .thumbnail { background-color: #484848   ; float:left; padding : 1%; width:200px; height:auto; overflow: hidden; }
+.thumbnail img {height:auto; width:100%; margin:10 auto; }
+
+.thumbnail {
+   width: 160px;
+   height: 210px;
+   overflow: auto;
+   margin: 20px;
+ }
+
+.thumbnail > img {
+   width: 100px;
+   height: 80px;
+ }
+
+
+ .text-center {
+     font-size: 12px;
+     margin: 2px;
+      }
+  
+}
+
+h1 {
+  color: rgb(102, 189, 221);
+  font-size: 48px;
+}
+h5  {
+  color: rgb(102, 189, 221);
+}
+h7 {
+  color:rgb(102, 189, 221);
+}
+
+h2 {
+  color:rgb(102, 189, 221);
+}
+
+p {
+  color:rgb(102, 189, 221);
+}
 
 } 
