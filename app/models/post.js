@@ -6,6 +6,7 @@ var postSchema = mongoose.Schema({
 	url  : String,
 	image_url: [String],
 	posted: { type: Date, default: Date.now },
+	video_url: [String],
 	comments: [{
 		name: String,
 		content: String

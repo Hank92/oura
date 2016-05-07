@@ -25,12 +25,17 @@
     <div class ="thumbnail">
     </br>
     <% for( var i = 0; i < postModel.image_url.length; i++ ) { %> 
+
       <font color ="#FFFFFF"><%= postModel.image_url[i] %></font>
             <img src = "<%= postModel.image_url[i] %>" alt = "이미지 로딩중.." class="img-responsive">
           
          </br></br>   
          
          <% }%> 
+         <% for( var i = 0; i < postModel.video_url.length; i++ ) { %> 
+           
+            <iframe width="640" height="360" src="<%= postModel.video_url[i] %>" frameborder="0" allowfullscreen></iframe> </br>
+            <% } %>    
          </br>
         출처: <%= postModel.url %>
     </div>

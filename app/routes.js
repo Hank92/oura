@@ -21,35 +21,6 @@ app.get('/', function (req, res){
 	if (typeof req.query.page !== 'undefined') {
         currentPage = +req.query.page;
     	}
-			postModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 10 }, function(err, results) {
-         if(err){
-         console.log("error");
-         console.log(err);
-     } else {
-    	    pageSize = results.limit;
-            pageCount = (results.total)/(results.limit);
-    		pageCount = Math.ceil(pageCount);
-    	    totalPosts = results.total;
-    	console.log(results.docs)
-
-    	res.render('hazzulMain.ejs', {
-    		postModels: results.docs,
-    		pageSize: pageSize,
-    		pageCount: pageCount,
-    		totalPosts: totalPosts,
-    		currentPage: currentPage
-    	})//res.render
-     }//else
-     });//paginate
-	
-});
-
-app.get('/issuein', function (req, res){
-
-	var currentPage = 1;
-	if (typeof req.query.page !== 'undefined') {
-        currentPage = +req.query.page;
-    	}
 		issueModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 10 }, function(err, results) {
          if(err){
          console.log("error!!");
@@ -63,6 +34,35 @@ app.get('/issuein', function (req, res){
 
     	res.render('issuein.ejs', {
     		issuepostModels: results.docs,
+    		pageSize: pageSize,
+    		pageCount: pageCount,
+    		totalPosts: totalPosts,
+    		currentPage: currentPage
+    	})//res.render
+     }//else
+     });//paginate
+	
+});
+
+app.get('/mbong19', function (req, res){
+
+	var currentPage = 1;
+	if (typeof req.query.page !== 'undefined') {
+        currentPage = +req.query.page;
+    	}
+			postModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 10 }, function(err, results) {
+         if(err){
+         console.log("error");
+         console.log(err);
+     } else {
+    	    pageSize = results.limit;
+            pageCount = (results.total)/(results.limit);
+    		pageCount = Math.ceil(pageCount);
+    	    totalPosts = results.total;
+    	console.log(results.docs)
+
+    	res.render('mbong19.ejs', {
+    		postModels: results.docs,
     		pageSize: pageSize,
     		pageCount: pageCount,
     		totalPosts: totalPosts,
@@ -102,8 +102,8 @@ app.param('id', function(req, res, next, id){
 			});	
 });
 
-app.get('/:id', function(req, res){
-	   res.render('individualHazzulMain.ejs', {postModel: req.mainpostId});
+app.get('/mbong19/:id', function(req, res){
+	   res.render('individualmbong19.ejs', {postModel: req.mainpostId});
 	   console.log(req.mainpostId)
 	})
 	
@@ -156,12 +156,30 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 				var $ = cheerio.load(body);
 				var comments = [];
 				var image_url = [];
+				var video_url = [];
 
 				$('span div img').each(function(){
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);	
 				})
 				// scrape all the images for the post
+
+				$('span div embed').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				$('span div iframe').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);	
+				})
+
+				$('video source').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);	
+				})
+
+				// scrape all the videos for the post
 				
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
@@ -179,6 +197,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 						title: bhuTitle,
 						url: bhuUrl,
 						image_url: image_url,
+						video_url: video_url,
 						comments: comments
 					})
 			Post.save(function(error){
