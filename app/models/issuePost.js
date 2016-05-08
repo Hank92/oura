@@ -5,6 +5,7 @@ var issueSchema = mongoose.Schema({
     title: String, 
 	url  : String,
 	img_url: [String],
+	video_url:[String],
 	posted: { type: Date, default: Date.now },
 	userComments: [{
 		userPost: String
