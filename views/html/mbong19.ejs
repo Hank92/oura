@@ -55,7 +55,7 @@
             <div class="row">
 
        <% for(var i = postModels.length-1; i > -1 ; i--) { %>
-            <a class="thumbnail" href="mbong19/<%= postModels[i].id %>">
+            <a class="thumbnail" href="/mbong19/<%= postModels[i].id %>">
 
                 <img class="img-responsive" src="<%= postModels[i].image_url[0] || postModels[i].image_url[1]  %>" alt="이미지 로딩중..."></br>
                 <div class="text-center">
@@ -68,7 +68,7 @@
 <% if (pageCount > 1) { %>  
 <ul class="pagination">  
   <% if (currentPage > 1) { %>
-      <li><a href="mbong19/?page=1">&laquo;</a></li>
+      <li><a href="/mbong19/?page=1">&laquo;</a></li>
   <% } %>
   <% var i = 1;
   if (currentPage > 5) {
@@ -81,17 +81,17 @@
     <% if (currentPage == i) { %>
         <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
     <% } else { %>
-        <li><a href="mbong19/?page=<%= i %>"><%= i %></a></li>
+        <li><a href="/mbong19/?page=<%= i %>"><%= i %></a></li>
     <% } %>
     <% if (i == (currentPage + 4)) { %>
         <li class="disabled"><a href="#">...</a></li>
     <% break; } %>
   <% } %>
   <% if (currentPage != pageCount) { %>
-      <li><a href="mbong19/?page=<%= pageCount %>">&raquo;</a></li>
+      <li><a href="/mbong19/?page=<%= pageCount %>">&raquo;</a></li>
   <% } %>
 </ul>  
-<% } %> 
+<% } %>
 
 </div>
 </div>

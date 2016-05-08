@@ -131,7 +131,7 @@ app.post('/:id/post', function (req, res){
 		item[0].save(function(err, data){
 			if (err) res.send(err)
 			else 
-				res.redirect('/' + req.params.id )
+				res.redirect('/mbong19/' + req.params.id )
 		});
 	})
 
@@ -159,6 +159,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 				var video_url = [];
 
 				$('span div img').each(function(){
+					var img_url = $(this).attr('src');
+					image_url.push(img_url);	
+				})
+
+				$('div img').each(function(){
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);	
 				})
