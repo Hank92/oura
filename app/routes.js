@@ -327,8 +327,8 @@ request('http://issuein.com/', function(err, res, body){
 					var issuePost = new issueModel({
 						title: issueTitle,
 						url: issueUrl,
-						img_url: image_url
-					
+						img_url: image_url,
+						video_url: video_url
 					})
 			issuePost.save(function(error){
 					if(error){
