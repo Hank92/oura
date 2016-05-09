@@ -47,6 +47,12 @@
         <li><a href="/about">하즐 소개</a></li>
         <li><a href="/mbong19">엠봉 19</a></li>
       </ul>
+      <form class="navbar-form navbar-right" role="search" action="/issueinSearch" method="get">
+              <div class="form-group">
+                <input type="text" name="search" class="form-control" placeholder="검색">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav></br>
@@ -57,7 +63,7 @@
        <% for(var i = issuepostModels.length-1; i > -1 ; i--) { %>
             <a class="thumbnail" href="/issuein/<%= issuepostModels[i].id %>">
 
-                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] %>" alt="이미지 로딩중..."></br>
+                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중..."></br>
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
                   <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
