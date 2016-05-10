@@ -21,7 +21,7 @@ app.get('/', function (req, res){
 	if (typeof req.query.page !== 'undefined') {
         currentPage = +req.query.page;
     	}
-		issueModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 10 }, function(err, results) {
+		issueModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 20 }, function(err, results) {
          if(err){
          console.log("error!!");
          console.log(err);
@@ -62,7 +62,7 @@ app.get('/mbong19', function (req, res){
 	if (typeof req.query.page !== 'undefined') {
         currentPage = +req.query.page;
     	}
-			postModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 10 }, function(err, results) {
+			postModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 20 }, function(err, results) {
          if(err){
          console.log("error");
          console.log(err);
@@ -174,8 +174,6 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);	
 				})
-
-				
 				// scrape all the images for the post
 
 				$('span div embed').each(function(){
@@ -239,8 +237,198 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 
 });
 
+request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('td.title').each(function(){
+		var issueTitle = $(this).find('a.hx').text();
+		var newHref = $(this).find('a').attr('href');
+		var issueUrl = "http://www.issuein.com"+ newHref;
+	 	
+			request(issueUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var image_url = [];
+				var video_url = [];
+
+				$('article div img').each(function(){
+					var img_url = $(this).attr('src');
+					image_url.push(img_url);	
+				})
+
+				$('div embed').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				// scrape all the images for the post
+				issueModel.find({title: issueTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new issueModel({
+						title: issueTitle,
+						url: issueUrl,
+						img_url: image_url,
+						video_url:video_url
+					
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+request('http://issuein.com/index.php?mid=index&page=3', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('td.title').each(function(){
+		var issueTitle = $(this).find('a.hx').text();
+		var newHref = $(this).find('a').attr('href');
+		var issueUrl = "http://www.issuein.com"+ newHref;
+	 	
+			request(issueUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var image_url = [];
+				var video_url = [];
+
+				$('article div img').each(function(){
+					var img_url = $(this).attr('src');
+					image_url.push(img_url);	
+				})
+
+				$('div embed').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				// scrape all the images for the post
+				issueModel.find({title: issueTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new issueModel({
+						title: issueTitle,
+						url: issueUrl,
+						img_url: image_url,
+						video_url:video_url
+					
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
 
 request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('td.title').each(function(){
+		var issueTitle = $(this).find('a.hx').text();
+		var newHref = $(this).find('a').attr('href');
+		var issueUrl = "http://www.issuein.com"+ newHref;
+	 	
+			request(issueUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var image_url = [];
+				var video_url = [];
+
+				$('article div img').each(function(){
+					var img_url = $(this).attr('src');
+					image_url.push(img_url);	
+				})
+
+				$('div embed').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				// scrape all the images for the post
+				issueModel.find({title: issueTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new issueModel({
+						title: issueTitle,
+						url: issueUrl,
+						img_url: image_url,
+						video_url:video_url
+					
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
 		
