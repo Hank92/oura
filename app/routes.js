@@ -43,7 +43,19 @@ app.get('/', function (req, res){
      });//paginate
 	
 });
+/*
+app.get('/issueinSearch', function (req, res){
 
+if(req.query.search){
+	issueModel.findOne({title: req.query.search}, function (err, all_pins){
+		res.render('issueinSearch.ejs', {issuepostModels: all_pins})
+		})
+	}
+	else{
+		res.render("nothingfound.ejs")
+	}
+});
+*/
 app.get('/mbong19', function (req, res){
 
 	var currentPage = 1;
