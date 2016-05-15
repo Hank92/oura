@@ -18,17 +18,20 @@ app.get('/about', function (req, res){
 app.get('/', function (req, res){
 if(req.query.search){
 	issueModel.findByTitle(req.query.search, function (err, all_pins){
+		var searchTitle = req.query.search;
 		pageSize  = 0;
 		pageCount = 0;
 		totalPosts = 0;
-		currentPage = 0;
+		currentPage =0;
 		res.render('issuein.ejs', {
 			issuepostModels: all_pins,
+			searchTitle: searchTitle,
 			pageSize: pageSize,
     		pageCount: pageCount,
     		totalPosts: totalPosts,
     		currentPage: currentPage
 		})
+		
 		})
 	}
 	else {
@@ -72,7 +75,24 @@ if(req.query.search){
 });
 */
 app.get('/mbong19', function (req, res){
-
+if(req.query.search){
+	postModel.findByTitle(req.query.search, function (err, all_pins){
+		var searchTitle = req.query.search;
+		pageSize  = 0;
+		pageCount = 0;
+		totalPosts = 0;
+		currentPage =0;
+		res.render('mbong19.ejs', {
+			postModels: all_pins,
+			searchTitle: searchTitle,
+			pageSize: pageSize,
+    		pageCount: pageCount,
+    		totalPosts: totalPosts,
+    		currentPage: currentPage
+		})
+		})
+	}
+	else {
 	var currentPage = 1;
 	if (typeof req.query.page !== 'undefined') {
         currentPage = +req.query.page;
@@ -97,7 +117,7 @@ app.get('/mbong19', function (req, res){
     	})//res.render
      }//else
      });//paginate
-	
+	}
 });
 
 

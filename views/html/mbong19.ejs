@@ -47,7 +47,12 @@
         <a class="btn btn-default btn-outline btn-circle collapsed" href="/about"><b>하즐 소개</b></a>
         <a class="btn btn-default btn-outline btn-circle collapsed" href="/mbong19"><b>짤 더보기 +</b></a> 
         </ul>
-
+<form class="navbar-form navbar-right" role="search" action="/mbong19" method="get">
+              <div class="form-group">
+                <input type="text" name="search" class="form-control" placeholder="검색하기">
+              </div>
+              <button type="submit" class="btn btn-default"><span class ="glyphicon glyphicon-search"><span></button>
+            </form>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav></br>
@@ -65,6 +70,12 @@
                 </div>
             </a>
        <% }%>
+        </br></br>
+         <% if (postModels.length < 1) { %> 
+          <div class ="text-center">
+          <h3><font size ="8" color ="#FFFFFF"> "<%= searchTitle %>"<font> <font size ="6" color ="#FFFFFF">검색 결과가 없습니다.. sorry<font></h3>
+          </div>
+       <% } %> 
 </div>
 <% if (pageCount > 1) { %>  
 <ul class="pagination">  
