@@ -143,5 +143,7 @@ h2 {
 p {
   color:rgb(102, 189, 221);
 }
+.btn.btn-circle { border-radius: 50px; color:rgb(102, 189, 221); position: relative;  padding: 4px 15px; margin:10px auto; }
+.btn.btn-outline { background-color: transparent; }
 
 } 
