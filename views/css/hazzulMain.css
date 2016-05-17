@@ -147,22 +147,25 @@ p {
 .btn.btn-outline { background-color: transparent; }
 
 .panel-table .panel-body{
-  padding:0;
+  padding:0; 
 }
 
 .panel-table .panel-body .table-bordered{
   border-style: none;
   margin:0;
+
 }
 
 .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {
     text-align:center;
     width: 100px;
+ 
 }
 
 .panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
 .panel-table .panel-body .table-bordered > tbody > tr > td:last-of-type {
   border-right: 0px;
+  background-color:   rgb(24,24,24) ; color: rgb(255,255,255);
 }
 
 .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type,
