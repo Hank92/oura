@@ -1,23 +1,17 @@
-// app/models/issuePost.js
+// app/models/daily.js
 var mongoose = require('mongoose');
 
-var issueSchema = mongoose.Schema({
+var dailySchema = mongoose.Schema({
     title: String, 
-	url  : String,
-	img_url: [String],
+    url: String,
 	video_url:[String],
 	posted: { type: Date, default: Date.now },
-	comments: [{
-		name: String,
-		content: String
-	}],
 	userComments: [{
 		userPost: String
 	}]
+    });
 
-     });
-
-issueSchema.statics.findByTitle = function(title, cb) {
+dailySchema.statics.findByTitle = function(title, cb) {
 	// This is an interesting line.
 	// New RegExp(title, 'i') creates a Regular Expression that causes a case-insensitive search.
 	// Also passing in the callback like this allows us to call this method like so:
@@ -30,5 +24,5 @@ issueSchema.statics.findByTitle = function(title, cb) {
 	this.find({ title: new RegExp(title, 'i')}, cb);
 }
 
-     issueSchema.plugin(mongoosePaginate);
-     module.exports = mongoose.model('issuePost', issueSchema);
+     dailySchema.plugin(mongoosePaginate);
+     module.exports = mongoose.model('dailyPost', dailySchema);

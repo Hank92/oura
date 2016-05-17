@@ -1,4 +1,4 @@
-<!-- views/issuein.ejs -->
+<!-- views/entertain.ejs -->
 <!doctype html>
 <html>
 <head>
@@ -45,42 +45,50 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <a class="btn btn-default btn-outline btn-circle collapsed" href="/about"><b>하즐 소개</b></a>
-        <a class="btn btn-default btn-outline btn-circle collapsed" href="/entertain"><b>예능</b></a>
+        <a class="btn btn-default btn-outline btn-circle collapsed" href="/entertain"><b>예능</b></a> 
         </ul>
-<form class="navbar-form navbar-right" role="search" action="/" method="get">
-              <div class="form-group">
-                <input type="text" name="search" class="form-control" placeholder="검색하기">
-              </div>
-              <button type="submit" class="btn btn-info"><span class ="glyphicon glyphicon-search"><span></button>
-            </form>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav></br>
+<div class="col-md-10 col-md-offset-1">
 
-           <!-- LOCAL INFORMATION -->
-            <div class="row">
-
-       <% for(var i = 0; i <  issuepostModels.length;  i++) { %>
-            <a class="thumbnail" href="/issuein/<%= issuepostModels[i].id %>">
-
-                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중..."></br>
-                <div class="text-center">
-                  <h5><%= issuepostModels[i].title %></h5>
-                  <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
+            <div class="panel panel-default panel-table">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col col-xs-6">
+                    <h3 class="panel-title"><a href ="/entertain"> 예능 / 오락 </a></h3>
+                  </div>
+                  <form class="col col-xs-6 form-inline text-right" role="search" action="/entertain" method="get">
+                   <div class="form-group">
+                    <input type="text" name="search" class="form-control" placeholder="검색하기">
+                    <button type="submit" class="btn btn-info"><span class ="glyphicon glyphicon-search"><span></button>
+                    </div>
+                  </form>
                 </div>
-            </a>
-       <% }%>
-       </br></br>
-        <% if (issuepostModels.length < 1) { %> 
-          <div class ="text-center">
-          <h3><font size ="8" color ="#FFFFFF"> "<%= searchTitle %>"<font> <font size ="6" color ="#FFFFFF">검색 결과가 없습니다.. sorry<font></h3>
-          </div>
-       <% } %> 
-</div>
-<% if (pageCount > 1) { %>  
+              </div>
+              <div class="panel-body">
+                <table class="table table-striped table-bordered table-list">
+                  
+                  <% for(var i = 0; i < postModels.length ; i++  ) { %>
+                  <tbody>
+                          <tr>
+                            
+                            <td><a href ="/entertain/<%= postModels[i].id %>"><font color ="#181818 "> <%= postModels[i].title %></font></a></td>
+                          </tr>
+                        </tbody>
+                  <% }%>
+                </table>
+            
+              </div>
+           <div class="panel-footer">
+                <div class="row">
+                  <div class="col col-xs-4">
+                  </div>
+                  <div class="col col-xs-8">
+                                 <% if (pageCount > 1) { %>  
 <ul class="pagination">  
   <% if (currentPage > 1) { %>
-      <li><a href="/?page=1">&laquo;</a></li>
+      <li><a href="/entertain/?page=1">&laquo;</a></li>
   <% } %>
   <% var i = 1;
   if (currentPage > 5) {
@@ -93,39 +101,20 @@
     <% if (currentPage == i) { %>
         <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
     <% } else { %>
-        <li><a href="/?page=<%= i %>"><%= i %></a></li>
+        <li><a href="/entertain/?page=<%= i %>"><%= i %></a></li>
     <% } %>
     <% if (i == (currentPage + 4)) { %>
         <li class="disabled"><a href="#">...</a></li>
     <% break; } %>
   <% } %>
   <% if (currentPage != pageCount) { %>
-      <li><a href="/?page=<%= pageCount %>">&raquo;</a></li>
+      <li><a href="/entertain/?page=<%= pageCount %>">&raquo;</a></li>
   <% } %>
 </ul>  
 <% } %> 
+                  </div>
+                </div>
+              </div>
+            </div>
 
-</div>
-</div>
-
-<!-- Start of StatCounter Code for Default Guide -->
-<script type="text/javascript">
-var sc_project=10950271; 
-var sc_invisible=0; 
-var sc_security="b7184453"; 
-var scJsHost = (("https:" == document.location.protocol) ?
-"https://secure." : "http://www.");
-document.write("<sc"+"ript type='text/javascript' src='" +
-scJsHost+
-"statcounter.com/counter/counter.js'></"+"script>");
-</script>
-<noscript><div class="statcounter"><a title="website
-statistics" href="http://statcounter.com/free-web-stats/"
-target="_blank"><img class="statcounter"
-src="//c.statcounter.com/10950271/0/b7184453/0/"
-alt="website statistics"></a></div></noscript>
-<!-- End of StatCounter Code for Default Guide -->
-
-
-</body>
-</html>
+</div></div></div>

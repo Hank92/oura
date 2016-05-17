@@ -11,8 +11,8 @@
     <meta name="naver-site-verification" content="8672f68ec19974757430dcc41aa887462bd2a8c5"/>
     <meta name="google-site-verification" content="UFlAZBpLslwZH5RF8Z4WSu6fiCM-MXNzOvcLsyDh2_Y" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴, 예능, 아는 형님, 무한도전 ">
-    <meta name="description" content="하루를 유쾌하게 보낼 수 있게 짤과 예능이 모여있는 플랫폼">
+    <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴">
+    <meta name="description" content="하루를 유쾌하게 보낼 수 있게 재밌는 이미지와 짤이 모여있는 플랫폼">
     <link rel='stylesheet' href='/css/individualHazzulMain.css'>
 </head>
 
@@ -50,16 +50,16 @@
 </nav></br>
     <div class ="thumbnail">
     </br>
-    <% for( var i = 0; i < issuepostModel.img_url.length; i++ ) { %> 
-         <img src = "<%= issuepostModel.img_url[i] %>" alt = "이미지 로딩중.." class="img-responsive">     
-         </br></br>   
-         <% }%> 
+        <font color = "#101010 ">
+        <%= issuepostModel.title %> 동영상</br>
 
+        *첫 동영상 버튼은 영상버튼이 아닌 영상 관련된 페이지로 연결 될 수 있습니다
+        </font>
+        </br></br>
          <% for( var i = 0; i < issuepostModel.video_url.length; i++ ) { %> 
-           
-            <iframe width="640" height="360" src="<%= issuepostModel.video_url[i] %>" frameborder="0" allowfullscreen></iframe> </br>
+          <a href = " <%= issuepostModel.video_url[i] %>"><button class="btn btn-success"><span class ="glyphicon glyphicon-play-circle"> #<%= i +1 %> 동영상 <span></button></a>
+           </br>
             <% } %>  </br>  
-        출처: <%= issuepostModel.url %>
     </div>
     </div></div>
 
@@ -72,7 +72,7 @@
 <div class="panel panel-primary" >
 <div class="panel-heading"><font size = "5">댓글 달기</font></div>
         <div class ="panel-body">
-<form role="form" method="post" action="/<%= issuepostModel.id %>/post/Issue"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
+<form role="form" method="post" action="/<%= issuepostModel.id %>/post/daily"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
     <div class="form-group">
       <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="3" id="comment"></textarea>
     </div>

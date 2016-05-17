@@ -7,7 +7,7 @@ var	methodOverride = require('method-override');
 
 var postModel = require('../app/models/post');
 var issueModel = require('../app/models/issuePost');
-var issuetodayModel = require('../app/models/issuetoday');
+var dailyModel = require('../app/models/dailyPost');
 
 module.exports = function (app, passport){
 
@@ -61,19 +61,54 @@ if(req.query.search){
      });//paginate
 }	
 });
-/*
-app.get('/issueinSearch', function (req, res){
 
+app.get('/entertain', function (req, res){
 if(req.query.search){
-	issueModel.findOne({title: req.query.search}, function (err, all_pins){
-		res.render('issueinSearch.ejs', {issuepostModels: all_pins})
+	dailyModel.findByTitle(req.query.search, function (err, all_pins){
+		var searchTitle = req.query.search;
+		pageSize  = 0;
+		pageCount = 0;
+		totalPosts = 0;
+		currentPage =0;
+		res.render('entertain.ejs', {
+			postModels: all_pins,
+			searchTitle: searchTitle,
+			pageSize: pageSize,
+    		pageCount: pageCount,
+    		totalPosts: totalPosts,
+    		currentPage: currentPage
+		})
+		
 		})
 	}
-	else{
-		res.render("nothingfound.ejs")
+	else {
+	var currentPage = 1;
+	if (typeof req.query.page !== 'undefined') {
+        currentPage = +req.query.page;
+    	}
+			dailyModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 10 }, function(err, results) {
+         if(err){
+         console.log("error");
+         console.log(err);
+     } else {
+    	    pageSize = results.limit;
+            pageCount = (results.total)/(results.limit);
+    		pageCount = Math.ceil(pageCount);
+    	    totalPosts = results.total;
+    	console.log(results.docs)
+
+    	res.render('entertain.ejs', {
+    		postModels: results.docs,
+    		pageSize: pageSize,
+    		pageCount: pageCount,
+    		totalPosts: totalPosts,
+    		currentPage: currentPage
+    	})//res.render
+     }//else
+     });//paginate
 	}
 });
-*/
+/*
 app.get('/mbong19', function (req, res){
 if(req.query.search){
 	postModel.findByTitle(req.query.search, function (err, all_pins){
@@ -119,7 +154,7 @@ if(req.query.search){
      });//paginate
 	}
 });
-
+*/
 
 app.param('id', function(req, res, next, id){
 	issueModel.findById(id, function(err, docs){
@@ -139,6 +174,22 @@ app.get('/issuein/:id', function(req, res){
 });
 
 app.param('id', function(req, res, next, id){
+	dailyModel.findById(id, function(err, docs){
+		if(err) res.json(err);
+		else
+			{
+				req.dailypostId = docs;
+				next();
+			}
+			});	
+});
+
+app.get('/entertain/:id', function(req, res){
+	res.render('individualEntertain.ejs', {issuepostModel: req.dailypostId});
+	
+});
+/*
+app.param('id', function(req, res, next, id){
 	postModel.findById(id, function(err, docs){
 		if(err) res.json(err);
 		else
@@ -156,7 +207,7 @@ app.get('/mbong19/:id', function(req, res){
 	
 	//finds the matching object
 
-
+*/
 app.post('/:id/post/Issue', function (req, res){
 	issueModel.find({_id: req.params.id}, function(err, item){
 		if(err) return next("error finding blog post.");
@@ -169,6 +220,19 @@ app.post('/:id/post/Issue', function (req, res){
 	})
 
 }) //app.post  
+
+app.post('/:id/post/daily', function (req, res){
+	dailyModel.find({_id: req.params.id}, function(err, item){
+		if(err) return next("error finding blog post.");
+		item[0].userComments.push({userPost : req.body.userPost})
+		item[0].save(function(err, data){
+			if (err) res.send(err)
+			else 
+				res.redirect('/entertain/'+req.params.id )
+		});
+	})
+
+}) //app.post 
 
 //post a comment on humor board
 app.post('/:id/post', function (req, res){
@@ -235,15 +299,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 
 					comments.splice(0,1)
 
-			postModel.find({title: bhuTitle}, function(err, newPosts){
+			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
 				if (!newPosts.length){
 					//save data in Mongodb
 
-					var Post = new postModel({
+					var Post = new issueModel({
 						title: bhuTitle,
 						url: bhuUrl,
-						image_url: image_url,
+						img_url: image_url,
 						video_url: video_url,
 						comments: comments
 					})
@@ -271,6 +335,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 	}//첫 if구문
 
 });
+
 
 request('http://issuein.com/', function(err, res, body){
 	
@@ -335,7 +400,63 @@ request('http://issuein.com/', function(err, res, body){
 
 });
 
+request('http://baykoreans.net/index.php?mid=entertain&page=1', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
 
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+/*
 request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -526,3 +647,4 @@ request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body
 	}//첫 if구문
 
 });
+*/

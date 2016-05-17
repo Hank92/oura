@@ -1,3 +1,3 @@
 module.exports ={
-	"url": "mongodb://hongjik:bjhv6c@jello.modulusmongo.net:27017/g9ajiNeq"	
+	"url": "mongodb://hongjik:zxczzxcz@jello.modulusmongo.net:27017/iroSo4py"	
 }
