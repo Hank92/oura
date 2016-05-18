@@ -476,8 +476,8 @@ request('http://issuein.com/', function(err, res, body){
 	}//첫 if구문
 
 });
-/*
-request('http://baykoreans.net/index.php?mid=entertain&page=1', function(err, res, body){
+
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%95%84%EB%8A%94', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
 		
@@ -533,9 +533,9 @@ request('http://baykoreans.net/index.php?mid=entertain&page=1', function(err, re
 	}//첫 if구문
 
 });
-*/
-/*
-request('http://baykoreans.net/index.php?mid=drama&page=14', function(err, res, body){
+
+
+request('http://baykoreans.net/index.php?mid=drama&page=1', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
 		
@@ -591,7 +591,7 @@ request('http://baykoreans.net/index.php?mid=drama&page=14', function(err, res, 
 	}//첫 if구문
 
 });
-*/
+
 /*
 request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body){
 	
