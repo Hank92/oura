@@ -477,7 +477,7 @@ request('http://issuein.com/', function(err, res, body){
 
 });
 
-request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%95%84%EB%8A%94', function(err, res, body){
+request('http://baykoreans.net/entertain', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
 		
