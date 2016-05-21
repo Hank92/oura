@@ -55,6 +55,17 @@
 
                   <% if (currentPage !== 0) { %>
                   <form class ="thumbnail role="search" action="/drama" method="get" > 
+                    <img class="img-responsive" src="http://img.kbs.co.kr/cms/drama/sun/behind/wallpaper/__icsFiles/afieldfile/2016/02/12/sun_pos_01_1024_1.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="태양"> </br>
+                    <div style="text-align:center">  
+                      <h5>태양희 후예 </h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/drama" method="get" > 
                     <img class="img-responsive" src="http://img.tenasia.hankyung.com/webwp_kr/wp-content/uploads/2016/02/2016021821170720308-540x377.jpg" alt="이미지 로딩중..."> 
                     <input type="hidden" name="search" class="form-control" value ="딴따라"> </br>
                     <div style="text-align:center">  
@@ -112,10 +123,10 @@
 
                   <% if (currentPage !== 0) { %>
                   <form class ="thumbnail role="search" action="/drama" method="get" >
-                    <img class="img-responsive" src="http://img.imbc.com/broad/tv/drama/gahwa/img/visual01.jpg" alt="이미지 로딩중..."> 
-                    <input type="hidden" name="search" class="form-control" value ="가화"> </br>
+                    <img class="img-responsive" src="http://img.lifestyler.co.kr/uploads/program/cheditor/2015/12/AC7MDCU5YIIHIKBT2YUC.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="시그"> </br>
                     <div style="text-align:center">  
-                      <h5>가화만사성</h5>
+                      <h5>시그널</h5>
                       <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
                    </div>
                   </form>
@@ -134,15 +145,29 @@
 
                   <% if (currentPage !== 0) { %>
                   <form class ="thumbnail role="search" action="/drama" method="get" >
-                    <img class="img-responsive" src="http://img.kbs.co.kr/tvnews/2012/14538680517363_1.jpg" alt="이미지 로딩중..."> 
+                    <img class="img-responsive" src="http://img.lifestyler.co.kr/uploads/program/cheditor/2015/11/412DZFKKHOEM74E8PKQ6.jpg" alt="이미지 로딩중..."> 
                     <input type="hidden" name="search" class="form-control" value ="천상의 약속"> </br>
                     <div style="text-align:center">  
-                      <h5>천상의 약속</h5>
+                      <h5>치즈인더트랩</h5>
                       <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
                    </div>
                   </form>
                   <% } %>
 
+                   
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/drama" method="get" >
+                    <img class="img-responsive" src="http://bbsimg.sbs.co.kr/photoviewer/rlagustlr/V2000008547/Img0404_20150916174957_1.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="나르샤"> </br>
+                    <div style="text-align:center">  
+                      <h5>육룡의 나르샤</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+                  
+                  
+                  <!--
                   <% if (currentPage !== 0) { %>
                   <form class ="thumbnail role="search" action="/drama" method="get" >
                     <img class="img-responsive" src="https://i.ytimg.com/vi/7bYGxAbbih4/maxresdefault.jpg" alt="이미지 로딩중..."> 
@@ -175,24 +200,14 @@
                    </div>
                   </form>
                   <% } %>
+                  -->
 
-                  <% if (currentPage !== 0) { %>
-                  <form class ="thumbnail role="search" action="/drama" method="get" >
-                    <img class="img-responsive" src="http://img2.sbs.co.kr/img/sbs_cms/WE/2016/02/03/WE70915755_w920.jpg" alt="이미지 로딩중..."> 
-                    <input type="hidden" name="search" class="form-control" value ="그래"> </br>
-                    <div style="text-align:center">  
-                      <h5>그래, 그런거야</h5>
-                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
-                   </div>
-                  </form>
-                  <% } %>
-                  
                   
 
                   <% for(var i = 0; i < postModels.length ; i++  ) { %>
                  <a class="thumbnail" href ="/drama/<%= postModels[i].id %>">
 
-                <img class="img-responsive" src="http://photo.jtbc.joins.com/news/2015/12/03/201512030432057682.jpg" alt="이미지 로딩중..."></br>
+                <img class="img-responsive" src="<%= postModels[i].image_url %>" alt="이미지 로딩중..."></br>
                 <div class="text-center">
                   <h5><%= postModels[i].title %></h5>
                 </div>
