@@ -25,7 +25,7 @@
     <div class="container">
       
     <header>
-      <h1><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Hazzul <font size = "5"> & 예능/오락</font> </h1>
+      <h1><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Hazzul <font size = "5"> & 예능/오락 </font> </h1>
     </header></br>
 
     <nav class="navbar navbar-default navbar-inverse" role="navigation">
@@ -51,78 +51,248 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav></br>
-<div class="col-md-10 col-md-offset-1">
+ <div class="row">
 
-            <div class="panel panel-default panel-table">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col col-xs-6">
-                    <h3 class="panel-title"><a href ="/entertain"><font size ="5"> 예능 / 오락</font> </a></h3>
-                  </div>
-                  <form class="col col-xs-6 form-inline text-right" role="search" action="/entertain" method="get">
-                   <div class="form-group">
-                    <input type="text" name="search" class="form-control" placeholder="검색하기">
-                    <button type="submit" class="btn btn-info"><span class ="glyphicon glyphicon-search"><span></button>
-                    </div>
+ <% if (currentPage !== 0) { %>
+<form class ="thumbnail role="search" action="/entertain" method="get" >
+
+                   
+                    <img class="img-responsive" src="http://photo.jtbc.joins.com/news/2015/12/03/201512030432057682.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="아는 형님"> </br>
+                    <div style="text-align:center">  
+                      <h5>아는 형님 </h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
                   </form>
-                </div>
-              </div>
-              <div class="panel-body">
-                <table class="table table-striped table-bordered table-list">
+                  <% } %>
+
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class="img-responsive" src="http://image.ajunews.com/content/image/2016/02/04/20160204152032774026.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="보컬전쟁 신의 목소리"> </br>
+                    <div style="text-align:center">  
+                      <h5>보컬전쟁 신의 목소리</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class="img-responsive" src="http://www.naverdrama.com/wp-content/uploads/2015/09/mask_singer.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="왕"> </br>
+                    <div style="text-align:center">  
+                      <h5>복면가왕</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+                   <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class="img-responsive" src="http://cfile4.uf.tistory.com/image/12235C4E506D3D36354EEC" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="카운트"> </br>
+                    <div style="text-align:center">  
+                      <h5>M 카운트 다운</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+                   <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class="img-responsive" src="http://cfile22.uf.tistory.com/image/267674485721C32B14C01D" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="음악의 신 시즌2"> </br>
+                    <div style="text-align:center">  
+                      <h5>음악의 신 시즌2</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+                   <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class="img-responsive" src="http://s1.dmcdn.net/JnGUk/x240-BJc.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="주간 아이돌"> </br>
+                    <div style="text-align:center">  
+                      <h5>주간 아이돌</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                     <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img src ="http://lh3.googleusercontent.com/G8G7UWO-6ebfRc-RJpDXdQshq_4LLwabvEVp5Z17wcLp5Fu3f4EkOfjFhmtVaFzW5-V0nAFqs8qzn8NP6IDR1ByfRZXBjWkykg=s0" class="img-responsive" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="비정상회담"> </br>
+                    <div style="text-align:center">  
+                      <h5>비정상회담</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                  
+                  <!--
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class="img-responsive" src="https://i.ytimg.com/vi/hlsr7X6O11M/maxresdefault.jpg" alt="이미지 로딩중...">  
+                    <input type="hidden" name="search" class="form-control" value =" 우 리 결 혼 했 어 요"> </br>
+                    <div style="text-align:center">  
+                      <h5> 우리 결혼했어요</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class = "img-responsive" src="http://1.bp.blogspot.com/-L7rKCaVRQCY/UqgAUuKWJ9I/AAAAAAAAAIs/cWoxyt_TdiI/s1600/%EB%9D%BC%EB%94%94%EC%98%A4%EC%8A%A4%ED%83%80+355%ED%9A%8C+%EB%8B%A4%EC%8B%9C%EB%B3%B4%EA%B8%B0.png" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="라 디 오 스 타"> </br>
+                    <div style="text-align:center">  
+                      <h5>라디오스타</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                    <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class ="img-responsive" src="http://cfile2.uf.tistory.com/image/27136236525FF1B917E508" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="나 .혼.자. 산.다"> </br>
+                    <div style="text-align:center">  
+                      <h5>나 혼자 산다</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                  -->
+
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class="img-responsive" src="http://s1.dmcdn.net/Gq49z/1280x720-jzH.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="뮤직뱅크"> </br>
+                    <div style="text-align:center">  
+                      <h5> 뮤직뱅크</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class ="img-responsive" src="https://scontent.cdninstagram.com/t51.2885-15/e35/13183495_240772802947579_1291572638_n.jpg?ig_cache_key=MTI0OTI4MzM4NDI1ODc0ODQ3Mg%3D%3D.2" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="쇼미더머니 시즌5"> </br>
+                    <div style="text-align:center">  
+                      <h5>쇼미더머니 시즌5</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                  
+
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class="img-responsive" src="http://www.todeffects.com/files/attach/images/126/709/002/87d5f2419cdf5b0709e3670ef29b353a.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value =" 우리동네 예체능"> </br>
+                    <div style="text-align:center">  
+                      <h5> 우리동네 예체능</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                    <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class = "img-responsive" src="http://cfile9.uf.tistory.com/image/247A35495319AAD01D89B6" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="유희열의 스케치북"> </br>
+                    <div style="text-align:center">  
+                      <h5>유희열의 스케치북</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class='img-responsive' src ="http://lh3.ggpht.com/pw4_jdLKFo1KU7N6IRmA1U1oUXmKUqJ72yDm_X2vrVTIYQqqidYr1lOcuW9aVV9V__joXUcyQvt9EOQJIdEO-ctR8Gv7-josj0Y=s0" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="냉장고를 부탁해"> </br>
+                    <div style="text-align:center">  
+                      <h5>냉장고를 부탁해</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class ="img-responsive" src ="http://imgnews.naver.com/image/277/2008/11/22/2008111716312008962_1.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="섹션TV 연예통신"> </br>
+                    <div style="text-align:center">  
+                      <h5>섹션TV 연예통신</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class= 'img-responsive' src="http://image.ajunews.com/content/image/2016/02/24/20160224073924513576.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="SNL 코리아 시즌7"> </br>
+                    <div style="text-align:center">  
+                      <h5>SNL 코리아 시즌7</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
                 
+
+
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class ="img-responsive" src="http://onairkorean.tv/data/file/content/3519350434_KY0uxdIg_EC8A88ED8DBCEBA7A8EC9DB4_EB8F8CEC9584EC9994EB8BA4_EB8BA4EC8B9CEBB3B4EAB8B0.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="슈퍼맨이 돌아왔다"> </br>
+                    <div style="text-align:center">  
+                      <h5>슈퍼맨이 돌아왔다</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class="img-responsive" src="http://4.bp.blogspot.com/-dQiLTS3pKFA/Vh5t53ZHEtI/AAAAAAAABNU/yUNGdFgTIls/s1600/%25EC%2587%25BC%2B%25EC%25B1%2594%25ED%2594%25BC%25EC%2596%25B8.jpg" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value =" 쇼! 챔피언"> </br>
+                    <div style="text-align:center">  
+                      <h5> 쇼! 챔피언</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+                  <% if (currentPage !== 0) { %>
+                  <form class ="thumbnail role="search" action="/entertain" method="get" >
+                    <img class= "img-responsive" src ="http://t1.daumcdn.net/thumb/C216x312/?fname=http%3A%2F%2Fcfile28.uf.daum.net%2Fimage%2F26242F4D5488E60B1F5114" alt="이미지 로딩중..."> 
+                    <input type="hidden" name="search" class="form-control" value ="스포츠 하이라이트"> </br>
+                    <div style="text-align:center">  
+                      <h5>스포츠 하이라이트</h5>
+                      <button type="submit" class="btn btn-info" style= " text-align:center;">바로보기</button>
+                   </div>
+                  </form>
+                  <% } %>
+
+
+                  
                   <% for(var i = 0; i < postModels.length ; i++  ) { %>
-                  <tbody>
-                          <tr>
-                          
-                            <td><a href ="/entertain/<%= postModels[i].id %>"><font size ="5" color ="#FFFFFF"> <%= postModels[i].title %></font></a></td>
-                          </tr>
-                        </tbody>
+                 <a class="thumbnail" href ="/entertain/<%= postModels[i].id %>">
+
+                <img class="img-responsive" src="<%= postModels[i].image_url %>" alt="이미지 로딩중..."></br>
+                <div class="text-center">
+                  <h5><%= postModels[i].title %></h5>
+                </div>
+            </a>
                   <% }%>
 
-                  <% if (postModels.length < 1) { %> 
-          <div class ="text-center">
-          <h3><font size ="8" color ="#181818"> "<%= searchTitle %>"<font> <font size ="6" color ="#181818">검색 결과가 없습니다.. sorry<font></h3>
-          </div>
-       <% } %> 
-
-                </table>
-            
-              </div>
-           <div class="panel-footer">
-                <div class="row">
-                  <div class="col col-xs-4">
-                  </div>
-                  <div class="col col-xs-8">
-                                 <% if (pageCount > 1) { %>  
-<ul class="pagination">  
-  <% if (currentPage > 1) { %>
-      <li><a href="/entertain/?page=1">&laquo;</a></li>
-  <% } %>
-  <% var i = 1;
-  if (currentPage > 5) {
-  i = +currentPage - 4;
-  } %>
-  <% if (i !== 1) { %>
-      <li class="disabled"><a href="#">...</a></li>
-  <% } %>
-  <% for (i; i<=pageCount; i++) { %>
-    <% if (currentPage == i) { %>
-        <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
-    <% } else { %>
-        <li><a href="/entertain/?page=<%= i %>"><%= i %></a></li>
-    <% } %>
-    <% if (i == (currentPage + 4)) { %>
-        <li class="disabled"><a href="#">...</a></li>
-    <% break; } %>
-  <% } %>
-  <% if (currentPage != pageCount) { %>
-      <li><a href="/entertain/?page=<%= pageCount %>">&raquo;</a></li>
-  <% } %>
-</ul>  
-<% } %> 
-                  </div>
-                </div>
-              </div>
-            </div>
-
-</div></div></div>
+             

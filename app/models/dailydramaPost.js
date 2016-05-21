@@ -5,6 +5,7 @@ var dailydramaSchema = mongoose.Schema({
     title: String, 
     url: String,
 	video_url:[String],
+	image_url:String,
 	posted: { type: Date, default: Date.now },
 	userComments: [{
 		userPost: String

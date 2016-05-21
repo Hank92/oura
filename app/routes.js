@@ -83,32 +83,52 @@ if(req.query.search){
 		})
 	}
 	else {
-	var currentPage = 1;
-	if (typeof req.query.page !== 'undefined') {
-        currentPage = +req.query.page;
-    	}
-			dailyModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 10 }, function(err, results) {
-         if(err){
-         console.log("error");
-         console.log(err);
-     } else {
-    	    pageSize = results.limit;
-            pageCount = (results.total)/(results.limit);
-    		pageCount = Math.ceil(pageCount);
-    	    totalPosts = results.total;
-    	console.log(results.docs)
+    	 
+    		postModels = 0;
+    	    currentPage= 1;
+    
 
-    	res.render('entertain.ejs', {
-    		postModels: results.docs,
-    		pageSize: pageSize,
-    		pageCount: pageCount,
-    		totalPosts: totalPosts,
+	res.render('entertain.ejs', {
+    		postModels: postModels,
+    		
     		currentPage: currentPage
-    	})//res.render
-     }//else
-     });//paginate
+    	})//res.render    	
+    
 	}
 });
+/*
+app.get('/dramaDelete', function (req, res){
+	dailydramaModel.find({}, function(req, docs){
+		res.render('dramadelete.ejs', {postModels: docs})	
+	})
+	
+})
+
+
+app.get('/dramaDelete/:id/delete', function(req, res){
+	dailydramaModel.remove({_id: req.params.id}, 
+	   function(err){
+		if(err) res.json(err);
+		else    res.redirect('/dramaDelete');
+	});
+});
+
+app.get('/entertainDelete', function (req, res){
+	dailyModel.find({}, function(req, docs){
+		res.render('entertaindelete.ejs', {postModels: docs})	
+	})
+	
+})
+
+
+app.get('/entertainDelete/:id/delete', function(req, res){
+	dailyModel.remove({_id: req.params.id}, 
+	   function(err){
+		if(err) res.json(err);
+		else    res.redirect('/entertainDelete');
+	});
+});
+*/
 
 app.get('/drama', function (req, res){
 if(req.query.search){
@@ -129,31 +149,14 @@ if(req.query.search){
 		
 		})
 	}
-	else {
-	var currentPage = 1;
-	if (typeof req.query.page !== 'undefined') {
-        currentPage = +req.query.page;
-    	}
-			dailydramaModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 10 }, function(err, results) {
-         if(err){
-         console.log("error");
-         console.log(err);
-     } else {
-    	    pageSize = results.limit;
-            pageCount = (results.total)/(results.limit);
-    		pageCount = Math.ceil(pageCount);
-    	    totalPosts = results.total;
-    	console.log(results.docs)
+	else{
+    		postModels = 0;
+    	    currentPage= 1;
 
     	res.render('drama.ejs', {
-    		postModels: results.docs,
-    		pageSize: pageSize,
-    		pageCount: pageCount,
-    		totalPosts: totalPosts,
+    		postModels: postModels,
     		currentPage: currentPage
-    	})//res.render
-     }//else
-     });//paginate
+    	})
 	}
 });
 /*
@@ -476,7 +479,7 @@ request('http://issuein.com/', function(err, res, body){
 	}//첫 if구문
 
 });
-
+/*
 request('http://baykoreans.net/entertain', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -685,7 +688,7 @@ request('http://issuein.com/index.php?mid=index&page=3', function(err, res, body
 
 				// scrape all the images for the post
 				issueModel.find({title: issueTitle}, function(err, newPosts){
-				
+				ㄴ
 				if (!newPosts.length){
 					//save data in Mongodb
 
