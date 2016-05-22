@@ -67,83 +67,37 @@ app.get('/entertain', function (req, res){
 if(req.query.search){
 	dailyModel.findByTitle(req.query.search, function (err, all_pins){
 		var searchTitle = req.query.search;
-		pageSize  = 0;
-		pageCount = 0;
-		totalPosts = 0;
 		currentPage =0;
 		res.render('entertain.ejs', {
 			postModels: all_pins,
 			searchTitle: searchTitle,
-			pageSize: pageSize,
-    		pageCount: pageCount,
-    		totalPosts: totalPosts,
-    		currentPage: currentPage
+			
 		})
 		
 		})
 	}
 	else {
-    	 
+    	
     		postModels = 0;
     	    currentPage= 1;
-    
-
-	res.render('entertain.ejs', {
+  
+	res.render('entertain.ejs',  {
     		postModels: postModels,
-    		
     		currentPage: currentPage
     	})//res.render    	
     
 	}
 });
-/*
-app.get('/dramaDelete', function (req, res){
-	dailydramaModel.find({}, function(req, docs){
-		res.render('dramadelete.ejs', {postModels: docs})	
-	})
-	
-})
-
-
-app.get('/dramaDelete/:id/delete', function(req, res){
-	dailydramaModel.remove({_id: req.params.id}, 
-	   function(err){
-		if(err) res.json(err);
-		else    res.redirect('/dramaDelete');
-	});
-});
-
-app.get('/entertainDelete', function (req, res){
-	dailyModel.find({}, function(req, docs){
-		res.render('entertaindelete.ejs', {postModels: docs})	
-	})
-	
-})
-
-
-app.get('/entertainDelete/:id/delete', function(req, res){
-	dailyModel.remove({_id: req.params.id}, 
-	   function(err){
-		if(err) res.json(err);
-		else    res.redirect('/entertainDelete');
-	});
-});
-*/
 
 app.get('/drama', function (req, res){
 if(req.query.search){
 	dailydramaModel.findByTitle(req.query.search, function (err, all_pins){
 		var searchTitle = req.query.search;
-		pageSize  = 0;
-		pageCount = 0;
-		totalPosts = 0;
+		
 		currentPage =0;
 		res.render('drama.ejs', {
 			postModels: all_pins,
 			searchTitle: searchTitle,
-			pageSize: pageSize,
-    		pageCount: pageCount,
-    		totalPosts: totalPosts,
     		currentPage: currentPage
 		})
 		
@@ -206,6 +160,31 @@ if(req.query.search){
 	}
 });
 */
+
+app.get('/enddrama', function (req, res){
+if(req.query.search){
+	dailydramaModel.findByTitle(req.query.search, function (err, all_pins){
+		var searchTitle = req.query.search;
+		
+		currentPage =0;
+		res.render('endDrama.ejs', {
+			postModels: all_pins,
+			searchTitle: searchTitle,
+    		currentPage: currentPage
+		})
+		
+		})
+	}
+	else{
+    		postModels = 0;
+    	    currentPage= 1;
+
+    	res.render('endDrama.ejs', {
+    		postModels: postModels,
+    		currentPage: currentPage
+    	})
+	}
+});
 
 app.param('id', function(req, res, next, id){
 	issueModel.findById(id, function(err, docs){
@@ -350,10 +329,14 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 				var video_url = [];
 
 				$('span div img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url);	
+					var img_url = $(this).attr('src');	
+					image_url.push(img_url);
+				
 				})
 				// scrape all the images for the post
+				if (image_url.length == 0)
+				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
+				image_url.push(img_url)
 
 				$('span div embed').each(function(){
 					var vid_url = $(this).attr('src');
@@ -437,6 +420,10 @@ request('http://issuein.com/', function(err, res, body){
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);	
 				})
+
+				if (image_url.length == 0)
+				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
+				image_url.push(img_url)
 
 				$('div embed').each(function(){
 					var vid_url = $(this).attr('src');
@@ -617,6 +604,10 @@ request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body
 					image_url.push(img_url);	
 				})
 
+				if (image_url.length == 0)
+				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
+				image_url.push(img_url)
+
 				$('div embed').each(function(){
 					var vid_url = $(this).attr('src');
 					video_url.push(vid_url);
@@ -681,6 +672,10 @@ request('http://issuein.com/index.php?mid=index&page=3', function(err, res, body
 					image_url.push(img_url);	
 				})
 
+				if (image_url.length == 0)
+				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
+				image_url.push(img_url)
+
 				$('div embed').each(function(){
 					var vid_url = $(this).attr('src');
 					video_url.push(vid_url);
@@ -688,7 +683,7 @@ request('http://issuein.com/index.php?mid=index&page=3', function(err, res, body
 
 				// scrape all the images for the post
 				issueModel.find({title: issueTitle}, function(err, newPosts){
-				ㄴ
+				
 				if (!newPosts.length){
 					//save data in Mongodb
 
@@ -743,6 +738,10 @@ request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);	
 				})
+
+				if (image_url.length == 0)
+				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
+				image_url.push(img_url)
 
 				$('div embed').each(function(){
 					var vid_url = $(this).attr('src');
