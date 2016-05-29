@@ -518,27 +518,6 @@ app.get('/usdramaH/:id', function(req, res){
 	
 });
 
-
-/*
-app.param('id', function(req, res, next, id){
-	postModel.findById(id, function(err, docs){
-		if(err) res.json(err);
-		else
-			{
-				req.mainpostId = docs;
-				next();
-			}
-			});	
-});
-
-app.get('/mbong19/:id', function(req, res){
-	   res.render('individualmbong19.ejs', {postModel: req.mainpostId});
-	   console.log(req.mainpostId)
-	})
-	
-	//finds the matching object
-
-*/
 app.post('/:id/post/Issue', function (req, res){
 	issueModel.find({_id: req.params.id}, function(err, item){
 		if(err) return next("error finding blog post.");
