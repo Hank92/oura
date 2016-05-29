@@ -1,4 +1,4 @@
-  <!doctype html>
+ <!doctype html>
 <html>
 <head>
     <title><%= issuepostModel.title %> -하즐 </title>
@@ -44,7 +44,8 @@
         <a class="btn btn-default btn-outline btn-circle collapsed" href="/about"><b>하즐 소개</b></a>
         <a class="btn btn-default btn-outline btn-circle collapsed" href="/usdrama"><b>미드</b></a>   
         <a class="btn btn-default btn-outline btn-circle collapsed" href="/entertain"><b>예능/오락</b></a> 
-        <a class="btn btn-default btn-outline btn-circle collapsed" href="/drama"><b>방영 드라마</b></a>    
+        <a class="btn btn-default btn-outline btn-circle collapsed" href="/drama"><b>방영 드라마</b></a>
+         
         </ul>
 
     </div><!-- /.navbar-collapse -->
@@ -55,13 +56,10 @@
         <font color = "#101010 ">
         <%= issuepostModel.title %> 동영상</br>
 
-        *첫 동영상 버튼은 영상버튼이 아닌 영상 관련된 페이지로 연결 될 수 있습니다
-        </font>
-        </br></br>
-         <% for( var i = 0; i < issuepostModel.video_url.length; i++ ) { %> 
-          <a href = " <%= issuepostModel.video_url[i] %>"><button class="btn btn-success"><span class ="glyphicon glyphicon-play-circle"> #<%= i +1 %> 동영상 <span></button></a>
-           </br>
-            <% } %>  </br>  
+            <iframe width="1100" height="460" src="<%= issuepostModel.video_url %>" quality="high" frameborder="0"  mozallowfullscreen webkitallowfullscreen allowfullscreen allowtransparency="true" border='no'></iframe>
+             </br>
+              </br> 
+              hazzul.com의 모든 컨텐츠는 인터넷 검색을 통해 공유 가능한 오직 링크만을 제공하는 것이며 hazzul.com은 동영상을 직접 제작 또는 불법 복제하여 업로드하거나 호스팅하지 않으므로 저작권에 관한 법적인 책임을 지지 않습니다. 법적 사안은 미디어파일 소유주 또는 호스터에게 컨텍하십시오.
     </div>
     </div></div>
 
@@ -74,7 +72,7 @@
 <div class="panel panel-primary" >
 <div class="panel-heading"><font size = "5">댓글 달기</font></div>
         <div class ="panel-body">
-<form role="form" method="post" action="/<%= issuepostModel.id %>/post/dailydrama"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
+<form role="form" method="post" action="/<%= issuepostModel.id %>/post/usdrama"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
     <div class="form-group">
       <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="3" id="comment"></textarea>
     </div>
@@ -92,6 +90,7 @@
             <p><font size ="5" color = "#FFFFFF"><%= issuepostModel.userComments[issuepostModel.userComments.length-i-1].userPost %></font></p>
 </div>
 <% }%>
+
      
 
 </div>

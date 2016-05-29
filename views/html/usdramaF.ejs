@@ -1,0 +1,209 @@
+
+
+<!-- views/usdrama.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>하즐 - 미드 F</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta name="naver-site-verification" content="8672f68ec19974757430dcc41aa887462bd2a8c5"/>
+    <meta name="google-site-verification" content="UFlAZBpLslwZH5RF8Z4WSu6fiCM-MXNzOvcLsyDh2_Y" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴, 예능, 아는 형님, 드라마 ">
+     <meta name="description" content="하루를 유쾌하게 보낼 수 있게 짤과 예능 드라마가 모여있는 플랫폼">
+
+    
+    <!--call the css file -->
+    <link rel='stylesheet' href='/css/hazzulMain.css'>
+</head>
+
+<body>
+  <div class="col-sm-12 col-md-12 affix-content">
+    <div class="container">
+      
+    <header>
+      <h1><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Hazzul <font size = "5"> & 미드 F</font> </h1>
+    </header></br>
+
+    <nav class="navbar navbar-default navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><font color ="#FFFFFF">Home</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <a class="btn btn-default btn-outline btn-circle collapsed" href="/about"><b>하즐 소개</b></a>
+        <a class="btn btn-default btn-outline btn-circle collapsed" href="/usdrama"><b>미드</b></a>   
+        <a class="btn btn-default btn-outline btn-circle collapsed" href="/entertain"><b>예능/오락</b></a> 
+        <a class="btn btn-default btn-outline btn-circle collapsed" href="/drama"><b>방영 드라마</b></a>
+        
+        </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+
+</nav></br>
+
+    
+        </br>
+      <div class="bs-example">
+    <div class="panel panel-success">
+    <!-- Default panel contents -->
+    <div class="panel-heading">미드</div>
+    <div class="panel-body">
+   <a href= "/usdrama"> A</a> <a href ="/usdramaB"> B </a> <a href ="/usdramaC"> C </a> <a href ="/usdramaD"> D </a> 
+    <a href ="/usdramaE"> E </a> <a href ="/usdramaF"> F </a> <a href ="/usdramaG"> G </a> 
+    <a href ="#"> H </a> <a href ="#"> 기타 </a>
+
+    <h4><font color =" #000000">* 드라마 첫자에 해당하는 알파벳을 눌러주세요 Ex) Gossip Girl은 alphabet g를 클릭해주세요. </font> </h4> 
+
+    </div>
+    <!-- List group -->
+    <div class="list-group">
+    <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform'>
+    <input type="hidden" name="search" class="form-control" value ="Fringe1">
+      <a href="#" onclick='document.forms["myform"].submit(); return false;' class="list-group-item">Fringe 시즌 1
+      </a>
+      </form>
+       <% } %>
+
+        <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform1'>
+    <input type="hidden" name="search" class="form-control" value ="Fringe2">
+      <a href="#" onclick='document.forms["myform1"].submit(); return false;' class="list-group-item">Fringe 시즌 2<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+        <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform2'>
+    <input type="hidden" name="search" class="form-control" value ="Fringe3">
+      <a href="#" onclick='document.forms["myform2"].submit(); return false;' class="list-group-item">Fringe 시즌 3<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+        <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform3'>
+    <input type="hidden" name="search" class="form-control" value ="Fringe4">
+      <a href="#" onclick='document.forms["myform3"].submit(); return false;' class="list-group-item">Fringe 시즌 4<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+       <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform4'>
+    <input type="hidden" name="search" class="form-control" value ="프린지 시즌5">
+      <a href="#" onclick='document.forms["myform4"].submit(); return false;' class="list-group-item">Fringe 시즌 5<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+       <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform5'>
+    <input type="hidden" name="search" class="form-control" value ="Friends1">
+      <a href="#" onclick='document.forms["myform5"].submit(); return false;' class="list-group-item">Friends 시즌 1<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+       <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform6'>
+    <input type="hidden" name="search" class="form-control" value ="Friends2">
+      <a href="#" onclick='document.forms["myform6"].submit(); return false;' class="list-group-item">Friends 시즌 2<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+         <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform7'>
+    <input type="hidden" name="search" class="form-control" value ="Friends3">
+      <a href="#" onclick='document.forms["myform7"].submit(); return false;' class="list-group-item">Friends 시즌 3<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+       <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform8'>
+    <input type="hidden" name="search" class="form-control" value ="Friends4">
+      <a href="#" onclick='document.forms["myform8"].submit(); return false;' class="list-group-item">Friends 시즌 4<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+       <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform9'>
+    <input type="hidden" name="search" class="form-control" value ="Friends5">
+      <a href="#" onclick='document.forms["myform9"].submit(); return false;' class="list-group-item">Friends 시즌 5<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+        <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform10'>
+    <input type="hidden" name="search" class="form-control" value ="Friends6">
+      <a href="#" onclick='document.forms["myform10"].submit(); return false;' class="list-group-item">Friends 시즌 6<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+       <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform11'>
+    <input type="hidden" name="search" class="form-control" value ="Friends7">
+      <a href="#" onclick='document.forms["myform11"].submit(); return false;' class="list-group-item">Friends 시즌 7<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+       <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform12'>
+    <input type="hidden" name="search" class="form-control" value ="Friends8">
+      <a href="#" onclick='document.forms["myform12"].submit(); return false;' class="list-group-item">Friends 시즌 8<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+       <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform13'>
+    <input type="hidden" name="search" class="form-control" value ="Friends9">
+      <a href="#" onclick='document.forms["myform13"].submit(); return false;' class="list-group-item">Friends 시즌 9<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+       <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform14'>
+    <input type="hidden" name="search" class="form-control" value ="Friends10">
+      <a href="#" onclick='document.forms["myform14"].submit(); return false;' class="list-group-item">Friends 시즌 10<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+       <% if (currentPage !== 0) { %>
+    <form role="search" action="/usdramaF" method="get" name='myform15'>
+    <input type="hidden" name="search" class="form-control" value ="FriendsofFriends">
+      <a href="#" onclick='document.forms["myform15"].submit(); return false;' class="list-group-item">Friends of Friends<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+      <% for(var i = 0; i < postModels.length ; i++  ) { %>
+       <a class="list-group-item" href ="/usdramaF/<%= postModels[i].id %>"><%= postModels[i].title %> </a>
+       <% }%>
+    </div>
+  </div>
+</div>

@@ -21,7 +21,7 @@
   } 
 
   .affix-content{
-    background-color: #333333;
+    background-color:#333333;
 
   } 
 
@@ -207,5 +207,7 @@ th {
 td {
   color:rgb(192,192,192) ;
 }
-
+h5  {
+  color: rgb(248,248,248) ;
+}
 } 
