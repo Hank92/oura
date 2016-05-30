@@ -5,8 +5,9 @@
 <html>
 <head>
     <title>하즐 - 미드 C</title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -58,7 +59,6 @@
 </nav></br>
 
     
-        </br>
       <div class="bs-example">
     <div class="panel panel-success">
     <!-- Default panel contents -->
@@ -66,13 +66,18 @@
     <div class="panel-body">
 <a href= "/usdrama"><font size ="4"> A<font></a> <a href ="/usdramaB"> B </a> <a href ="/usdramaC"> C </a> <a href ="/usdramaD"> D </a> 
     <a href ="/usdramaE"> E </a> <a href ="/usdramaF"> F </a> <a href ="/usdramaG"> G </a> 
-    <a href ="/usdramaH"> H </a> <a href ="#"> 기타 </a>
+    <a href ="/usdramaH"> H </a> <a href ="/usdramaS"> S </a> <a href ="/usdramaOthers"> 기타 </a>
 
     <h6><font color =" #000000">* 드라마 첫자에 해당하는 알파벳을 눌러주세요 Ex) Gossip Girl은 alphabet g를 클릭해주세요. </font> </h6> 
 
     </div>
     <!-- List group -->
     <div class="list-group">
+
+<% if (currentPage !== 0) { %>
+    <a href="#demo" class="list-group-item" data-toggle="collapse">Cuckoo</a>
+  <div id="demo" class="collapse">
+  
      <% if (currentPage !== 0) { %>
     <form role="search" action="/usdramaC" method="get" name='myform'>
     <input type="hidden" name="search" class="form-control" value ="쿠쿠 시즌1">
@@ -80,46 +85,44 @@
       </a>
       </form>
        <% } %>
+  </div>
+<% }%>
 
-        <% if (currentPage !== 0) { %>
-    <form role="search" action="/usdramaC" method="get" name='myform1'>
+    <% if (currentPage !== 0) { %>
+   <a href="#demo2" class="list-group-item" data-toggle="collapse">Chuck</a>
+  <div id="demo2" class="collapse">
+       <form role="search" action="/usdramaC" method="get" name='myform1'>
     <input type="hidden" name="search" class="form-control" value ="Chuck1">
-      <a href="#" onclick='document.forms["myform1"].submit(); return false;' class="list-group-item">Chuck 시즌 1<span class="label label-danger">Hot</span>
+      <a href="#" onclick='document.forms["myform1"].submit(); return false;' class="list-group-item">Chuck 시즌 1 <span class="label label-danger">Hot</span>
       </a>
       </form>
-       <% } %>
 
-        <% if (currentPage !== 0) { %>
     <form role="search" action="/usdramaC" method="get" name='myform2'>
     <input type="hidden" name="search" class="form-control" value ="Chuck2">
-      <a href="#" onclick='document.forms["myform2"].submit(); return false;' class="list-group-item">Chuck 시즌 2<span class="label label-danger">Hot</span>
+      <a href="#" onclick='document.forms["myform2"].submit(); return false;' class="list-group-item">Chuck 시즌 2 <span class="label label-danger">Hot</span>
       </a>
       </form>
-       <% } %>
 
-        <% if (currentPage !== 0) { %>
-    <form role="search" action="/usdramaC" method="get" name='myform3'>
+       <form role="search" action="/usdramaC" method="get" name='myform3'>
     <input type="hidden" name="search" class="form-control" value ="Chuck3">
-      <a href="#" onclick='document.forms["myform3"].submit(); return false;' class="list-group-item">Chuck 시즌 3<span class="label label-danger">Hot</span>
+      <a href="#" onclick='document.forms["myform3"].submit(); return false;' class="list-group-item">Chuck 시즌 3 <span class="label label-danger">Hot</span>
       </a>
       </form>
-       <% } %>
 
-       <% if (currentPage !== 0) { %>
-    <form role="search" action="/usdramaC" method="get" name='myform4'>
+        <form role="search" action="/usdramaC" method="get" name='myform4'>
     <input type="hidden" name="search" class="form-control" value ="Chuck4">
-      <a href="#" onclick='document.forms["myform4"].submit(); return false;' class="list-group-item">Chuck 시즌 4<span class="label label-danger">Hot</span>
+      <a href="#" onclick='document.forms["myform4"].submit(); return false;' class="list-group-item">Chuck 시즌 4 <span class="label label-danger">Hot</span>
       </a>
       </form>
-       <% } %>
 
-       <% if (currentPage !== 0) { %>
-    <form role="search" action="/usdramaC" method="get" name='myform5'>
+       <form role="search" action="/usdramaC" method="get" name='myform5'>
     <input type="hidden" name="search" class="form-control" value ="Chuck5">
-      <a href="#" onclick='document.forms["myform5"].submit(); return false;' class="list-group-item">Chuck 시즌 5<span class="label label-danger">Hot</span>
+      <a href="#" onclick='document.forms["myform5"].submit(); return false;' class="list-group-item">Chuck 시즌 5 <span class="label label-danger">Hot</span>
       </a>
       </form>
-       <% } %>
+
+  </div>
+ <% }%>
 
       <% for(var i = 0; i < postModels.length ; i++  ) { %>
        <a class="list-group-item" href ="/usdrama/<%= postModels[i].id %>"><%= postModels[i].title %> </a>
