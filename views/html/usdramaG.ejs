@@ -112,7 +112,7 @@
 <% if (currentPage !== 0) { %>
 <a href="#demo1" class="list-group-item" data-toggle="collapse">Gossip Girl</a>
   <div id="demo1" class="collapse">
-     <form role="search" action="/usdramaG" method="get" name='myform5'>
+     <form role="search" action="/usdramaG" method="get" name='myform'>
     <input type="hidden" name="search" class="form-control" value ="Girl1">
       <a href="#" onclick='document.forms["myform5"].submit(); return false;' class="list-group-item">Gossip Girl 시즌 1 <span class="label label-danger">Hot</span>
       </a>
@@ -147,6 +147,30 @@
       <a href="#" onclick='document.forms["myform10"].submit(); return false;' class="list-group-item">Gossip Girl 시즌 6
       </a>
       </form>
+  </div>
+<% } %>
+
+<% if (currentPage !== 0) { %>
+<a href="#demo2" class="list-group-item" data-toggle="collapse">Girls</a>
+  <div id="demo2" class="collapse">
+     <form role="search" action="/usdramaG" method="get" name='myform11'>
+    <input type="hidden" name="search" class="form-control" value ="Girls1">
+      <a href="#" onclick='document.forms["myform11"].submit(); return false;' class="list-group-item">Girls 시즌 1 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+       <form role="search" action="/usdramaG" method="get" name='myform12'>
+    <input type="hidden" name="search" class="form-control" value ="Girls2">
+      <a href="#" onclick='document.forms["myform12"].submit(); return false;' class="list-group-item">Girls 시즌 2 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+      <form role="search" action="/usdramaG" method="get" name='myform13'>
+    <input type="hidden" name="search" class="form-control" value ="Girls3">
+      <a href="#" onclick='document.forms["myform13"].submit(); return false;' class="list-group-item">Girls 시즌 3
+      </a>
+      </form>
+
   </div>
 <% } %>
 
