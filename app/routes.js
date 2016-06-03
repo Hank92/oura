@@ -123,7 +123,7 @@ app.get('/dramaDelete/:id/delete', function(req, res){
 });
 
 app.get('/entertainDelete', function (req, res){
-	dailyModel.find({}, function(req, docs){
+	dailydModel.find({}, function(req, docs){
 		res.render('entertaindelete.ejs', {postModels: docs})	
 	})
 	
@@ -1576,7 +1576,65 @@ request('http://www.heyheyfriends.com/browse-WVD5268-videos-1-date.html', functi
 	}//첫 if구문
 
 });
+/*
+request('http://www.mgoon.com/ch/Micis/?currentPage=5&perPage=12&sort_column=cdate&sort_type=1&search_keyword=G.o.T&f_date=0&f_quality=0&f_duration=0', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('.video-item').each(function(){
+		var heyTitle = $(this).find('.video-title a').text();
+		//heyTitle = "BigBang Theory5 " + heyTitle;
+		var newHref = $(this).find('.video-thumbnail a').attr('href');
+	 	var heyUrl = "http://www.mgoon.com" + newHref;
 
+			request(heyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var vid_url;
+
+				$('#div_mgoon_video embed').each(function(){
+					var newHref = $(this).attr('src');
+					vid_url = "http://www.mgoon.com" + newHref
+				})
+
+
+				// scrape all the images for the post
+				usdramaModel.find({title: heyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new usdramaModel({
+						title: heyTitle,
+						url: heyUrl,
+						video_url: vid_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+*/
 //24
 request('http://www.heyheyfriends.com/browse-wer3242-videos-2-date.html', function(err, res, body){
 	
