@@ -1584,7 +1584,7 @@ request('http://www.mgoon.com/ch/Micis/?currentPage=5&perPage=12&sort_column=cda
 		var $ = cheerio.load(body);
 		$('.video-item').each(function(){
 		var heyTitle = $(this).find('.video-title a').text();
-		//heyTitle = "BigBang Theory5 " + heyTitle;
+		heyTitle = "Game of Thrones1 " + heyTitle;
 		var newHref = $(this).find('.video-thumbnail a').attr('href');
 	 	var heyUrl = "http://www.mgoon.com" + newHref;
 
@@ -1593,8 +1593,8 @@ request('http://www.mgoon.com/ch/Micis/?currentPage=5&perPage=12&sort_column=cda
 				var $ = cheerio.load(body);
 				var vid_url;
 
-				$('#div_mgoon_video embed').each(function(){
-					var newHref = $(this).attr('src');
+				$('#player_section').each(function(){
+					var newHref = $(this).find("iframe").attr('src');
 					vid_url = "http://www.mgoon.com" + newHref
 				})
 
@@ -1635,6 +1635,31 @@ request('http://www.mgoon.com/ch/Micis/?currentPage=5&perPage=12&sort_column=cda
 
 });
 */
+usdramaModel.find({}, function(err, newPosts){
+				
+				if (newPosts.length){
+					//save data in Mongodb
+					var vid_url= "http://play.mgoon.com/Video/V4470618@key_YK4JTLkySbo67nOgaHTbMfvosdC8Q8btMyVxcJhBx7S4dqSDxWJK0PBxSswChfrkDq4AjXh2v698NEDaNJtY6UmfhVEJaKipBp8UsYljqis9Wyrh4Bw6BqXHBDOA3RI0his@auto"
+				
+					var heyTitle = "Game of Thrones1 시즌 1-2" 
+
+					var issuePost = new usdramaModel({
+						title: heyTitle,
+						video_url: vid_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+
 //24
 request('http://www.heyheyfriends.com/browse-wer3242-videos-2-date.html', function(err, res, body){
 	
