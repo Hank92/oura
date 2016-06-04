@@ -1639,9 +1639,9 @@ usdramaModel.find({}, function(err, newPosts){
 				
 				if (newPosts.length){
 					//save data in Mongodb
-					var vid_url= "http://play.mgoon.com/Video/V4470618@key_YK4JTLkySbo67nOgaHTbMfvosdC8Q8btMyVxcJhBx7S4dqSDxWJK0PBxSswChfrkDq4AjXh2v698NEDaNJtY6UmfhVEJaKipBp8UsYljqis9Wyrh4Bw6BqXHBDOA3RI0his@auto"
+					var vid_url= "http://play.mgoon.com/Video/V4538804@key_YK4JTLkySbo67nOgaHTbMfvosdC8Q8btMyVxcJhBx7S4dqSDxWJK0PBxSswChfrkDq4AjXh2v698NEDaNJtY6UmfhVEJaKipBlfdU1PMHcYmNykH5ypbRb3BDOA3RI0his@auto"
 				
-					var heyTitle = "Game of Thrones1 시즌 1-2" 
+					var heyTitle = "Game of Thrones1 시즌 1-8" 
 
 					var issuePost = new usdramaModel({
 						title: heyTitle,

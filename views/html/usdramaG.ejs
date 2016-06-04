@@ -153,6 +153,12 @@
 <% if (currentPage !== 0) { %>
 <a href="#demo3" class="list-group-item" data-toggle="collapse">Game of Thrones</a>
   <div id="demo3" class="collapse">
+    <form role="search" action="/usdramaG" method="get" name='myform16'>
+    <input type="hidden" name="search" class="form-control" value ="Game of Thrones1">
+      <a href="#" onclick='document.forms["myform16"].submit(); return false;' class="list-group-item">Game of Thrones 시즌 1 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
      <form role="search" action="/usdramaG" method="get" name='myform14'>
     <input type="hidden" name="search" class="form-control" value ="Game of Thrones2">
       <a href="#" onclick='document.forms["myform14"].submit(); return false;' class="list-group-item">Game of Thrones 시즌 2 <span class="label label-danger">Hot</span>
