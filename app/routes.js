@@ -1635,13 +1635,14 @@ request('http://www.mgoon.com/ch/Micis/?currentPage=5&perPage=12&sort_column=cda
 
 });
 */
+/*
 usdramaModel.find({}, function(err, newPosts){
 				
 				if (newPosts.length){
 					//save data in Mongodb
-					var vid_url= "http://play.mgoon.com/Video/V4538804@key_YK4JTLkySbo67nOgaHTbMfvosdC8Q8btMyVxcJhBx7S4dqSDxWJK0PBxSswChfrkDq4AjXh2v698NEDaNJtY6UmfhVEJaKipBlfdU1PMHcYmNykH5ypbRb3BDOA3RI0his@auto"
+					var vid_url= "http://play.mgoon.com/Video/V5777531@key_YK4JTLkySbo67nOgaHTbMfvosdC8Q8btMyVxcJhBx7S4dqSDxWJK0PBxSswChfrkDq4AjXh2v698NEDaNJtY6UmfhVEJaKipBUiiPjDisWHpYQW561fetKUFLisZhwTRQ03Z@auto"
 				
-					var heyTitle = "Game of Thrones1 시즌 1-8" 
+					var heyTitle = "Game of Thrones4 시즌 4-10" 
 
 					var issuePost = new usdramaModel({
 						title: heyTitle,
@@ -1659,7 +1660,32 @@ usdramaModel.find({}, function(err, newPosts){
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
+*/
 
+usdramaModel.find({}, function(err, newPosts){
+				
+				if (newPosts.length){
+					//save data in Mongodb
+					var vid_url= "http://play.mgoon.com/Video/V2358380@key_YK4JTLkySbo67nOgaHTbMfvosdC8Q8btMyVxcJhBx7S4dqSDxWJK0PBxSswChfrkDq4AjXh2v68aYg3h83jLx9NhrFhLhF3nTqUeAepaJxynIYXGshEDnvORLhOZkii6CR8T2lmiphyP0ie@auto"
+				
+					var heyTitle = "How I met your mother1 시즌 1-22" 
+
+					var issuePost = new usdramaModel({
+						title: heyTitle,
+						video_url: vid_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
 //24
 request('http://www.heyheyfriends.com/browse-wer3242-videos-2-date.html', function(err, res, body){
 	
