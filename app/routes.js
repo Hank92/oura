@@ -849,6 +849,7 @@ request('http://www.heyheyfriends.com/browse-house8-videos-2-date.html', functio
 	}//첫 if구문
 
 });
+/*
 //how I met your mother
 request('http://www.heyheyfriends.com/browse-mzs52498-videos-2-date.html', function(err, res, body){
 	
@@ -904,7 +905,7 @@ request('http://www.heyheyfriends.com/browse-mzs52498-videos-2-date.html', funct
 	}//첫 if구문
 
 });
-
+*/
 //heroes
 request('http://www.heyheyfriends.com/browse-erw324242wr-videos-2-date.html', function(err, res, body){
 	
@@ -914,6 +915,341 @@ request('http://www.heyheyfriends.com/browse-erw324242wr-videos-2-date.html', fu
 		$('.video_i').each(function(){
 		var heyTitle = $(this).find('a .song_name').text();
 		heyTitle = "Heroes4 " + heyTitle;
+		var heyUrl = $(this).find('a').attr('href');
+	 	
+			request(heyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var vid_url;
+
+				$('#Playerholder embed').each(function(){
+					vid_url = $(this).attr('src');
+				})
+
+				// scrape all the images for the post
+				usdramaModel.find({title: heyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new usdramaModel({
+						title: heyTitle,
+						url: heyUrl,
+						video_url: vid_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+//New Girl
+request('http://www.heyheyfriends.com/browse-nyt54796-videos-1-date.html', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('.video_i').each(function(){
+		var heyTitle = $(this).find('a .song_name').text();
+		heyTitle = "NewGirl5 " + heyTitle;
+		var heyUrl = $(this).find('a').attr('href');
+	 	
+			request(heyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var vid_url;
+
+				$('#Playerholder embed').each(function(){
+					vid_url = $(this).attr('src');
+				})
+
+				// scrape all the images for the post
+				usdramaModel.find({title: heyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new usdramaModel({
+						title: heyTitle,
+						url: heyUrl,
+						video_url: vid_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//Forever
+request('http://www.heyheyfriends.com/browse-qyh14621-videos-2-date.html', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('.video_i').each(function(){
+		var heyTitle = $(this).find('a .song_name').text();
+		heyTitle = "Forever1 " + heyTitle;
+		var heyUrl = $(this).find('a').attr('href');
+	 	
+			request(heyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var vid_url;
+
+				$('#Playerholder embed').each(function(){
+					vid_url = $(this).attr('src');
+				})
+
+				// scrape all the images for the post
+				usdramaModel.find({title: heyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new usdramaModel({
+						title: heyTitle,
+						url: heyUrl,
+						video_url: vid_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//Finder
+request('http://www.heyheyfriends.com/browse-34243242-videos-2-date.html', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('.video_i').each(function(){
+		var heyTitle = $(this).find('a .song_name').text();
+		heyTitle = "Finder1 " + heyTitle;
+		var heyUrl = $(this).find('a').attr('href');
+	 	
+			request(heyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var vid_url;
+
+				$('#Playerholder embed').each(function(){
+					vid_url = $(this).attr('src');
+				})
+
+				// scrape all the images for the post
+				usdramaModel.find({title: heyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new usdramaModel({
+						title: heyTitle,
+						url: heyUrl,
+						video_url: vid_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//Cougar Town
+request('http://www.heyheyfriends.com/browse-NQA12698-videos-1-date.html', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('.video_i').each(function(){
+		var heyTitle = $(this).find('a .song_name').text();
+		heyTitle = "Cougar Town5 " + heyTitle;
+		var heyUrl = $(this).find('a').attr('href');
+	 	
+			request(heyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var vid_url;
+
+				$('#Playerholder embed').each(function(){
+					vid_url = $(this).attr('src');
+				})
+
+				// scrape all the images for the post
+				usdramaModel.find({title: heyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new usdramaModel({
+						title: heyTitle,
+						url: heyUrl,
+						video_url: vid_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//Escape from Alcatraz
+request('http://www.heyheyfriends.com/browse-13546752-videos-2-date.html', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('.video_i').each(function(){
+		var heyTitle = $(this).find('a .song_name').text();
+		heyTitle = "Escape from Alcatraz1 " + heyTitle;
+		var heyUrl = $(this).find('a').attr('href');
+	 	
+			request(heyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var vid_url;
+
+				$('#Playerholder embed').each(function(){
+					vid_url = $(this).attr('src');
+				})
+
+				// scrape all the images for the post
+				usdramaModel.find({title: heyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new usdramaModel({
+						title: heyTitle,
+						url: heyUrl,
+						video_url: vid_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//Switched at Birth
+request('http://www.heyheyfriends.com/browse-agf2568-videos-2-date.html', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('.video_i').each(function(){
+		var heyTitle = $(this).find('a .song_name').text();
+		heyTitle = "Switched at Birth2 " + heyTitle;
 		var heyUrl = $(this).find('a').attr('href');
 	 	
 			request(heyUrl, function(err, res, body){
@@ -1661,7 +1997,7 @@ usdramaModel.find({}, function(err, newPosts){
 
 			})//postModel.find
 */
-
+/*
 usdramaModel.find({}, function(err, newPosts){
 				
 				if (newPosts.length){
@@ -1686,6 +2022,7 @@ usdramaModel.find({}, function(err, newPosts){
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
+			*/
 //24
 request('http://www.heyheyfriends.com/browse-wer3242-videos-2-date.html', function(err, res, body){
 	

@@ -16,7 +16,7 @@
     <meta name="google-site-verification" content="UFlAZBpLslwZH5RF8Z4WSu6fiCM-MXNzOvcLsyDh2_Y" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴, 예능, 아는 형님, 드라마, 미드 ">
-     <meta name="description" content="하루를 유쾌하게 보낼 수 있게 짤과 예능 드라마가 모여있는 플랫폼">
+     <meta name="description" content="하루를 유쾌하게 보낼 수 있게 짤과 예능 드라마, 미드가 모여있는 플랫폼">
 
     
     <!--call the css file -->
@@ -178,6 +178,24 @@
       </a>
       </form>
   </div>
+<% } %>
+
+
+
+<% if (currentPage !== 0) { %>
+ <form role="search" action="/usdramaF" method="get" name='myform16'>
+    <input type="hidden" name="search" class="form-control" value ="Forever1">
+      <a href="#" onclick='document.forms["myform16"].submit(); return false;' class="list-group-item">Forever 시즌 1
+      </a>
+      </form>
+<% } %>
+
+<% if (currentPage !== 0) { %>
+ <form role="search" action="/usdramaF" method="get" name='myform17'>
+    <input type="hidden" name="search" class="form-control" value ="Finder1">
+      <a href="#" onclick='document.forms["myform17"].submit(); return false;' class="list-group-item">Finder 시즌 1
+      </a>
+      </form>
 <% } %>
 
       <% for(var i = 0; i < postModels.length ; i++  ) { %>
