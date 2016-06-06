@@ -2453,9 +2453,9 @@ usdramaModel.find({}, function(err, newPosts){
 				
 				if (newPosts.length){
 					//save data in Mongodb
-					var vid_url= "http://play.mgoon.com/Video/V2358380@key_YK4JTLkySbo67nOgaHTbMfvosdC8Q8btMyVxcJhBx7S4dqSDxWJK0PBxSswChfrkDq4AjXh2v68aYg3h83jLx9NhrFhLhF3nTqUeAepaJxynIYXGshEDnvORLhOZkii6CR8T2lmiphyP0ie@auto"
+					var vid_url= "http://play.mgoon.com/Video/V1776290@key_YK4JTLkySbo67nOgaHTbMfvosdC8Q8btMyVxcJhBx7S4dqSDxWJK0PBxSswChfrkDq4AjXh2v68aYg3h83jLx9NhrFhLhF3nGXP1fLbDupTSEgBQADnNxfORLhOZkii6CR8T2lmiphyP0ie@auto"
 				
-					var heyTitle = "How I met your mother1 시즌 1-22" 
+					var heyTitle = "How I met your mother2 시즌 2-22" 
 
 					var issuePost = new usdramaModel({
 						title: heyTitle,
@@ -2473,7 +2473,7 @@ usdramaModel.find({}, function(err, newPosts){
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			*/
+*/			
 //24
 request('http://www.heyheyfriends.com/browse-wer3242-videos-2-date.html', function(err, res, body){
 	
