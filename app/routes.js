@@ -1689,6 +1689,65 @@ request('http://www.heyheyfriends.com/browse-agf2568-videos-2-date.html', functi
 
 });
 
+//미녀공심이
+request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EA%B3%B5%EC%8B%AC%EC%9D%B4', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailydramaModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailydramaModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+			
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
 //breaking bad
 request('http://www.heyheyfriends.com/browse-dfc5478-videos-2-date.html', function(err, res, body){
 	

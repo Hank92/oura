@@ -12,8 +12,8 @@
     <meta name="naver-site-verification" content="8672f68ec19974757430dcc41aa887462bd2a8c5"/>
     <meta name="google-site-verification" content="UFlAZBpLslwZH5RF8Z4WSu6fiCM-MXNzOvcLsyDh2_Y" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴, 예능, 아는 형님, 드라마 ">
-     <meta name="description" content="하루를 유쾌하게 보낼 수 있게 짤과 예능 드라마가 모여있는 플랫폼">
+    <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴, 예능, 아는 형님, 미드, 드라마 ">
+     <meta name="description" content="하루를 유쾌하게 보낼 수 있게 짤과 예능 드라마, 미드가 모여있는 플랫폼">
 
     
     <!--call the css file -->
@@ -109,6 +109,16 @@
       </form>
        <% } %>
 
+
+          <% if (currentPage !== 0) { %>
+    <form role="search" action="/drama" method="get" name='myform9'>
+    <input type="hidden" name="search" class="form-control" value ="공심이">
+      <a href="#" onclick='document.forms["myform9"].submit(); return false;' class="list-group-item">미녀 공심이 <span class="label label-danger">Hot</span>
+      </a>
+      </a>
+      </form>
+       <% } %>
+
        <% if (currentPage !== 0) { %>
     <form role="search" action="/drama" method="get" name='myform6'>
     <input type="hidden" name="search" class="form-control" value ="디어">
@@ -125,9 +135,9 @@
        <% } %>
 
        <% if (currentPage !== 0) { %>
-    <form role="search" action="/drama" method="get" name='myform6'>
+    <form role="search" action="/drama" method="get" name='myform8'>
     <input type="hidden" name="search" class="form-control" value ="별난 가족">
-      <a href="#" onclick='document.forms["myform"].submit(); return false;' class="list-group-item">별난 가족
+      <a href="#" onclick='document.forms["myform8"].submit(); return false;' class="list-group-item">별난 가족
       </a>
       </form>
        <% } %>  

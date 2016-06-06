@@ -164,12 +164,13 @@
   </div>
 <% } %>
 
+<% if (currentPage !== 0) { %>
 <form role="search" action="/usdrama" method="get" name='myform12'>
     <input type="hidden" name="search" class="form-control" value ="Alphas1">
       <a href="#" onclick='document.forms["myform12"].submit(); return false;' class="list-group-item">Alphas 시즌 1
       </a>
       </form>
-      
+     <% } %> 
       <% for(var i = 0; i < postModels.length ; i++  ) { %>
        <a class="list-group-item" href ="/usdrama/<%= postModels[i].id %>"><%= postModels[i].title %> </a>
        <% }%>
