@@ -16,7 +16,7 @@
     <meta name="google-site-verification" content="UFlAZBpLslwZH5RF8Z4WSu6fiCM-MXNzOvcLsyDh2_Y" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴, 예능, 아는 형님, 드라마, 미드 ">
-     <meta name="description" content="하루를 유쾌하게 보낼 수 있게 짤과 예능 드라마가 모여있는 플랫폼">
+     <meta name="description" content="하루를 유쾌하게 보낼 수 있게 짤과 예능 드라마, 미드가 모여있는 플랫폼">
 
     
     <!--call the css file -->
@@ -221,6 +221,25 @@
       <a href="#" onclick='document.forms["myform20"].submit(); return false;' class="list-group-item">Doctor Who 시즌 7
       </a>
       </form>
+
+  </div>
+ <% }%>
+
+  <% if (currentPage !== 0) { %>
+   <a href="#demo4" class="list-group-item" data-toggle="collapse">Da Vinchi's Demons</a>
+  <div id="demo4" class="collapse">
+       <form role="search" action="/usdramaD" method="get" name='myform21'>
+    <input type="hidden" name="search" class="form-control" value ="Demons1">
+      <a href="#" onclick='document.forms["myform21"].submit(); return false;' class="list-group-item">Da Vinchi's Demons 시즌 1 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+    <form role="search" action="/usdramaD" method="get" name='myform22'>
+    <input type="hidden" name="search" class="form-control" value ="Demons2">
+      <a href="#" onclick='document.forms["myform22"].submit(); return false;' class="list-group-item">Da Vinchi's Demons 시즌 2 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
 
   </div>
  <% }%>

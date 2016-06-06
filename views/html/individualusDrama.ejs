@@ -11,8 +11,8 @@
     <meta name="naver-site-verification" content="8672f68ec19974757430dcc41aa887462bd2a8c5"/>
     <meta name="google-site-verification" content="UFlAZBpLslwZH5RF8Z4WSu6fiCM-MXNzOvcLsyDh2_Y" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴">
-     <meta name="description" content="하루를 유쾌하게 보낼 수 있게 짤과 예능 드라마가 모여있는 플랫폼">
+    <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴, 미드, 드라마, 예능, 아는 형님">
+     <meta name="description" content="하루를 유쾌하게 보낼 수 있게 짤과 예능 드라마, 미드가 모여있는 플랫폼">
     <link rel='stylesheet' href='/css/individualHazzulMain.css'>
 </head>
 
@@ -51,14 +51,17 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav></br>
-    <div class ="thumbnail">
+   <div class ="thumbnail">
     </br>
         <font color = "#101010 ">
-        <%= issuepostModel.title %> 동영상</br>
-            <embed src="<%= issuepostModel.video_url %>"  quality="high" bgcolor="#000000" width="500" height="400" name="mgoonPlayer" align="middle" allowscriptaccess="always" allowfullscreen="true" type="application/x-shockwave-flash">
-             </br>
-              </br> 
-              hazzul.com의 모든 컨텐츠는 인터넷 검색을 통해 공유 가능한 오직 링크만을 제공하는 것이며 hazzul.com은 동영상을 직접 제작 또는 불법 복제하여 업로드하거나 호스팅하지 않으므로 저작권에 관한 법적인 책임을 지지 않습니다. 법적 사안은 미디어파일 소유주 또는 호스터에게 컨텍하십시오.
+        <h3><%= issuepostModel.title %> 동영상</h3></br>
+        광고가 있을 수 있습니다.</br></br>
+        화질이 좋지 않다면 인터넷 창을 줄이시면 됩니다
+        </font>
+        </br></br>
+          <a href = " <%= issuepostModel.video_url %>"><button class="btn btn-success"><span class ="glyphicon glyphicon-play-circle"> 동영상 보기 <span></button></a>
+           </br>
+        
     </div>
     </div></div>
 

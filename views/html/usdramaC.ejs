@@ -184,6 +184,49 @@
   </div>
  <% }%>
 
+ <% if (currentPage !== 0) { %>
+   <a href="#demo5" class="list-group-item" data-toggle="collapse">Continnum</a>
+  <div id="demo5" class="collapse">
+       <form role="search" action="/usdramaC" method="get" name='myform14'>
+    <input type="hidden" name="search" class="form-control" value ="Continnum1">
+      <a href="#" onclick='document.forms["myform14"].submit(); return false;' class="list-group-item">Continuum 시즌 1 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+    <form role="search" action="/usdramaC" method="get" name='myform15'>
+    <input type="hidden" name="search" class="form-control" value ="continuum2">
+      <a href="#" onclick='document.forms["myform15"].submit(); return false;' class="list-group-item">Continuum 시즌 2 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+       <form role="search" action="/usdramaC" method="get" name='myform16'>
+    <input type="hidden" name="search" class="form-control" value ="Continnum3">
+      <a href="#" onclick='document.forms["myform16"].submit(); return false;' class="list-group-item">Continuum 시즌 3 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+  </div>
+ <% }%>
+
+ <% if (currentPage !== 0) { %>
+   <a href="#demo6" class="list-group-item" data-toggle="collapse">Covert Affairs</a>
+  <div id="demo6" class="collapse">
+       <form role="search" action="/usdramaC" method="get" name='myform17'>
+    <input type="hidden" name="search" class="form-control" value ="Affairs1">
+      <a href="#" onclick='document.forms["myform17"].submit(); return false;' class="list-group-item">Covert Affairs 시즌 1 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+    <form role="search" action="/usdramaC" method="get" name='myform18'>
+    <input type="hidden" name="search" class="form-control" value ="Affairs2">
+      <a href="#" onclick='document.forms["myform18"].submit(); return false;' class="list-group-item">Covert Affairs 시즌 2 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+
+  </div>
+ <% }%>
+
       <% for(var i = 0; i < postModels.length ; i++  ) { %>
        <a class="list-group-item" href ="/usdrama/<%= postModels[i].id %>"><%= postModels[i].title %> </a>
        <% }%>
