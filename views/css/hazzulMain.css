@@ -82,7 +82,6 @@
 
 @media (min-width: 1220px){
   
-
   .affix-content{
     overflow: auto;
   }
@@ -107,7 +106,7 @@
 
 .thumbnail {
    width: 203px;
-   height: 230px;
+   height: 240px;
    overflow: auto;
    margin: 20px;
  }
@@ -116,7 +115,6 @@
    width: 140px;
    height: 100px;
  }
-
 
  .text-center {
      font-size: 12px;
