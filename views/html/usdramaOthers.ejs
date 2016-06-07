@@ -122,7 +122,7 @@
       <a href="#" onclick='document.forms["myform7"].submit(); return false;' class="list-group-item">24 시즌 3 <span class="label label-danger">Hot</span>
       </a>
       </form>
-
+ 
       <form role="search" action="/usdramaOthers" method="get" name='myform8'>
     <input type="hidden" name="search" class="form-control" value ="twentyfour4">
       <a href="#" onclick='document.forms["myform8"].submit(); return false;' class="list-group-item">24 시즌 4 <span class="label label-danger">Hot</span>
@@ -254,9 +254,21 @@
       </a>
       </form>
 
-      <form role="search" action="/usdramaOthers" method="get" name='myform29'>
-    <input type="hidden" name="search" class="form-control" value ="NewGirl5">
-      <a href="#" onclick='document.forms["myform29"].submit(); return false;' class="list-group-item">New Girl 시즌 5 <span class="label label-danger">Hot</span>
+  </div>
+<% } %>
+
+<% if (currentPage !== 0) { %>
+<a href="#demo5" class="list-group-item" data-toggle="collapse">True Blood</a>
+  <div id="demo5" class="collapse">
+    <form role="search" action="/usdramaOthers" method="get" name='myform29'>
+    <input type="hidden" name="search" class="form-control" value ="Blood1">
+      <a href="#" onclick='document.forms["myform29"].submit(); return false;' class="list-group-item">True Blood 시즌 1 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+      <form role="search" action="/usdramaOthers" method="get" name='myform30'>
+    <input type="hidden" name="search" class="form-control" value ="Blood2">
+      <a href="#" onclick='document.forms["myform30"].submit(); return false;' class="list-group-item">True Blood 시즌 2 <span class="label label-danger">Hot</span>
       </a>
       </form>
 
