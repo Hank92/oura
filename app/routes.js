@@ -2448,39 +2448,16 @@ usdramaModel.find({}, function(err, newPosts){
 
 			})//postModel.find
 */
+
+
 /*
 usdramaModel.find({}, function(err, newPosts){
 				
 				if (newPosts.length){
 					//save data in Mongodb
-					var vid_url= "http://play.mgoon.com/Video/V2718449@key_YK4JTLkySbo67nOgaHTbMfvosdC8Q8btMyVxcJhBx7S4dqSDxWJK0PBxSswChfrkDq4AjXh2v69FTY4J3UBLIfT5XXzVOq6SmYteph7GF8Ypm1lAiiUMpjCzeB0CNUpTgWbckXuXrWn8ie@auto"
+					var vid_url= "http://play.mgoon.com/Video/V3241775@key_YK4JTLkySbo67nOgaHTbMfvosdC8Q8btMyVxcJhBx7S4dqSDxWJK0PBxSswChfrkDq4AjXh2v68z1iihNe9fGBBUWrJVWx4iiw3eWA5crLrFXPfpIQLFiipmCeBP02bSzQJ9j8Wv9cdxAQie@auto"
 				
-					var heyTitle = "True Blood2 시즌 2-12" 
-
-					var issuePost = new usdramaModel({
-						title: heyTitle,
-						video_url: vid_url
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(issuePost);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-
-usdramaModel.find({}, function(err, newPosts){
-				
-				if (newPosts.length){
-					//save data in Mongodb
-					var vid_url= "http://play.mgoon.com/Video/V2718662@key_YK4JTLkySbo67nOgaHTbMfvosdC8Q8btMyVxcJhBx7S4dqSDxWJK0PBxSswChfrkDq4AjXh2v69FTY4J3UBLIfT5XXzVOq6SmYteph7GF8YZUWO1Do5qlSzeB0CNUpTgWbckXuXrWn8ie@auto"
-				
-					var heyTitle = "True Blood2 시즌 2-11" 
+					var heyTitle = "True Blood2 시즌 2-8" 
 
 					var issuePost = new usdramaModel({
 						title: heyTitle,
