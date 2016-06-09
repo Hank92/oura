@@ -105,7 +105,7 @@ app.get('/postdelete/:id/delete', function(req, res){
 		else    res.redirect('/postDelete');
 	});
 });
-
+/*
 app.get('/dramaDelete', function (req, res){
 	issueModel.find({}, function(req, docs){
 		res.render('dramadelete.ejs', {postModels: docs})	
@@ -137,7 +137,7 @@ app.get('/entertainDelete/:id/delete', function(req, res){
 		else    res.redirect('/entertainDelete');
 	});
 });
-
+*/
 
 app.get('/drama', function (req, res){
 if(req.query.search){
