@@ -159,6 +159,24 @@
 <% } %>
 
 <% if (currentPage !== 0) { %>
+<a href="#demo3" class="list-group-item" data-toggle="collapse">Americans</a>
+  <div id="demo3" class="collapse">
+<form role="search" action="/usdrama" method="get" name='myform13'>
+    <input type="hidden" name="search" class="form-control" value ="Americans1">
+      <a href="#" onclick='document.forms["myform13"].submit(); return false;' class="list-group-item">Americans 시즌 1 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+    <form role="search" action="/usdrama" method="get" name='myform14'>
+    <input type="hidden" name="search" class="form-control" value ="Americans2">
+      <a href="#" onclick='document.forms["myform14"].submit(); return false;' class="list-group-item">Americans 시즌 2 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+  </div>
+<% } %>
+
+<% if (currentPage !== 0) { %>
 <form role="search" action="/usdrama" method="get" name='myform12'>
     <input type="hidden" name="search" class="form-control" value ="Alphas1">
       <a href="#" onclick='document.forms["myform12"].submit(); return false;' class="list-group-item">Alphas 시즌 1

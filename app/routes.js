@@ -107,7 +107,7 @@ app.get('/postdelete/:id/delete', function(req, res){
 });
 
 app.get('/dramaDelete', function (req, res){
-	usdramaModel.find({}, function(req, docs){
+	issueModel.find({}, function(req, docs){
 		res.render('dramadelete.ejs', {postModels: docs})	
 	})
 	
@@ -115,7 +115,7 @@ app.get('/dramaDelete', function (req, res){
 
 
 app.get('/dramaDelete/:id/delete', function(req, res){
-	usdramaModel.remove({_id: req.params.id}, 
+	issueModel.remove({_id: req.params.id}, 
 	   function(err){
 		if(err) res.json(err);
 		else    res.redirect('/dramaDelete');
@@ -768,6 +768,11 @@ request('http://issuein.com/', function(err, res, body){
 					video_url.push(vid_url);
 				})
 
+				$('video').each(function(){
+					var vid_url = $(this).find("source").attr('src');
+					video_url.push(vid_url);
+				})
+
 				// scrape all the images for the post
 				issueModel.find({title: issueTitle}, function(err, newPosts){
 				
@@ -895,4 +900,1326 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 	}//첫 if구문
 
 });
+//비정상회담
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EB%B9%84%EC%A0%95%EC%83%81%ED%9A%8C%EB%8B%B4', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://lh3.googleusercontent.com/G8G7UWO-6ebfRc-RJpDXdQshq_4LLwabvEVp5Z17wcLp5Fu3f4EkOfjFhmtVaFzW5-V0nAFqs8qzn8NP6IDR1ByfRZXBjWkykg=s0";
 
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//슈퍼맨이 돌아왔다
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%8A%88%ED%8D%BC%EB%A7%A8', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://onairkorean.tv/data/file/content/3519350434_KY0uxdIg_EC8A88ED8DBCEBA7A8EC9DB4_EB8F8CEC9584EC9994EB8BA4_EB8BA4EC8B9CEBB3B4EAB8B0.jpg";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//유희열의 스케치북
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%9C%A0%ED%9D%AC%EC%97%B4', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://cfile9.uf.tistory.com/image/247A35495319AAD01D89B6";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//SNL 
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=SNL', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://image.ajunews.com/content/image/2016/02/24/20160224073924513576.jpg";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//섹션 TV
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%84%B9%EC%85%98TV+%EC%97%B0%EC%98%88%ED%86%B5%EC%8B%A0', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://imgnews.naver.com/image/277/2008/11/22/2008111716312008962_1.jpg";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//냉장고를 부탁해
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EB%83%89%EC%9E%A5%EA%B3%A0', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://lh3.ggpht.com/pw4_jdLKFo1KU7N6IRmA1U1oUXmKUqJ72yDm_X2vrVTIYQqqidYr1lOcuW9aVV9V__joXUcyQvt9EOQJIdEO-ctR8Gv7-josj0Y=s0";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//스포츠 하이라이트
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%8A%A4%ED%8F%AC%EC%B8%A0+%ED%95%98%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8A%B8', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://t1.daumcdn.net/thumb/C216x312/?fname=http%3A%2F%2Fcfile28.uf.daum.net%2Fimage%2F26242F4D5488E60B1F5114";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//우리동네 예체능
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%9A%B0%EB%A6%AC%EB%8F%99%EB%84%A4+%EC%98%88%EC%B2%B4%EB%8A%A5', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://www.todeffects.com/files/attach/images/126/709/002/87d5f2419cdf5b0709e3670ef29b353a.jpg";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//쇼미더머니
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%87%BC%EB%AF%B8%EB%8D%94%EB%A8%B8%EB%8B%88', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "https://scontent.cdninstagram.com/t51.2885-15/e35/13183495_240772802947579_1291572638_n.jpg?ig_cache_key=MTI0OTI4MzM4NDI1ODc0ODQ3Mg%3D%3D.2";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//뮤직뱅크 
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EB%AE%A4%EC%A7%81%EB%B1%85%ED%81%AC', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://s1.dmcdn.net/Gq49z/1280x720-jzH.jpg";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//쇼! 챔피언
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%87%BC%21+%EC%B1%94%ED%94%BC%EC%96%B8', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://4.bp.blogspot.com/-dQiLTS3pKFA/Vh5t53ZHEtI/AAAAAAAABNU/yUNGdFgTIls/s1600/%25EC%2587%25BC%2B%25EC%25B1%2594%25ED%2594%25BC%25EC%2596%25B8.jpg";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//주간 아이돌
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%A3%BC%EA%B0%84+%EC%95%84%EC%9D%B4%EB%8F%8C', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://s1.dmcdn.net/JnGUk/x240-BJc.jpg";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//음악의 신
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%9D%8C%EC%95%85%EC%9D%98+%EC%8B%A0+%EC%8B%9C%EC%A6%8C2', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://cfile22.uf.tistory.com/image/267674485721C32B14C01D";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+
+//M 카운트 다운
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=M+%EC%B9%B4%EC%9A%B4%ED%8A%B8+%EB%8B%A4%EC%9A%B4', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://cfile4.uf.tistory.com/image/12235C4E506D3D36354EEC";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+
+//복면가왕
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EB%B3%B5+%EB%A9%B4+%EA%B0%80+%EC%99%95', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://www.naverdrama.com/wp-content/uploads/2015/09/mask_singer.jpg";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+
+//신의 목소리
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EB%B3%B4%EC%BB%AC+%EC%A0%84%EC%9F%81', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://image.ajunews.com/content/image/2016/02/04/20160204152032774026.jpg";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+
+//아는 형님
+request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%95%84%EB%8A%94+%ED%98%95%EB%8B%98', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://photo.jtbc.joins.com/news/2015/12/03/201512030432057682.jpg";
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailyModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailyModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+//딴따라
+request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EB%94%B4%EB%94%B0%EB%9D%BC', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://img.tenasia.hankyung.com/webwp_kr/wp-content/uploads/2016/02/2016021821170720308-540x377.jpg"
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailydramaModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailydramaModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//오해영
+request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EC%98%A4%ED%95%B4%EC%98%81', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://image-origin.tving.com/resize.php?u=http://image-origin.tving.com/upload/cms/caip/CAIP1500/P000273930.jpg&w=327"
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailydramaModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailydramaModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//디어마이 프렌즈
+request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EB%94%94%EC%96%B4+%EB%A7%88%EC%9D%B4+%ED%94%84%EB%A0%8C%EC%A6%88', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "https://i.ytimg.com/vi/Qh_trLkf4hI/maxresdefault.jpg"
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailydramaModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailydramaModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+
+
+//동네변호사 조들호
+request('http://baykoreans.net/index.php?mid=drama&search_target=title&search_keyword=%EB%8F%99%EB%84%A4%EB%B3%80%ED%98%B8%EC%82%AC+%EC%A1%B0%EB%93%A4%ED%98%B8&page=2&division=-2820019&last_division=-2781128', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+				var image_url = "http://upload.enews24.net/News/Contents/20160323/28604327.jpg"
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailydramaModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailydramaModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+//미녀 공심이
+request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EA%B3%B5%EC%8B%AC%EC%9D%B4', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailydramaModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailydramaModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url,
+						image_url: image_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});

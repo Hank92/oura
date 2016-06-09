@@ -225,6 +225,81 @@
   </div>
 <% }%>
 
+ <% if (currentPage !== 0) { %>
+    <a href="#demo4" class="list-group-item" data-toggle="collapse">Haven</a>
+  <div id="demo4" class="collapse">
+  
+      <form role="search" action="/usdramaH" method="get" name='myform24'>
+    <input type="hidden" name="search" class="form-control" value ="haven1">
+      <a href="#" onclick='document.forms["myform24"].submit(); return false;' class="list-group-item">Haven 시즌 1<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       
+ <form role="search" action="/usdramaH" method="get" name='myform25'>
+    <input type="hidden" name="search" class="form-control" value ="haven2">
+      <a href="#" onclick='document.forms["myform25"].submit(); return false;' class="list-group-item">Haven 시즌 2<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+         <form role="search" action="/usdramaH" method="get" name='myform26'>
+    <input type="hidden" name="search" class="form-control" value ="haven3">
+      <a href="#" onclick='document.forms["myform26"].submit(); return false;' class="list-group-item">Haven 시즌 3<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+        <form role="search" action="/usdramaH" method="get" name='myform27'>
+    <input type="hidden" name="search" class="form-control" value ="haven4">
+      <a href="#" onclick='document.forms["myform27"].submit(); return false;' class="list-group-item">Haven 시즌 4<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+  </div>
+<% }%>
+
+<% if (currentPage !== 0) { %>
+    <a href="#demo5" class="list-group-item" data-toggle="collapse">Homeland</a>
+  <div id="demo5" class="collapse">
+  
+      <form role="search" action="/usdramaH" method="get" name='myform28'>
+    <input type="hidden" name="search" class="form-control" value ="homeland1">
+      <a href="#" onclick='document.forms["myform28"].submit(); return false;' class="list-group-item">Homeland 시즌 1<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       
+ <form role="search" action="/usdramaH" method="get" name='myform29'>
+    <input type="hidden" name="search" class="form-control" value ="homeland2">
+      <a href="#" onclick='document.forms["myform29"].submit(); return false;' class="list-group-item">Homeland 시즌 2<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+         <form role="search" action="/usdramaH" method="get" name='myform30'>
+    <input type="hidden" name="search" class="form-control" value ="homeland3">
+      <a href="#" onclick='document.forms["myform30"].submit(); return false;' class="list-group-item">Homeland 시즌 3<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+  </div>
+<% }%>
+
+<% if (currentPage !== 0) { %>
+    <a href="#demo6" class="list-group-item" data-toggle="collapse">Hannibal</a>
+  <div id="demo6" class="collapse">
+  
+      <form role="search" action="/usdramaH" method="get" name='myform31'>
+    <input type="hidden" name="search" class="form-control" value ="hannibal1">
+      <a href="#" onclick='document.forms["myform28"].submit(); return false;' class="list-group-item">Hannibal 시즌 1<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       
+ <form role="search" action="/usdramaH" method="get" name='myform32'>
+    <input type="hidden" name="search" class="form-control" value ="hannibal2">
+      <a href="#" onclick='document.forms["myform32"].submit(); return false;' class="list-group-item">Hannibal 시즌 2<span class="label label-danger">Hot</span>
+      </a>
+      </form>
+
+  </div>
+<% }%>
+
       <% for(var i = 0; i < postModels.length ; i++  ) { %>
        <a class="list-group-item" href ="/usdrama/<%= postModels[i].id %>"><%= postModels[i].title %> </a>
        <% }%>
