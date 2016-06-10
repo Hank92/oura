@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var usdramaSchema = mongoose.Schema({
     title: String, 
     url: String,
-	video_url:String,
+	video_url: [String],
 	posted: { type: Date, default: Date.now },
 	userComments: [{
 		userPost: String

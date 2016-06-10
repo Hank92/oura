@@ -105,9 +105,9 @@ app.get('/postdelete/:id/delete', function(req, res){
 		else    res.redirect('/postDelete');
 	});
 });
-/*
+
 app.get('/dramaDelete', function (req, res){
-	issueModel.find({}, function(req, docs){
+	usdramaModel.find({}, function(req, docs){
 		res.render('dramadelete.ejs', {postModels: docs})	
 	})
 	
@@ -115,7 +115,7 @@ app.get('/dramaDelete', function (req, res){
 
 
 app.get('/dramaDelete/:id/delete', function(req, res){
-	issueModel.remove({_id: req.params.id}, 
+	usdramaModel.remove({_id: req.params.id}, 
 	   function(err){
 		if(err) res.json(err);
 		else    res.redirect('/dramaDelete');
@@ -137,7 +137,7 @@ app.get('/entertainDelete/:id/delete', function(req, res){
 		else    res.redirect('/entertainDelete');
 	});
 });
-*/
+
 
 app.get('/drama', function (req, res){
 if(req.query.search){
@@ -2223,3 +2223,4 @@ request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=titl
 	}//첫 if구문
 
 });
+
