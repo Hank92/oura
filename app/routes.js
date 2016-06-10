@@ -89,7 +89,7 @@ if(req.query.search){
     
 	}
 });
-
+/*
 app.get('/postdelete', function (req, res){
 	issueModel.find({}, function(req, docs){
 		res.render('postDelete.ejs', {postModels: docs})	
@@ -137,7 +137,7 @@ app.get('/entertainDelete/:id/delete', function(req, res){
 		else    res.redirect('/entertainDelete');
 	});
 });
-
+*/
 
 app.get('/drama', function (req, res){
 if(req.query.search){
@@ -2223,4 +2223,3 @@ request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=titl
 	}//첫 if구문
 
 });
-
