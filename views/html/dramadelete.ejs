@@ -1,7 +1,7 @@
 <% for(var i = postModels.length-1; i > -1 ; i--) { %>
 <div>
 <%= postModels[i].title%>
-<a href = "/dramaDelete/<%= postModels[i].id%>/delete">delete</a>
+<a href = "/postdelete/<%= postModels[i].id%>/delete">delete</a>
 <%= postModels[i].video_url %>
                </div>
        <% }%>

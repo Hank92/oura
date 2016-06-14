@@ -25,7 +25,7 @@ if(req.query.search){
 		pageCount = 0;
 		totalPosts = 0;
 		currentPage =0;
-		res.render('issuein.ejs', {
+		res.render('hazzul.ejs', {
 			issuepostModels: all_pins,
 			searchTitle: searchTitle,
 			pageSize: pageSize,
@@ -52,7 +52,7 @@ if(req.query.search){
     	    totalPosts = results.total;
     	console.log(results.docs)
 
-    	res.render('issuein.ejs', {
+    	res.render('hazzul.ejs', {
     		issuepostModels: results.docs,
     		pageSize: pageSize,
     		pageCount: pageCount,
@@ -92,7 +92,7 @@ if(req.query.search){
 /*
 app.get('/postdelete', function (req, res){
 	issueModel.find({}, function(req, docs){
-		res.render('postDelete.ejs', {postModels: docs})	
+		res.render('dramaDelete.ejs', {postModels: docs})	
 	})
 	
 })
@@ -435,9 +435,9 @@ app.param('id', function(req, res, next, id){
 			});	
 });
 
-app.get('/issuein/:id', function(req, res){
+app.get('/hazzul/:id', function(req, res){
 	var postId = req.postId;
-	res.render('individualIssueIn.ejs', {issuepostModel: postId});
+	res.render('individualHazzul.ejs', {issuepostModel: postId});
 	console.log(postId)//finds the matching object
 });
 
@@ -554,14 +554,14 @@ app.get('/mbong19/:id', function(req, res){
 	//finds the matching object
 
 */
-app.post('/:id/post/Issue', function (req, res){
+app.post('/:id/post/Hazzul', function (req, res){
 	issueModel.find({_id: req.params.id}, function(err, item){
 		if(err) return next("error finding blog post.");
 		item[0].userComments.push({userPost : req.body.userPost})
 		item[0].save(function(err, data){
 			if (err) res.send(err)
 			else 
-				res.redirect('/issuein/'+req.params.id )
+				res.redirect('/hazzul/'+req.params.id )
 		});
 	})
 
@@ -2223,7 +2223,7 @@ request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=titl
 	}//첫 if구문
 
 });
-/*
+
 request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -2426,4 +2426,3 @@ request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body
 	}//첫 if구문
 
 });
-*/
