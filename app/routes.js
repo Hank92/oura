@@ -89,7 +89,7 @@ if(req.query.search){
     
 	}
 });
-
+/*
 app.get('/postdelete', function (req, res){
 	issueModel.find({}, function(req, docs){
 		res.render('dramaDelete.ejs', {postModels: docs})	
@@ -138,7 +138,7 @@ app.get('/entertainDelete/:id/delete', function(req, res){
 	});
 });
 
-
+*/
 app.get('/drama', function (req, res){
 if(req.query.search){
 	dailydramaModel.findByTitle(req.query.search, function (err, all_pins){
