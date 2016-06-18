@@ -67,10 +67,9 @@
         출처: <%= issuepostModel.url %>
 
     </div>
-    
+    </div></div>
  
-
- <div class="container">
+  <div class="container">
 <div class="row">
 <div class="col-sm-12">
 <div class="comments-list">
@@ -85,7 +84,7 @@
     <button type="submit" class="btn btn-info" style ="float:right">댓글 달기</button>
   </form>
         </div>
-  </div>
+  </div> 
 
 <div class="panel panel-primary">
 <div class="panel-heading"><font size = "5">댓글 <%= issuepostModel.comments.length + issuepostModel.userComments.length %></font></div>
@@ -94,8 +93,8 @@
   <% for( var i = 0; i < issuepostModel.userComments.length; i++ ) { %>
   <div class ="media">
             <p><font size ="5" color = "#FFFFFF"><%= issuepostModel.userComments[issuepostModel.userComments.length-i-1].userPost %></font></p>
-</div>
-<% }%>
+  </div>
+  <% }%>
 
 <% for( var i = 0; i < issuepostModel.comments.length; i++ ) { %>
     <div class ="media">
