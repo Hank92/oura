@@ -320,6 +320,68 @@ h2 {
 }  
 }
 
+@media (min-width: 1400px){
+  
+  .affix-content{
+    overflow: auto;
+  }
+
+  .affix-content .container {
+    width: 1400px;
+    overflow: auto;
+    padding-top :0px;
+  }
+
+  .affix-content .container .page-header{
+    margin-top: 0;
+  }
+  .affix-content{
+    padding-right: 30px;
+    padding-left: 30px;
+  }  
+
+
+  .thumbnail { background-color: #484848   ; float:left; padding : 1%; width:200px; height:auto; overflow: hidden; }
+.thumbnail img {height:auto; width:100%; margin:10 auto; }
+
+.thumbnail {
+   width: 198px;
+   height: 250px;
+   overflow: auto;
+   margin: 16px;
+ }
+
+.thumbnail > img {
+   width: 198px;
+   height: 120px;
+ }
+
+ .text-center {
+     font-size: 11px;
+     margin: 0px;
+      }
+
+
+h1 a {
+  color: rgb(102, 189, 221);
+  font-size: 55px;
+  font-family: Book Antiqua, serif;
+}
+h5  {
+  color: rgb(248,248,248) ;
+  font-family: Book Antiqua, serif;
+  font-size:14px;
+}
+h7 {
+  color:rgb(248,248,248) ;
+  font-family: Book Antiqua, serif;
+}
+
+h2 {
+  color:rgb(102, 189, 221);
+}  
+}
+
 .btn.btn-circle { border-radius: 50px; color: rgb(255,255,255); position: relative;  padding: 4px 15px; margin:10px auto; }
 .btn.btn-outline { background-color: transparent; }
 
