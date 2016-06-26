@@ -283,20 +283,20 @@ h2 {
 .thumbnail img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnail {
-   width: 203px;
+   width: 198px;
    height: 240px;
    overflow: auto;
    margin: 20px;
  }
 
 .thumbnail > img {
-   width: 140px;
-   height: 100px;
+   width: 198px;
+   height: 120px;
  }
 
  .text-center {
-     font-size: 12px;
-     margin: 2px;
+     font-size: 11px;
+     margin: 0px;
       }
 
 
