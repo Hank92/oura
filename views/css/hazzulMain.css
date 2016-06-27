@@ -292,10 +292,16 @@ h2 {
 .thumbnail > img {
    width: 198px;
    height: 120px;
+   padding:0px;
+   margin:0px;
  }
 
  .text-center {
      font-size: 11px;
+     margin: 2px;
+      }
+  .pagelayout{
+     font-size: 17px;
      margin: 2px;
       }
 
