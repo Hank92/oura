@@ -26,7 +26,7 @@
     <div class="container">
       
     <header>
-      <h1><a href = "/"><span class="glyphicon glyphicon-th-list"></span></a>&nbsp;&nbsp;<b>Hazzul <font size = "5"> & 드라마</font> </b></h1>
+      <h1><a href = "/"><span class="glyphicon glyphicon-th-list"></span></a><b>&nbsp;<a href = "/" style="text-decoration: none">H&nbsp;a&nbsp;z&nbsp;z&nbsp;u&nbsp;l <font size = "6"> & 드라마 </font></b></h1>
     </header></br>
 
     <nav class="navbar navbar-default navbar-inverse" role="navigation">
@@ -71,6 +71,14 @@
     <form role="search" action="/drama" method="get" name='myform1'>
     <input type="hidden" name="search" class="form-control" value ="오해영">
       <a href="#" onclick='document.forms["myform1"].submit(); return false;' class="list-group-item">또 오해영 <span class="label label-danger">Hot</span>
+      </a>
+      </form>
+       <% } %>
+
+       <% if (currentPage !== 0) { %>
+    <form role="search" action="/drama" method="get" name='myform10'>
+    <input type="hidden" name="search" class="form-control" value ="닥터스">
+      <a href="#" onclick='document.forms["myform10"].submit(); return false;' class="list-group-item">닥터스 <span class="label label-danger">Hot</span>&nbsp;<span class="label label-success">New</span>
       </a>
       </form>
        <% } %>

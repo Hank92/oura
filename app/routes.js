@@ -1983,6 +1983,65 @@ request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=titl
 
 });
 
+//닥터스
+request('http://baykoreans.net/index.php?mid=drama&category=2829118', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('tbody td.title').each(function(){
+		var dailyTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+	 	
+			request(dailyUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var video_url = [];
+
+				$('.boardReadBody center a').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
+
+				// scrape all the images for the post
+				dailydramaModel.find({title: dailyTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new dailydramaModel({
+						title: dailyTitle,
+						url: dailyUrl,
+						video_url: video_url
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+/*
 //오해영
 request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EC%98%A4%ED%95%B4%EC%98%81', function(err, res, body){
 	
@@ -2042,7 +2101,7 @@ request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=titl
 	}//첫 if구문
 
 });
-
+*/
 //디어마이 프렌즈
 request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EB%94%94%EC%96%B4+%EB%A7%88%EC%9D%B4+%ED%94%84%EB%A0%8C%EC%A6%88', function(err, res, body){
 	
