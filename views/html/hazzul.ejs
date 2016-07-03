@@ -67,8 +67,8 @@
 </nav></br>
 
            <!-- LOCAL INFORMATION -->
-            <div class="row">
-
+            <div class="row ">
+            <div class ="text-center">
        <% for(var i = 0; i <  issuepostModels.length;  i++) { %>
             <a class="thumbnail" href="/hazzul/<%= issuepostModels[i].id %>" style="text-decoration: none;">
                 <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
@@ -78,6 +78,8 @@
                 </div>
             </a>
        <% }%>
+       </div>
+      
        </br></br>
         <% if (issuepostModels.length < 1) { %> 
           <div class ="text-center">
