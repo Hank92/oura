@@ -23,15 +23,17 @@
 .thumbnail img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnail {
-   width: 200px;
-   height: 210px;
+   width: 203px;
+   height: 255px;
    overflow: auto;
    margin: 20px;
+   border:1px solid #3f3f3f;
  }
 
 .thumbnail > img {
-   width: 100px;
-   height: 80px;
+   width: 198px;
+   height: 172px;
+
  }
 
 
@@ -87,17 +89,18 @@ h2 {
 .thumbnail img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnail {
-   width: 200px;
-   height: 210px;
+   width: 203px;
+   height: 255px;
    overflow: auto;
    margin: 20px;
+   border:1px solid #3f3f3f;
  }
 
 .thumbnail > img {
-   width: 100px;
-   height: 80px;
- }
+   width: 198px;
+   height: 172px;
 
+ }
 
  .text-center {
      font-size: 12px;
@@ -105,22 +108,31 @@ h2 {
       }
 
 
-h1 a{
-  color: rgb(102, 189, 221);
-  font-size: 55px;
-  font-family: Book Antiqua, serif;
+  h1 span{
+  color: rgb(240,248,255);
+  font-size: 75px;
   text-decoration: none;
+  background-color: none;
 }
 
-
+h1 a {
+  color:rgb(240,248,255);
+  font-size: 85px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  background-color: none;
+}
 h5  {
-  color: rgb(248,248,248) ;
-  font-family: Book Antiqua, serif;
-  
+  color: rgb(255, 255, 255) ;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:14px;
+  font-weight: bold;
 }
 h7 {
-  color:rgb(248,248,248) ;
+  color:rgb(255, 255, 255) ;
   font-family: Book Antiqua, serif;
+  font-size:10px;
+
 }
 
 h2 {
@@ -152,15 +164,17 @@ html,body{
 .thumbnail img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnail {
-   width: 200px;
-   height: 210px;
+   width: 203px;
+   height: 255px;
    overflow: auto;
    margin: 20px;
+   border:1px solid #3f3f3f;
  }
 
 .thumbnail > img {
-   width: 100px;
-   height: 80px;
+   width: 198px;
+   height: 172px;
+
  }
 
 
@@ -173,28 +187,32 @@ html,body{
     background-color:#333333;
   } 
 
-  h1{
-  color: rgb(102, 189, 221);
+
+   h1 span{
+  color: rgb(240,248,255);
   font-size: 55px;
-  font-family: Book Antiqua, serif;
   text-decoration: none;
+  background-color: none;
 }
 
-h1 a{
-  color: rgb(102, 189, 221);
+h1 a {
+  color:rgb(240,248,255);
   font-size: 55px;
-  font-family: Book Antiqua, serif;
+  font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
+  background-color: none;
 }
-
 h5  {
-  color: rgb(248,248,248) ;
-  font-family: Book Antiqua, serif;
-  
+  color: rgb(255, 255, 255) ;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:14px;
+  font-weight: bold;
 }
 h7 {
-  color:rgb(248,248,248) ;
+  color:rgb(255, 255, 255) ;
   font-family: Book Antiqua, serif;
+  font-size:10px;
+
 }
 
 h2 {
@@ -226,15 +244,17 @@ html,body{
 .thumbnail img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnail {
-   width: 200px;
-   height: 210px;
+   width: 203px;
+   height: 255px;
    overflow: auto;
    margin: 20px;
+   border:1px solid #3f3f3f;
  }
 
 .thumbnail > img {
-   width: 100px;
-   height: 80px;
+   width: 198px;
+   height: 172px;
+
  }
 
 
@@ -243,27 +263,31 @@ html,body{
      margin: 2px;
       }
 
-      h1{
-  color: rgb(102, 189, 221);
+   h1 span{
+  color: rgb(240,248,255);
   font-size: 33px;
-  font-family: Book Antiqua, serif;
   text-decoration: none;
+  background-color: none;
 }
 
-h1 a{
-  color: rgb(102, 189, 221);
+h1 a {
+  color:rgb(240,248,255);
   font-size: 33px;
-  font-family: Book Antiqua, serif;
+  font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
+  background-color: none;
 }
 h5  {
-  color: rgb(248,248,248) ;
-  font-family: Book Antiqua, serif;
-  
+  color: rgb(255, 255, 255) ;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:14px;
+  font-weight: bold;
 }
 h7 {
-  color:rgb(248,248,248) ;
+  color:rgb(255, 255, 255) ;
   font-family: Book Antiqua, serif;
+  font-size:9px;
+
 }
 
 h2 {
@@ -289,20 +313,20 @@ h2 {
     margin-top: 0;
   }
 
-  .thumbnail { background-color: #F0F8FF  ; float:left; padding : 1%; width:200px; height:auto; overflow: hidden; }
+ .thumbnail { background-color: #484848; float:left; padding : 1%; width:200px; height:auto; overflow: hidden; }
 .thumbnail img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnail {
    width: 203px;
-   height: 250px;
+   height: 255px;
    overflow: auto;
    margin: 20px;
-   border:1px solid #021a40;
+   border:1px solid #3f3f3f;
  }
 
 .thumbnail > img {
    width: 198px;
-   height: 180px;
+   height: 172px;
 
  }
 
@@ -330,13 +354,13 @@ h1 a {
   background-color: none;
 }
 h5  {
-  color: rgb(0, 0, 0) ;
+  color: rgb(255, 255, 255) ;
   font-family: Arial, Helvetica, sans-serif;
   font-size:14px;
   font-weight: bold;
 }
 h7 {
-  color:rgb(0, 0, 0) ;
+  color:rgb(255, 255, 255) ;
   font-family: Book Antiqua, serif;
   font-size:10px;
 
