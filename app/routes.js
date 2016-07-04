@@ -2255,8 +2255,7 @@ request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=titl
 					var issuePost = new dailydramaModel({
 						title: dailyTitle,
 						url: dailyUrl,
-						video_url: video_url,
-						image_url: image_url
+						video_url: video_url
 					})
 			issuePost.save(function(error){
 					if(error){

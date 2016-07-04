@@ -1,7 +1,7 @@
   <!doctype html>
 <html>
 <head>
-    <title><%= issuepostModel.title %> -하즐 </title>
+        <title><%= issuepostModel.title %> -하즐 </title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -12,8 +12,8 @@
     <meta name="naver-site-verification" content="8672f68ec19974757430dcc41aa887462bd2a8c5"/>
     <meta name="google-site-verification" content="UFlAZBpLslwZH5RF8Z4WSu6fiCM-MXNzOvcLsyDh2_Y" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴">
-     <meta name="description" content="하루를 유쾌하게 보낼 수 있게 짤과 예능 드라마가 모여있는 플랫폼">
+    <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴, 예능, 아는 형님, 드라마, 미드 ">
+     <meta name="description" content="하루를 유쾌하게 보낼 수 있게 짤과 예능 드라마, 미드가 모여있는 플랫폼">
     <link rel='stylesheet' href='/css/individualHazzulMain.css'>
     <link rel="shortcut icon" href="http://www.iconj.com/ico/h/s/hsldd203fl.ico" type="image/x-icon" />
 </head>
@@ -73,28 +73,22 @@
 <div class="comments-list">
 
 <div class="panel panel-primary" >
-<div class="panel-heading"><font size = "5">댓글 달기</font></div>
+<div class="panel-heading"><font size = "5">댓글 <%= issuepostModel.userComments.length %> </font></div>
         <div class ="panel-body">
 <form role="form" method="post" action="/<%= issuepostModel.id %>/post/dailydrama"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
     <div class="form-group">
       <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="3" id="comment"></textarea>
     </div>
-    <button type="submit" class="btn btn-info" style ="float:right">댓글 달기</button>
+    <button type="submit" class="btn btn-danger" style ="float:right">댓글 달기</button>
   </form>
-        </div>
-  </div>
 
-<div class="panel panel-primary">
-<div class="panel-heading"><font size = "5">댓글 <%= issuepostModel.userComments.length %></font></div>
-  <div class="panel-body">
-    
-  <% for( var i = 0; i < issuepostModel.userComments.length; i++ ) { %>
+</br></br>
+<% for( var i = 0; i < issuepostModel.userComments.length; i++ ) { %>
   <div class ="media">
-            <p><font size ="5" color = "#FFFFFF"><%= issuepostModel.userComments[issuepostModel.userComments.length-i-1].userPost %></font></p>
-</div>
-<% }%>
-     
-
+            
+            <p><font size ="5" color = "#FFFFFF"><%= issuepostModel.userComments[issuepostModel.userComments.length-i-1].userPost %></font>  </p>
+  </div>
+  <% }%>
 </div>
 </div>
             

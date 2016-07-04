@@ -71,7 +71,7 @@
             <div class ="text-center">
        <% for(var i = 0; i <  issuepostModels.length;  i++) { %>
             <a class="thumbnail" href="/hazzul/<%= issuepostModels[i].id %>" style="text-decoration: none;">
-                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
+                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].img_url[2] || issuepostModels[i].img_url[3] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
                   <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>

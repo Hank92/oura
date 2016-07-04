@@ -72,31 +72,27 @@
 <div class="comments-list">
 
 <div class="panel panel-primary" >
-<div class="panel-heading"><font size = "5">댓글 달기</font></div>
+<div class="panel-heading"><font size = "5">댓글 <%= issuepostModel.userComments.length %></font></div>
         <div class ="panel-body">
 <form role="form" method="post" action="/<%= issuepostModel.id %>/post/daily"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
     <div class="form-group">
       <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="3" id="comment"></textarea>
     </div>
-    <button type="submit" class="btn btn-info" style ="float:right">댓글 달기</button>
+    <button type="submit" class="btn btn-danger" style ="float:right">댓글 달기</button>
   </form>
-        </div>
-  </div>
+      </br></br>
 
-<div class="panel panel-primary">
-<div class="panel-heading"><font size = "5">댓글 <%= issuepostModel.userComments.length %></font></div>
-  <div class="panel-body">
-    
-  <% for( var i = 0; i < issuepostModel.userComments.length; i++ ) { %>
+<% for( var i = 0; i < issuepostModel.userComments.length; i++ ) { %>
   <div class ="media">
-            <p><font size ="5" color = "#FFFFFF"><%= issuepostModel.userComments[issuepostModel.userComments.length-i-1].userPost %></font></p>
-</div>
-<% }%>
-     
+            
+            <p><font size ="5" color = "#FFFFFF"><%= issuepostModel.userComments[issuepostModel.userComments.length-i-1].userPost %></font>  </p>
+  </div>
+  <% }%>
+    
 
 </div>
 </div>
-            
+        
 </div>
 </div>
 </div>               
