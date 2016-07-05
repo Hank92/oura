@@ -2484,3 +2484,26 @@ request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body
 	}//첫 if구문
 
 });
+/*
+issueModel.find({}, function(err, newPosts){
+				
+					//save data in Mongodb
+					var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png";
+					var title = "요즘 언더에서 뜨는 힙합 그룹";
+					var video_url ="http://www.youtube.com/embed/BWixa5Y1E-Y";
+					var issuePost = new issueModel({
+						title: title,
+						img_url: img_url,
+						video_url:video_url
+					
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+});
+*/

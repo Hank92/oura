@@ -19,6 +19,14 @@
 </head>
 
 <body>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.6";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 
  <div class="col-sm-12 col-md-12 affix-content">
     <div class="container">
@@ -64,8 +72,8 @@
             <iframe class ="embed-responsive-item" src="<%= issuepostModel.video_url[i] %>"quality="high" bgcolor="#000000" width="500" height="400" name="NEXT4896413" align="middle" allowscriptaccess="always" allowfullscreen="true" type="application/x-shockwave-flash"></iframe> </br>
           </div>
             <% } %>  </br>  
-        출처: <%= issuepostModel.url %>
-
+        출처: <%= issuepostModel.url %> 
+<div class="fb-share-button" data-href="www.hazzul.com/hazzul/<%= issuepostModel.id%>" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="www.hazzul.com/hazzul/<%= issuepostModel.id%>">공유하기</a></div></br></br>
     </div>
     </div></div>
  
