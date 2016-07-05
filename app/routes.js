@@ -10,6 +10,7 @@ var issueModel = require('../app/models/issuePost');
 var dailyModel = require('../app/models/dailyPost');
 var dailydramaModel = require('../app/models/dailydramaPost');
 var usdramaModel = require('../app/models/usdramaPost');
+var newsModel = require('../app/models/newsPost');
 
 module.exports = function (app, passport){
 
@@ -63,7 +64,54 @@ if(req.query.search){
      });//paginate
 }	
 });
+/*
+app.get('/', function (req, res){
+if(req.query.search){
+	newsModel.findByTitle(req.query.search, function (err, all_pins){
+		var searchTitle = req.query.search;
+		pageSize  = 0;
+		pageCount = 0;
+		totalPosts = 0;
+		currentPage =0;
+		res.render('hazzul.ejs', {
+			issuepostModels: all_pins,
+			searchTitle: searchTitle,
+			pageSize: pageSize,
+    		pageCount: pageCount,
+    		totalPosts: totalPosts,
+    		currentPage: currentPage
+		})
+		
+		})
+	}
+	else {
+	var currentPage = 1;
+	if (typeof req.query.page !== 'undefined') {
+        currentPage = +req.query.page;
+    	}
+		newsModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 20 }, function(err, results) {
+         if(err){
+         console.log("error!!");
+         console.log(err);
+     } else {
+    	    pageSize = results.limit;
+            pageCount = (results.total)/(results.limit);
+    		pageCount = Math.ceil(pageCount);
+    	    totalPosts = results.total;
+    	console.log(results.docs)
 
+    	res.render('hazzul.ejs', {
+    		issuepostModels: results.docs,
+    		pageSize: pageSize,
+    		pageCount: pageCount,
+    		totalPosts: totalPosts,
+    		currentPage: currentPage
+    	})//res.render
+     }//else
+     });//paginate
+}	
+});
+*/
 app.get('/entertain', function (req, res){
 if(req.query.search){
 	dailyModel.findByTitle(req.query.search, function (err, all_pins){
@@ -2484,6 +2532,47 @@ request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body
 	}//첫 if구문
 
 });
+/*
+request('http://dc.cozo.me/link', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('.link').each(function(){
+		var issueTitle = $(this).find('.title').text();
+		var url = $(this).attr('href');
+		var img =$(this).find('img').attr('src');
+
+	// scrape all the images for the post
+		newsModel.find({image_url: img}, function(err, newPosts){
+		
+		if (!newPosts.length && (img !==undefined) ){
+			//save data in Mongodb
+			var newsPost = new newsModel({
+				title: issueTitle,
+				url: url,
+				image_url: img
+			})
+	newsPost.save(function(error){
+			if(error){
+				console.log(error);
+			}
+			else 
+				console.log(newsPost);
+		})
+
+	//post.save
+		}//if bhuTitle안에 있는 {}
+
+	})//postModel.find
+
+		});
+		
+	}//첫 if구문
+
+});
+*/
+
 /*
 issueModel.find({}, function(err, newPosts){
 				
