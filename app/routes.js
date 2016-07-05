@@ -65,7 +65,7 @@ if(req.query.search){
 }	
 });
 /*
-app.get('/', function (req, res){
+app.get('/hazzulnews', function (req, res){
 if(req.query.search){
 	newsModel.findByTitle(req.query.search, function (err, all_pins){
 		var searchTitle = req.query.search;
@@ -73,7 +73,7 @@ if(req.query.search){
 		pageCount = 0;
 		totalPosts = 0;
 		currentPage =0;
-		res.render('hazzul.ejs', {
+		res.render('hazzulNews.ejs', {
 			issuepostModels: all_pins,
 			searchTitle: searchTitle,
 			pageSize: pageSize,
@@ -100,7 +100,7 @@ if(req.query.search){
     	    totalPosts = results.total;
     	console.log(results.docs)
 
-    	res.render('hazzul.ejs', {
+    	res.render('hazzulNews.ejs', {
     		issuepostModels: results.docs,
     		pageSize: pageSize,
     		pageCount: pageCount,
@@ -139,7 +139,7 @@ if(req.query.search){
 });
 
 app.get('/postdelete', function (req, res){
-	issueModel.find({}, function(req, docs){
+	newsModel.find({}, function(req, docs){
 		res.render('dramaDelete.ejs', {postModels: docs})	
 	})
 	
@@ -147,7 +147,7 @@ app.get('/postdelete', function (req, res){
 
 
 app.get('/postdelete/:id/delete', function(req, res){
-	issueModel.remove({_id: req.params.id}, 
+	newsModel.remove({_id: req.params.id}, 
 	   function(err){
 		if(err) res.json(err);
 		else    res.redirect('/postDelete');
@@ -2538,18 +2538,26 @@ request('http://dc.cozo.me/link', function(err, res, body){
 	if(!err && res.statusCode == 200) {
 		
 		var $ = cheerio.load(body);
+		
+
 		$('.link').each(function(){
-		var issueTitle = $(this).find('.title').text();
+		
 		var url = $(this).attr('href');
 		var img =$(this).find('img').attr('src');
+		var title= [];
+		$('.articles').each(function(){
+			var issueTitle = $(this).find('.title').text();
+			title = issueTitle;
+		})
 
+		
 	// scrape all the images for the post
 		newsModel.find({image_url: img}, function(err, newPosts){
 		
 		if (!newPosts.length && (img !==undefined) ){
 			//save data in Mongodb
 			var newsPost = new newsModel({
-				title: issueTitle,
+				title: title,
 				url: url,
 				image_url: img
 			})
