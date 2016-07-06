@@ -139,7 +139,7 @@ if(req.query.search){
 });
 
 app.get('/postdelete', function (req, res){
-	newsModel.find({}, function(req, docs){
+	issueModel.find({}, function(req, docs){
 		res.render('dramaDelete.ejs', {postModels: docs})	
 	})
 	
@@ -147,7 +147,7 @@ app.get('/postdelete', function (req, res){
 
 
 app.get('/postdelete/:id/delete', function(req, res){
-	newsModel.remove({_id: req.params.id}, 
+	issueModel.remove({_id: req.params.id}, 
 	   function(err){
 		if(err) res.json(err);
 		else    res.redirect('/postDelete');
@@ -857,7 +857,7 @@ request('http://issuein.com/', function(err, res, body){
 	}//첫 if구문
 
 });
-
+/*
 request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -948,6 +948,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 	}//첫 if구문
 
 });
+*/
 //비정상회담
 request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EB%B9%84%EC%A0%95%EC%83%81%ED%9A%8C%EB%8B%B4', function(err, res, body){
 	
@@ -2533,6 +2534,75 @@ request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body
 
 });
 /*
+request('http://ggoorr.com/gg', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('td.title').each(function(){
+		var issueTitle = $(this).find('a').text();
+		var newHref = $(this).find('a').attr('href');
+		var issueUrl = "http://ggoorr.com/"+ newHref;
+	 	
+			request(issueUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var image_url = [];
+				var video_url = [];
+
+				$('.rd_body img').each(function(){
+					var img_url = $(this).attr('src');
+					image_url.push(img_url);	
+				})
+
+				if (image_url.length == 0)
+				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
+				image_url.push(img_url)
+
+				$('.rd_body iframe').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				// scrape all the images for the post
+				issueModel.find({title: issueTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var issuePost = new issueModel({
+						title: issueTitle,
+						url: issueUrl,
+						img_url: image_url,
+						video_url:video_url
+					
+					})
+			issuePost.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(issuePost);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+*/
+/*
 request('http://dc.cozo.me/link', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -2544,12 +2614,7 @@ request('http://dc.cozo.me/link', function(err, res, body){
 		
 		var url = $(this).attr('href');
 		var img =$(this).find('img').attr('src');
-		var title= [];
-		$('.articles').each(function(){
-			var issueTitle = $(this).find('.title').text();
-			title = issueTitle;
-		})
-
+		var title = $(this).find('.title').text();
 		
 	// scrape all the images for the post
 		newsModel.find({image_url: img}, function(err, newPosts){
@@ -2580,7 +2645,6 @@ request('http://dc.cozo.me/link', function(err, res, body){
 
 });
 */
-
 /*
 issueModel.find({}, function(err, newPosts){
 				
