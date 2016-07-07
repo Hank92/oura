@@ -440,3 +440,18 @@ used to vertically center elements, may need modification if you're not using de
 .thumbnail img {
     width: 100%;
 }
+
+a.back-to-top {
+  display: none;
+  width: 60px;
+  height: 60px;
+  text-indent: -9999px;
+  position: fixed;
+  z-index: 999;
+  right: 20px;
+  bottom: 20px;
+  background: #000000 url("https://www.hkright.com/wp-content/uploads/up_arrow.png") no-repeat center 43%;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+}
