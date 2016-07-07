@@ -64,8 +64,8 @@ if(req.query.search){
      });//paginate
 }	
 });
-/*
-app.get('/hazzulnews', function (req, res){
+
+app.get('/hazzulEng', function (req, res){
 if(req.query.search){
 	newsModel.findByTitle(req.query.search, function (err, all_pins){
 		var searchTitle = req.query.search;
@@ -73,7 +73,7 @@ if(req.query.search){
 		pageCount = 0;
 		totalPosts = 0;
 		currentPage =0;
-		res.render('hazzulNews.ejs', {
+		res.render('hazzulRed.ejs', {
 			issuepostModels: all_pins,
 			searchTitle: searchTitle,
 			pageSize: pageSize,
@@ -100,7 +100,7 @@ if(req.query.search){
     	    totalPosts = results.total;
     	console.log(results.docs)
 
-    	res.render('hazzulNews.ejs', {
+    	res.render('hazzulRed.ejs', {
     		issuepostModels: results.docs,
     		pageSize: pageSize,
     		pageCount: pageCount,
@@ -111,7 +111,7 @@ if(req.query.search){
      });//paginate
 }	
 });
-*/
+
 app.get('/entertain', function (req, res){
 if(req.query.search){
 	dailyModel.findByTitle(req.query.search, function (err, all_pins){
@@ -154,19 +154,19 @@ app.get('/postdelete/:id/delete', function(req, res){
 	});
 });
 
-app.get('/dramaDelete', function (req, res){
-	usdramaModel.find({}, function(req, docs){
-		res.render('dramadelete.ejs', {postModels: docs})	
+app.get('/engpostDelete', function (req, res){
+	newsModel.find({}, function(req, docs){
+		res.render('engpostdelete.ejs', {postModels: docs})	
 	})
 	
 })
 
 
-app.get('/dramaDelete/:id/delete', function(req, res){
-	usdramaModel.remove({_id: req.params.id}, 
+app.get('/engpostDelete/:id/delete', function(req, res){
+	newsModel.remove({_id: req.params.id}, 
 	   function(err){
 		if(err) res.json(err);
-		else    res.redirect('/dramaDelete');
+		else    res.redirect('/engpostdelete');
 	});
 });
 
@@ -2533,6 +2533,8 @@ request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body
 	}//첫 if구문
 
 });
+
+
 /*
 request('http://ggoorr.com/gg', function(err, res, body){
 	
@@ -2602,6 +2604,52 @@ request('http://ggoorr.com/gg', function(err, res, body){
 
 });
 */
+
+request('https://www.reddit.com/r/funny/rising/', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('.thing','#siteTable').each(function(){
+		var title = $(this).find('a.title').text();
+		var url = $(this).find('a').attr('href');
+		var img =$(this).find('img').attr('src');
+	 	var length = 75;
+		var trimmedtitle = title.substring(0, length);
+		if (url.indexOf("/r/") >= 0) {
+			url = "https://www.reddit.com" +url  
+		}
+
+			
+		newsModel.find({image_url: img}, function(err, newPosts){
+		
+		if (!newPosts.length && (img !==undefined) ){
+			//save data in Mongodb
+
+			var newsPost = new newsModel({
+				title: trimmedtitle,
+				url: url,
+				image_url: img
+			})
+	newsPost.save(function(error){
+			if(error){
+				console.log(error);
+			}
+			else 
+				console.log(newsPost);
+		})
+
+	//post.save
+		}//if bhuTitle안에 있는 {}
+
+	})//postModel.find
+
+		});
+		
+	}//첫 if구문
+
+});
+
 /*
 request('http://dc.cozo.me/link', function(err, res, body){
 	

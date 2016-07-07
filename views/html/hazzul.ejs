@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-    <title> 하즐 - 하루의 즐거움 <% if (currentPage > 1) { %> <%= currentPage %> <% } %></title>
+    <title> 하즐 - 하루의 즐거움</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -22,6 +22,7 @@
 </head>
 
 <body>
+
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -31,13 +32,12 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-
   <div class="col-sm-12 col-md-12 affix-content">
     <div class="container">
       
     <header>
       <h1><a href = "/"><span class="glyphicon glyphicon-th-list"></span></a>&nbsp;&nbsp;<a href = "/" style="text-decoration: none"><b>H&nbsp;a&nbsp;z&nbsp;z&nbsp;u&nbsp;l  </b></a></h1>
-    <div class="fb-share-button" data-href="http://www.hazzul.com" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
+      <div class="fb-share-button" data-href="http://www.hazzul.com" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
     </header></br>
 
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
@@ -57,14 +57,12 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <a class="btn btn-default btn-outline btn-circle collapsed" href="/about"><b>하즐 소개</b></a>
+        <a class="btn btn-default btn-outline btn-circle collapsed" href="/hazzulEng"><b>영어 짤</b> &nbsp;<span class="label label-success">New</span></a>
         <a class="btn btn-default btn-outline btn-circle collapsed" href="/usdrama"><b>미드</b></a>   
         <a class="btn btn-default btn-outline btn-circle collapsed" href="/entertain"><b>예능/오락</b></a> 
         <a class="btn btn-default btn-outline btn-circle collapsed" href="/drama"><b>방영 드라마</b></a>
         
         </ul>
-
-
-
 
         <form class="navbar-form navbar-right" role="search" action="/" method="get">
         <div class="input-group">
@@ -85,7 +83,7 @@
             <div class ="text-center">
        <% for(var i = 0; i <  issuepostModels.length;  i++) { %>
             <a class="thumbnail" href="/hazzul/<%= issuepostModels[i].id %>" style="text-decoration: none;">
-                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].img_url[2] || issuepostModels[i].img_url[3] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
+                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
                   <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
