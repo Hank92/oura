@@ -3,5 +3,6 @@
 <%= postModels[i].title%>
 <a href = "/engpostDelete/<%= postModels[i].id%>/delete">delete</a>
 <%= postModels[i].url %>
+<%= postModels[i].posted.toLocaleDateString() %>
                </div>
        <% }%>
