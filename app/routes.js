@@ -857,7 +857,7 @@ request('http://issuein.com/', function(err, res, body){
 	}//첫 if구문
 
 });
-/*
+
 request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -879,10 +879,26 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 				var video_url = [];
 
 				$('span div img').each(function(){
-					var img_url = $(this).attr('src');	
+					
+					var img_url = $(this).attr('src');
 					image_url.push(img_url);
 				
 				})
+
+
+				$('td div img').each(function(){
+					
+					var img_url = $(this).attr('src');	
+					if (img_url.indexOf("../data") >= 0) {
+						img_url = img_url.replace("..",".");
+					img_url = "http://www.bhu.co.kr" +img_url  
+					image_url.push(img_url);
+					}
+					
+				
+				})
+
+
 				// scrape all the images for the post
 				if (image_url.length == 0)
 				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
@@ -948,7 +964,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 	}//첫 if구문
 
 });
-*/
+
 //비정상회담
 request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EB%B9%84%EC%A0%95%EC%83%81%ED%9A%8C%EB%8B%B4', function(err, res, body){
 	
@@ -2090,67 +2106,7 @@ request('http://baykoreans.net/index.php?mid=drama&category=2829118', function(e
 
 });
 
-/*
-//오해영
-request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EC%98%A4%ED%95%B4%EC%98%81', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('tbody td.title').each(function(){
-		var dailyTitle = $(this).find('a').text();
-		var newHref = $(this).find('a').attr('href');
-		var dailyUrl = "http://www.baykoreans.net"+ newHref;
-	 	
-			request(dailyUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var video_url = [];
-				var image_url = "http://image-origin.tving.com/resize.php?u=http://image-origin.tving.com/upload/cms/caip/CAIP1500/P000273930.jpg&w=327"
 
-				$('.boardReadBody center a').each(function(){
-					var vid_url = $(this).attr('href');
-					video_url.push(vid_url);
-				})
-
-
-				// scrape all the images for the post
-				dailydramaModel.find({title: dailyTitle}, function(err, newPosts){
-				
-				if (!newPosts.length){
-					//save data in Mongodb
-
-					var issuePost = new dailydramaModel({
-						title: dailyTitle,
-						url: dailyUrl,
-						video_url: video_url,
-						image_url: image_url
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(issuePost);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-*/
 //디어마이 프렌즈
 request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EB%94%94%EC%96%B4+%EB%A7%88%EC%9D%B4+%ED%94%84%EB%A0%8C%EC%A6%88', function(err, res, body){
 	
