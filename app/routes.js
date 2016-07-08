@@ -893,11 +893,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 						img_url = img_url.replace("..",".");
 					img_url = "http://www.bhu.co.kr" +img_url  
 					image_url.push(img_url);
-					}
-					
-				
+					}				
 				})
-
 
 				// scrape all the images for the post
 				if (image_url.length == 0)
@@ -923,7 +920,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 				
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
-							comments.push({content: content}); 	
+						if (content.indexOf("엠봉") >= 0) {
+						content = content.replace("엠봉", "하즐");
+						comments.push({content: content});
+						} 	
+						comments.push({content: content});
 					})//scrape all the comments for the post
 
 					comments.splice(0,1)
