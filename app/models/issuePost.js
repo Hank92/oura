@@ -7,6 +7,7 @@ var issueSchema = mongoose.Schema({
 	img_url: [String],
 	video_url:[String],
 	posted: { type: Date, default: Date.now },
+	numClicks: [Number],
 	comments: [{
 		name: String,
 		content: String
