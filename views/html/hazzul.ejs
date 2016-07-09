@@ -123,7 +123,7 @@ $('a.back-to-top').click(function() {
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
                   <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
-                  <% if (issuepostModels[i].numClicks.length >30) { %> 
+                  <% if (issuepostModels[i].numClicks.length >10) { %> 
                     <span class="label label-danger">Hot</span>
                   <% } %> 
                 </div>
