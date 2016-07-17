@@ -2203,6 +2203,9 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 		var $ = cheerio.load(body);
 		$('td.subject').each(function(){
 		var bhuTitle = $(this).find('a font').text();
+		if (bhuTitle.indexOf("엠봉") >= 0) {
+			bhuTitle = bhuTitle.replace("엠봉", "하즐");
+			}
 		var newHref = $(this).find('a').attr('href');
 		newHref = newHref.replace("≀","&");
 		newHref = newHref.replace("id","wr_id");
