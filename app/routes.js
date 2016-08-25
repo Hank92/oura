@@ -2159,7 +2159,7 @@ request('http://issuein.com/', function(err, res, body){
 					video_url.push(vid_url);
 				})
 
-				// scrape all the images for the post
+				// scrape al\l the images for the post
 				issueModel.find({title: issueTitle}, function(err, newPosts){
 				
 				if (!newPosts.length){
@@ -2195,7 +2195,7 @@ request('http://issuein.com/', function(err, res, body){
 	}//첫 if구문
 
 });
-/*
+
 request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -2295,7 +2295,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 	}//첫 if구문
 
 });
-*/
+
 request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
