@@ -174,7 +174,6 @@ app.get('/entertainDelete', function (req, res){
 	dailyModel.find({}, function(req, docs){
 		res.render('entertaindelete.ejs', {postModels: docs})	
 	})
-	
 })
 
 
@@ -1767,7 +1766,7 @@ request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=
 
 
 //아는 형님
-request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%95%84%EB%8A%94+%ED%98%95%EB%8B%98', function(err, res, body){
+request('http://dongyoungsang.com/index.php?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EC%95%84%EB%8A%94', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
 		
@@ -1775,15 +1774,14 @@ request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=
 		$('tbody td.title').each(function(){
 		var dailyTitle = $(this).find('a').text();
 		var newHref = $(this).find('a').attr('href');
-		var dailyUrl = "http://www.baykoreans.net"+ newHref;
+		var dailyUrl = "http://dongyoungsang.com"+ newHref;
 	 	
 			request(dailyUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
 				var video_url = [];
-				var image_url = "http://photo.jtbc.joins.com/news/2015/12/03/201512030432057682.jpg";
 
-				$('.boardReadBody center a').each(function(){
+				$('center .xLarge').each(function(){
 					var vid_url = $(this).attr('href');
 					video_url.push(vid_url);
 				})
@@ -1798,8 +1796,7 @@ request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=
 					var issuePost = new dailyModel({
 						title: dailyTitle,
 						url: dailyUrl,
-						video_url: video_url,
-						image_url: image_url
+						video_url: video_url
 					})
 			issuePost.save(function(error){
 					if(error){
