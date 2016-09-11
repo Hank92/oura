@@ -1828,7 +1828,7 @@ request('http://dongyoungsang.com/index.php?act=&vid=&mid=entertain&category=&se
 
 
 //구르미 그린 달빛
-request('http://dongyoungsang.com/index.php?act=&vid=&mid=drama&category=&search_target=title&search_keyword=구르미', function(err, res, body){
+request('http://dongyoungsang.com/index.php?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EA%B5%AC%EB%A5%B4%EB%AF%B8', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
 		
