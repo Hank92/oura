@@ -619,15 +619,7 @@ app.post('/:id/post/Hazzul', function (req, res){
 	})
 
 }) //app.post  
-/*
-app.post('/:id/hazzulNumClicks',function (req, res){
-	issueMode.find({_id: req.params.id}, function(err, item){
-		if(err) return next("error finding blog post.");
-		item[0].numClicks =+ req.body.numClicks
-		item[0].save
-	})
-})
-*/
+
 app.post('/:id/post/daily', function (req, res){
 	dailyModel.find({_id: req.params.id}, function(err, item){
 		if(err) return next("error finding blog post.");
@@ -799,8 +791,11 @@ app.post('/:id/post', function (req, res){
 }) //app.post  
 };
 
-
-
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+예능
+*/
 //비정상회담
 request('http://baykoreans.net/?act=&vid=&mid=entertain&category=&search_target=title&search_keyword=%EB%B9%84%EC%A0%95%EC%83%81%ED%9A%8C%EB%8B%B4', function(err, res, body){
 	
@@ -1822,8 +1817,18 @@ request('http://dongyoungsang.com/index.php?act=&vid=&mid=entertain&category=&se
 	}//첫 if구문
 
 });
-//딴따라
-request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EB%94%B4%EB%94%B0%EB%9D%BC', function(err, res, body){
+/*
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+드라마
+*/
+
+
+//구르미 그린 달빛
+request('http://dongyoungsang.com/index.php?act=&vid=&mid=drama&category=&search_target=title&search_keyword=구르미', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
 		
@@ -1831,255 +1836,14 @@ request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=titl
 		$('tbody td.title').each(function(){
 		var dailyTitle = $(this).find('a').text();
 		var newHref = $(this).find('a').attr('href');
-		var dailyUrl = "http://www.baykoreans.net"+ newHref;
-	 	
-			request(dailyUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var video_url = [];
-				var image_url = "http://img.tenasia.hankyung.com/webwp_kr/wp-content/uploads/2016/02/2016021821170720308-540x377.jpg"
+		var dailyUrl = "http://dongyoungsang.com"+ newHref;
 
-				$('.boardReadBody center a').each(function(){
-					var vid_url = $(this).attr('href');
-					video_url.push(vid_url);
-				})
-
-
-				// scrape all the images for the post
-				dailydramaModel.find({title: dailyTitle}, function(err, newPosts){
-				
-				if (!newPosts.length){
-					//save data in Mongodb
-
-					var issuePost = new dailydramaModel({
-						title: dailyTitle,
-						url: dailyUrl,
-						video_url: video_url,
-						image_url: image_url
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(issuePost);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-
-//닥터스
-request('http://baykoreans.net/index.php?mid=drama&category=2829118', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('tbody td.title').each(function(){
-		var dailyTitle = $(this).find('a').text();
-		var newHref = $(this).find('a').attr('href');
-		var dailyUrl = "http://www.baykoreans.net"+ newHref;
-	 	
 			request(dailyUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
 				var video_url = [];
 
-				$('.boardReadBody center a').each(function(){
-					var vid_url = $(this).attr('href');
-					video_url.push(vid_url);
-				})
-
-
-				// scrape all the images for the post
-				dailydramaModel.find({title: dailyTitle}, function(err, newPosts){
-				
-				if (!newPosts.length){
-					//save data in Mongodb
-
-					var issuePost = new dailydramaModel({
-						title: dailyTitle,
-						url: dailyUrl,
-						video_url: video_url
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(issuePost);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-
-
-//디어마이 프렌즈
-request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EB%94%94%EC%96%B4+%EB%A7%88%EC%9D%B4+%ED%94%84%EB%A0%8C%EC%A6%88', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('tbody td.title').each(function(){
-		var dailyTitle = $(this).find('a').text();
-		var newHref = $(this).find('a').attr('href');
-		var dailyUrl = "http://www.baykoreans.net"+ newHref;
-	 	
-			request(dailyUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var video_url = [];
-				var image_url = "https://i.ytimg.com/vi/Qh_trLkf4hI/maxresdefault.jpg"
-
-				$('.boardReadBody center a').each(function(){
-					var vid_url = $(this).attr('href');
-					video_url.push(vid_url);
-				})
-
-
-				// scrape all the images for the post
-				dailydramaModel.find({title: dailyTitle}, function(err, newPosts){
-				
-				if (!newPosts.length){
-					//save data in Mongodb
-
-					var issuePost = new dailydramaModel({
-						title: dailyTitle,
-						url: dailyUrl,
-						video_url: video_url,
-						image_url: image_url
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(issuePost);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-
-
-
-//동네변호사 조들호
-request('http://baykoreans.net/index.php?mid=drama&search_target=title&search_keyword=%EB%8F%99%EB%84%A4%EB%B3%80%ED%98%B8%EC%82%AC+%EC%A1%B0%EB%93%A4%ED%98%B8&page=2&division=-2820019&last_division=-2781128', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('tbody td.title').each(function(){
-		var dailyTitle = $(this).find('a').text();
-		var newHref = $(this).find('a').attr('href');
-		var dailyUrl = "http://www.baykoreans.net"+ newHref;
-	 	
-			request(dailyUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var video_url = [];
-				var image_url = "http://upload.enews24.net/News/Contents/20160323/28604327.jpg"
-
-				$('.boardReadBody center a').each(function(){
-					var vid_url = $(this).attr('href');
-					video_url.push(vid_url);
-				})
-
-
-				// scrape all the images for the post
-				dailydramaModel.find({title: dailyTitle}, function(err, newPosts){
-				
-				if (!newPosts.length){
-					//save data in Mongodb
-
-					var issuePost = new dailydramaModel({
-						title: dailyTitle,
-						url: dailyUrl,
-						video_url: video_url,
-						image_url: image_url
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(issuePost);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-
-//미녀 공심이
-request('http://baykoreans.net/?act=&vid=&mid=drama&category=&search_target=title&search_keyword=%EA%B3%B5%EC%8B%AC%EC%9D%B4', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('tbody td.title').each(function(){
-		var dailyTitle = $(this).find('a').text();
-		var newHref = $(this).find('a').attr('href');
-		var dailyUrl = "http://www.baykoreans.net"+ newHref;
-	 	
-			request(dailyUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var video_url = [];
-
-				$('.boardReadBody center a').each(function(){
+				$('center .xLarge').each(function(){
 					var vid_url = $(this).attr('href');
 					video_url.push(vid_url);
 				})

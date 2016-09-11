@@ -1,7 +1,7 @@
 // app/models/daily.js
 var mongoose = require('mongoose');
 
-var dailydramaSchema = mongoose.Schema({
+var recentdailydramaSchema = mongoose.Schema({
     title: String, 
     url: String,
 	video_url:[String],
