@@ -1884,7 +1884,7 @@ request('http://dongyoungsang.com/index.php?act=&vid=&mid=drama&category=&search
 	}//첫 if구문
 
 });
-
+/*
 request('http://issuein.com/', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -1956,7 +1956,7 @@ request('http://issuein.com/', function(err, res, body){
 	}//첫 if구문
 
 });
-
+*/
 request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -2056,7 +2056,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 	}//첫 if구문
 
 });
-
+/*
 request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -2074,6 +2074,11 @@ request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body
 				var video_url = [];
 
 				$('article div img').each(function(){
+					var img_url = $(this).attr('src');
+					image_url.push(img_url);	
+				})
+
+				$('article_1 a img').each(function(){
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);	
 				})
@@ -2260,7 +2265,7 @@ request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body
 
 });
 
-
+*/
 /*
 request('http://ggoorr.com/gg', function(err, res, body){
 	
