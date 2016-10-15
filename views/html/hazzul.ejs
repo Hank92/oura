@@ -122,7 +122,7 @@ $('a.back-to-top').click(function() {
                 <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
-                  <h7><%= issuepostModels[i].posted %></h7>
+                  <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
                   <% if (issuepostModels[i].numClicks.length >15) { %> 
                     <b><span class="label label-danger">Hot</span></b>
                   <% } %> 
