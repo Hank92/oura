@@ -1937,7 +1937,7 @@ request('http://issuein.com/', function(err, res, body){
 				// scrape al\ the images for the post
 				issueModel.find({title: issueTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && image_url[0].indexOf("./files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && image_url[0].indexOf("http://www.issuein.com/files/attach") !== 0 &&  image_url[0].indexOf("./files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var issuePost = new issueModel({
@@ -2109,7 +2109,7 @@ request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body
 				// scrape all the images for the post
 				issueModel.find({title: issueTitle}, function(err, newPosts){
 				
-				if (!newPosts.length &&  image_url[0].indexOf("./files/attach") !== 0 &&  image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0  ){
+				if (!newPosts.length &&  image_url[0].indexOf("./files/attach") !== 0 && image_url[0].indexOf("http://www.issuein.com/files/attach") !== 0  && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0  ){
 					//save data in Mongodb
 
 					var issuePost = new issueModel({
@@ -2177,7 +2177,7 @@ request('http://issuein.com/index.php?mid=index&page=3', function(err, res, body
 				// scrape all the images for the post
 				issueModel.find({title: issueTitle}, function(err, newPosts){
 				
-				if (!newPosts.length  && image_url[0].indexOf("./files/attach") !== 0 && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length  && image_url[0].indexOf("./files/attach") !== 0 && image_url[0].indexOf("http://www.issuein.com/files/attach") !== 0  && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var issuePost = new issueModel({
@@ -2244,7 +2244,7 @@ request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body
 				// scrape all the images for the post
 				issueModel.find({title: issueTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("./files/attach") !== 0 && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0   ){
+				if (!newPosts.length && image_url[0].indexOf("./files/attach") !== 0 && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && image_url[0].indexOf("http://www.issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0   ){
 					//save data in Mongodb
 
 
