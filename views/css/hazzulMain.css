@@ -8,6 +8,11 @@
     margin-top: 0;
   }
   
+  #intro {
+    color:rgb(240,248,255);
+  font-weight: bold;
+  }
+
   .affix-row, .affix-container, .affix-content{
     height: 100%;
     margin-left: 0;
@@ -74,6 +79,11 @@ h2 {
     margin-top: 0;
   }
   
+    #intro {
+    color:rgb(240,248,255);
+  font-weight: bold;
+  }
+
   .affix-row, .affix-container, .affix-content{
     height: 100%;
     margin-left: 0;
@@ -149,6 +159,11 @@ html,body{
     margin-top: 0;
   }
   
+    #intro {
+    color:rgb(240,248,255);
+  font-weight: bold;
+  }
+
   .affix-row, .affix-container, .affix-content{
     height: 100%;
     margin-left: 0;
@@ -227,6 +242,11 @@ html,body{
   }
     .affix-content .container .page-header{
     margin-top: 0;
+  }
+  
+  #intro {
+    color:rgb(240,248,255);
+  font-weight: bold;
   }
   
   .affix-row, .affix-container, .affix-content{
