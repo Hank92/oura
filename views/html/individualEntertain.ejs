@@ -77,7 +77,7 @@
 <div class="comments-list">
 
 <div class="panel panel-primary" >
-<div class="panel-heading"><font size = "5">댓글 <%= issuepostModel.userComments.length %></font></div>
+<div class="panel-heading"><font size = "5">댓글 '<%= issuepostModel.userComments.length %>'</font></div>
         <div class ="panel-body">
 <form role="form" method="post" action="/<%= issuepostModel.id %>/post/daily"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
     <div class="form-group">

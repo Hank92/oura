@@ -498,7 +498,7 @@ app.param('id', function(req, res, next, id){
 
 app.get('/hazzul/:id', function(req, res){
 	var postId = req.postId;
-	postId.numClicks.push(0);	
+	postId.numClicks += 1;	
 	postId.save(function (err, data){
 		if (err) res.send(err)
 		else
