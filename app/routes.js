@@ -2245,6 +2245,13 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=3', function(err, res
 	if(!err && res.statusCode == 200) {
 		
 		var $ = cheerio.load(body);
+		/*
+		var numClicks;
+		$('td.hit').each(function(){
+		numClicks = $(this).text();
+		})
+		*/
+
 		$('td.subject').each(function(){
 		var bhuTitle = $(this).find('a font').text();
 		if (bhuTitle.indexOf("엠봉") >= 0) {
@@ -2255,6 +2262,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=3', function(err, res
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
+		
 	 	
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
