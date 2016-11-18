@@ -62,9 +62,6 @@ h7 {
   font-family: Book Antiqua, serif;
 }
 
-h2 {
-  color:rgb(102, 189, 221);
-}
 }
 
 
@@ -145,9 +142,6 @@ h7 {
 
 }
 
-h2 {
-  color:rgb(102, 189, 221);
-}
 }
 
 @media (min-width: 400px){
@@ -230,9 +224,6 @@ h7 {
 
 }
 
-h2 {
-  color:rgb(102, 189, 221);
-}
 }
 
 @media (max-width: 380px){
@@ -310,9 +301,7 @@ h7 {
 
 }
 
-h2 {
-  color:rgb(102, 189, 221);
-}
+
 }
 
 @media (min-width: 1220px){
@@ -389,9 +378,6 @@ h7 {
 
 }
 
-h2 {
-  color:rgb(102, 189, 221);
-}  
 }
 
 .btn.btn-circle { border-radius: 50px; color: rgb(255,255,255); position: relative;  padding: 4px 15px; margin:10px auto; }

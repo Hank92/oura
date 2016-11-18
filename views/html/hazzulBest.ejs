@@ -1,8 +1,8 @@
-<!-- views/hazzul.ejs -->
+<!-- views/hazzulBest.ejs -->
 <!doctype html>
 <html>
 <head>
-    <title> 하즐 - 영어 짤 <% if (currentPage > 1) { %> <%= currentPage %> <% } %></title>
+    <title> 하즐 - 하루의 즐거움 <% if (currentPage > 1) { %> <%= currentPage %> <% } %></title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -10,21 +10,12 @@
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="imagetoolbar" content="no" />
-    <meta name="naver-site-verification" content="8672f68ec19974757430dcc41aa887462bd2a8c5"/>
-    <meta name="google-site-verification" content="UFlAZBpLslwZH5RF8Z4WSu6fiCM-MXNzOvcLsyDh2_Y" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴, 예능, 아는 형님, 드라마, 미드, 영어 짤, funny thumbnail">
-    <meta name="title" content=" 하즐 - 영어 짤<% if (currentPage > 1) { %> <%= currentPage %> <% } %>">
-    <meta name="description" content="영어로 된 재밌는 짤">
-    <meta property = "og:url" content ="http://www.hazzul.com/hazzulEng">
-    <meta property = "og:type" content ="website">
-    <meta property = "og:site_name" content ="하즐">
-
-    <link rel="shortcut icon" href="http://www.iconj.com/ico/5/7/57tg375o1i.ico" type="image/x-icon" />
+    <link rel='shortcut icon' href='/images/Favicon.ico' type='image/x-icon'/ >
+    
     <!--call the css file -->
     <link rel='stylesheet' href='/css/hazzulMain.css'>
 
-    <script type="text/javascript">
+<script type="text/javascript">
   $('body').prepend('<a href="#" class="back-to-top">Back to Top</a>');
 </script>
 <script type="text/javascript">
@@ -47,9 +38,17 @@ $('a.back-to-top').click(function() {
 });
 </script>
 
+<script>
+    var i = 0;
+    function buttonClick() {
+        i++;
+        document.getElementById('inc').value = i;
+    }
+</script>
 </head>
 
 <body>
+
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -59,13 +58,12 @@ $('a.back-to-top').click(function() {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-
   <div class="col-sm-12 col-md-12 affix-content">
     <div class="container">
       
     <header>
-      <h1><a href = "/"><span class="glyphicon glyphicon-th-list"></span></a>&nbsp;&nbsp;<a href = "/" style="text-decoration: none"><b>H&nbsp;a&nbsp;z&nbsp;z&nbsp;u&nbsp;l  </b></a></h1>
-    <div class="fb-share-button" data-href="http://www.hazzul.com" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
+      <h1><a href = "/"><img src="/images/Logo1.jpg" alt="HTML5 Icon" style="width:45%;height:auto;"> </b></a></h1>
+      <div class="fb-share-button" data-href="http://www.hazzul.com" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
     </header></br>
 
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
@@ -78,24 +76,17 @@ $('a.back-to-top').click(function() {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/"><font color ="#FFFFFF">하즐 홈</a>
+      <a class="navbar-brand" href="/"><font color ="#FFFFFF"><b>하루의 즐거움</b></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <a class="btn btn-default btn-outline btn-circle collapsed" href="/about"><b>하즐 소개</b></a>
-        <a class="btn btn-default btn-outline btn-circle collapsed" href="/hazzulEng"><b>영어 짤</b></a>
-        <a class="btn btn-default btn-outline btn-circle collapsed" href="/usdrama"><b>미드</b></a>   
-        <a class="btn btn-default btn-outline btn-circle collapsed" href="/entertain"><b>예능/오락</b></a> 
-        <a class="btn btn-default btn-outline btn-circle collapsed" href="/drama"><b>드라마</b></a>
-        
+        <a class="btn btn-default btn-outline btn-circle collapsed" href="/hazzulBest"><b>하즐 베스트 &nbsp<span class="label label-success">Best</span></b></a>
         </ul>
 
-
-
-
-        <form class="navbar-form navbar-right" role="search" action="/hazzulEng" method="get">
+        <form class="navbar-form navbar-right" role="search" action="/hazzulBest" method="get">
         <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="검색하기">
             <div class="input-group-btn">
@@ -112,14 +103,19 @@ $('a.back-to-top').click(function() {
            <!-- LOCAL INFORMATION -->
             <div class="row ">
             <div class ="text-center">
-       <% for(var i = 0; i <  issuepostModels.length; i++) { %>
-            <a class="thumbnail" href="<%= issuepostModels[i].url %>" style="text-decoration: none;">
-                <img class="img-responsive" src="<%= issuepostModels[i].image_url %>" alt="이미지 로딩중...">
+
+       <% for(var i = 0; i <  issuepostModels.length;  i++) { %>
+       
+            <a class="thumbnail" href="/hazzulBest/<%= issuepostModels[i].id %>" style="text-decoration: none;">
+            <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
+                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
-                  <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
+                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%= issuepostModels[i].comments.length + issuepostModels[i].userComments.length %></h7>&nbsp&nbsp
+                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp<%= issuepostModels[i].numClicks + issuepostModels[i].usernumClicks %></h7>
                 </div>
             </a>
+            </form>
        <% }%>
        </div>
       
@@ -136,9 +132,9 @@ $('a.back-to-top').click(function() {
 
 <% if (pageCount > 1) { %>  
 <div class ="text-center pagelayout">
-<ul class="pagination ">  
+<ul class="pagination">  
   <% if (currentPage > 1) { %>
-      <li><a href="/hazzulEng/?page=1">&laquo;</a></li>
+      <li><a href="/hazzulBest/?page=1">&laquo;</a></li>
   <% } %>
   <% var i = 1;
   if (currentPage > 5) {
@@ -151,14 +147,14 @@ $('a.back-to-top').click(function() {
     <% if (currentPage == i) { %>
         <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
     <% } else { %>
-        <li><a href="/hazzulEng/?page=<%= i %>"><%= i %></a></li>
+        <li><a href="/hazzulBest/?page=<%= i %>"><%= i %></a></li>
     <% } %>
     <% if (i == (currentPage + 4)) { %>
         <li class="disabled"><a href="#">...</a></li>
     <% break; } %>
   <% } %>
   <% if (currentPage != pageCount) { %>
-      <li><a href="/hazzulEng/?page=<%= pageCount %>">&raquo;</a></li>
+      <li><a href="/hazzulBest/?page=<%= pageCount %>">&raquo;</a></li>
   <% } %>
 </ul>  
 </div>

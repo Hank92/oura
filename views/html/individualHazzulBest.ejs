@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name='keyword' content="하즐, 하루, 즐거움, 짤, hazzul, 웃긴, 예능, 아는 형님, 드라마, 미드, haz, 영어 짤 ">
     <meta name="title" content="<%= issuepostModel.title %>">
-    <meta property = "og:url" content ="http://www.hazzul.com/hazzul/<%= issuepostModel.id %>">
+    <meta property = "og:url" content ="http://www.hazzul.com/hazzulBest/<%= issuepostModel.id %>">
     <meta property = "og:title" content ="<%= issuepostModel.title %>">
     <meta property = "og:type" content ="website">
     <meta property = "og:site_name" content ="하즐">
@@ -98,12 +98,10 @@
       </a>
       </a>
       <div class="comment-body">
-        <form role="form" method="post" action="/<%= issuepostModel.id %>/post/hazzul"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
+        <form role="form" method="post" action="/<%= issuepostModel.id %>/post/hazzulBest"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
     <div class="form-group">
-    <div class ="text">
       <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="3" id="comment"></textarea>
-    </div></div>
-    <br>
+    </div>
     <button type="submit" class="btn btn-danger btn-lg " style ="float:right">댓글 달기</button>
   </form>
       </div>
