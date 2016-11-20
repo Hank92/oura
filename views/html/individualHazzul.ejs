@@ -22,16 +22,7 @@
     <link rel='stylesheet' href='/css/individualHazzulMain.css'>
     <link rel='shortcut icon' href='/images/Favicon.ico' type='image/x-icon'/ >
 
-<script type="text/javascript">
- function InvalidMsg(textbox) {
-    
-    if (textbox.value == '') {
-        textbox.setCustomValidity('댓글칸에 댓글을 달아주세요~');
-    }
-    return true;
-} 
 
-</script>
 
 </head>
 
@@ -113,7 +104,7 @@
         <form name ="myForm" role="form" method="post" action="/<%= issuepostModel.id %>/post/hazzul"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
     <div class="form-group">
     <div class ="text">
-      <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="5" id="comment" oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" required></textarea>
+      <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="5" id="comment" required></textarea>
     </div></div>
     <br>
     <button type="submit" class="btn btn-danger btn-lg " style ="float:right">댓글 달기</button>

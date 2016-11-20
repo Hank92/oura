@@ -21,18 +21,6 @@
     <meta property = "og:image" content ="<%= issuepostModel.img_url[0] %>">
     <link rel='stylesheet' href='/css/individualHazzulMain.css'>
     <link rel='shortcut icon' href='/images/Favicon.ico' type='image/x-icon'/ >
-    <script type="text/javascript">
- function InvalidMsg(textbox) {
-    
-    if (textbox.value == '') {
-        textbox.setCustomValidity('댓글칸에 댓글을 달아주세요~');
-    }
-    return true;
-} 
-
-</script>
-
-
 </head>
 
 <body>
@@ -112,7 +100,7 @@
       <div class="comment-body">
         <form role="form" method="post" action="/<%= issuepostModel.id %>/post/hazzulBest"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
     <div class="form-group">
-      <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="5" id="comment" oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" required></textarea>
+      <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="3" id="comment" required></textarea>
     </div>
     <button type="submit" class="btn btn-danger btn-lg " style ="float:right">댓글 달기</button>
   </form>
