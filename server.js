@@ -19,7 +19,7 @@ mongoose.connect(configDB.url);
 	app.use(morgan('dev')); // log every request to the console
 	app.use(bodyParser());// pull information from html in POST
 	app.use(bodyParser.json());	 //setting app to use bodyParser
-	app.use(bodyParser.urlencoded());
+	app.use(bodyParser.urlencoded({extended: true}));
 	app.use(cookieParser());
 	app.use(methodOverride());
 

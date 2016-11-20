@@ -120,7 +120,7 @@ $('a.back-to-top').click(function() {
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
                    <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%= issuepostModels[i].comments.length + issuepostModels[i].userComments.length %></h7>&nbsp&nbsp
-                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks + issuepostModels[i].usernumClicks %></h7>
+                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].usernumClicks + issuepostModels[i].numClicks %></h7>
                   <% if (issuepostModels[i].numClicks +issuepostModels[i].usernumClicks >15000) { %> 
                     <b><span class="label label-danger">Hot</span></b>
                   <% } %> 
