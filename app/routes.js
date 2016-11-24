@@ -1270,6 +1270,210 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 
 });
 
+
+
+request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+	
+		$('.bg0').each(function(){
+		var bhuTitle = $(this).find('td.subject a font').text();
+		var numClicks = $(this).find('td.hit').text();
+		if (bhuTitle.indexOf("엠봉") >= 0) {
+			bhuTitle = bhuTitle.replace("엠봉", "하즐");
+			}
+		var newHref = $(this).find('a').attr('href');
+		newHref = newHref.replace("≀","&");
+		newHref = newHref.replace("id","wr_id");
+		newHref = newHref.replace("..",".");
+		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
+		
+	 	
+			request(bhuUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var comments = [];
+				var image_url = [];
+				var video_url = [];
+
+				$('span div img').each(function(){
+					
+					var img_url = $(this).attr('src');
+					image_url.push(img_url);
+				
+				})
+
+				// scrape all the images for the post
+				if (image_url.length == 0)
+				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
+				image_url.push(img_url)
+
+				$('span div embed').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				$('span div iframe').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);	
+				})
+
+				$('video source').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);	
+				})
+				
+				// scrape all the videos for the post
+				
+					$("[style *= 'line-height: 180%']").each(function(){
+						var content =  $(this).text();
+						if (content.indexOf("엠봉") >= 0) {
+						content = content.replace("엠봉", "하즐");
+						comments.push({content: content});
+						} 	
+						comments.push({content: content});
+					})//scrape all the comments for the post
+
+					comments.splice(0,1)
+
+			issueModel.find({title: bhuTitle}, function(err, newPosts){
+				
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+					//save data in Mongodb
+
+					var Post = new issueModel({
+						title: bhuTitle,
+						url: bhuUrl,
+						img_url: image_url,
+						video_url: video_url,
+						comments: comments,
+						numClicks: numClicks
+					})
+			Post.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(Post);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+		$('.bg1').each(function(){
+		var bhuTitle = $(this).find('td.subject a font').text();
+		var numClicks = $(this).find('td.hit').text();
+		if (bhuTitle.indexOf("엠봉") >= 0) {
+			bhuTitle = bhuTitle.replace("엠봉", "하즐");
+			}
+		var newHref = $(this).find('a').attr('href');
+		newHref = newHref.replace("≀","&");
+		newHref = newHref.replace("id","wr_id");
+		newHref = newHref.replace("..",".");
+		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
+		
+	 	
+			request(bhuUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var comments = [];
+				var image_url = [];
+				var video_url = [];
+
+				$('span div img').each(function(){
+					
+					var img_url = $(this).attr('src');
+					image_url.push(img_url);
+				
+				})
+
+				// scrape all the images for the post
+				if (image_url.length == 0)
+				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
+				image_url.push(img_url)
+
+				$('span div embed').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				$('span div iframe').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);	
+				})
+
+				$('video source').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);	
+				})
+				
+				// scrape all the videos for the post
+				
+					$("[style *= 'line-height: 180%']").each(function(){
+						var content =  $(this).text();
+						if (content.indexOf("엠봉") >= 0) {
+						content = content.replace("엠봉", "하즐");
+						comments.push({content: content});
+						} 	
+						comments.push({content: content});
+					})//scrape all the comments for the post
+
+					comments.splice(0,1)
+
+			issueModel.find({title: bhuTitle}, function(err, newPosts){
+				
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+					//save data in Mongodb
+
+					var Post = new issueModel({
+						title: bhuTitle,
+						url: bhuUrl,
+						img_url: image_url,
+						video_url: video_url,
+						comments: comments,
+						numClicks: numClicks
+					})
+			Post.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(Post);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+
+	}//첫 if구문
+
+});
+
+
+
+
+
 request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
