@@ -24,12 +24,14 @@
 
   } 
 
+
+
   .thumbnail { background-color: #484848   ; float:center; padding : 1%; width:200px; height:auto; overflow: hidden; }
 .thumbnail img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnail {
    width: 203px;
-   height: 255px;
+   height: 260px;
    overflow: auto;
    margin: 20px;
    border:1px solid #3f3f3f;
@@ -37,7 +39,7 @@
 
 .thumbnail > img {
    width: 198px;
-   height: 165px;
+   height: 172px;
 
  }
 
@@ -61,6 +63,18 @@ h7 {
   color:rgb(248,248,248) ;
   font-family: Book Antiqua, serif;
 }
+
+
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 130%;
+  padding: 10px;
+  width: auto;
+}
+
 
 #search {
   width: 700px;
@@ -111,7 +125,7 @@ h7 {
 
 .thumbnail {
    width: 203px;
-   height: 255px;
+   height: 260px;
    overflow: auto;
    margin: 20px;
    border:1px solid #3f3f3f;
@@ -119,7 +133,7 @@ h7 {
 
 .thumbnail > img {
    width: 198px;
-   height: 165px;
+   height: 172px;
 
  }
 
@@ -155,6 +169,16 @@ h7 {
   font-size:10px;
 
 }
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 130%;
+  padding: 10px;
+  width: auto;
+}
+
 
 #search {
   width: 700px;
@@ -210,7 +234,7 @@ html,body{
 
 .thumbnail > img {
    width: 198px;
-   height: 165px;
+   height: 172px;
 
  }
 
@@ -251,6 +275,16 @@ h7 {
   font-size:10px;
 
 }
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 130%;
+  padding: 10px;
+  width: auto;
+}
+
 
 #search {
   width: 700px;
@@ -298,7 +332,7 @@ html,body{
 
 .thumbnail {
    width: 203px;
-   height: 255px;
+   height: 260px;
    overflow: auto;
    margin: 20px;
    border:1px solid #3f3f3f;
@@ -306,7 +340,7 @@ html,body{
 
 .thumbnail > img {
    width: 198px;
-   height: 165px;
+   height: 172px;
 
  }
 
@@ -342,8 +376,18 @@ h7 {
   font-size:9px;
 
 }
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 130%;
+  padding: 10px;
+  width: auto;
+}
+
+
 #search {
-  width: 700px;
+  width: 500px;
   height: 40px;
   background: #2b303b;
   border: none;
@@ -389,7 +433,7 @@ h7 {
 
 .thumbnail > img {
    width: 198px;
-   height: 165px;
+   height: 172px;
 
  }
 
@@ -432,26 +476,10 @@ h7 {
 
 }
 
-#search {
-  width: 400px;
-  height: 40px;
-  background: #2b303b;
-  border: none;
-  font-size: 10pt;
-  float: left;
-  color: #fff;
-  padding-left: 15px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
 }
 
-}
-
-.btn.btn-circle { border-radius: 50px; color: rgb(255,255,255); position: relative;  padding: 7px 15px; margin:10px auto; }
+.btn.btn-circle { border-radius: 50px; color: rgb(255,255,255); position: relative;  padding: 8px 15px; margin:10px auto; }
 .btn.btn-outline { background-color: transparent; }
-
-
 
 .thumbnail {
     position: relative;

@@ -67,35 +67,27 @@ $('a.back-to-top').click(function() {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-  <div class="col-sm-12 col-md-12 affix-content">
+  <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-      
-    <header>
-      <h1><a href = "/"><img src="images/Logo1.jpg" alt="HTML5 Icon" style="width:45%;height:auto;"> </b></a></h1>
-      <div class="fb-share-button" data-href="http://www.hazzul.com" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
-    </header></br>
 
-<nav class="navbar navbar-default navbar-inverse" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/"><font color ="#FFFFFF" size="4.5"><b>하루의 즐거움</b></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <a class="btn btn-default btn-outline btn-circle collapsed" href="/about"><b>하즐 소개</b></a>
-        </ul>
-
-        <form class="navbar-form navbar-right" role="search" action="/" method="get">
-        <input type="text" name="search" id="search" type="text" class="search-query form-control" class="form-control" placeholder="검색하기">
+        <div class="navbar-header">
+            <button button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" rel="home" href="/" >
+                <img style="max-width:700px; margin-top: -7px;"
+                     src="/images/logo11.jpeg">
+            </a>
+        </div>
+        
+        <div id="navbar" class="collapse navbar-collapse navbar-responsive-collapse">
+            
+      <form class="navbar-form navbar-left" role="search" action="/" method="get">
+       
+            <input type="text" name="search" id="search" type="text" class="search-query form-control" class="form-control" placeholder="검색하기">
             <button id ="searchbutton" style=" border: none;
   background: #e1e4ea;
   height: 40px;
@@ -104,13 +96,49 @@ $('a.back-to-top').click(function() {
   border-radius: 5px;
   font-size: 10pt;" class="icon"><i class="fa fa-search"></i></button>
          
-        </form>
+      </form>
 
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+      <div class="navbar-form navbar-right" >
+        
+  <button data-toggle="modal" data-target="#aboutModal" style=" border: none; background: #222222;
+  height: 40px;
+  width: 40px;
+  color: #4f5b66;
+  opacity: none;
+  font-size: 20pt;" class="icon"><i i class="fa fa-question-circle" aria-hidden="true"></i></button> &nbsp; &nbsp;
+  
+      </div>
+      
+    </div>
 
-</nav>
+    </div>
+</div>
 
+
+
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="exampleModalLabel">하즐 소개</h3>
+      </div>
+      <div class="modal-body">
+        하즐은 하루의 즐거움의 줄임말로서 이용자들에게 매일 재밌는 짤과 동영상을 제공해드립니다
+        <br><br>
+        <div class="fb-share-button"  data-href="http://www.hazzul.com" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">창 닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ </br> </br> </br>
+  <div class="col-sm-12 col-md-12 affix-content">
+    <div class="container">
+     
            <!-- LOCAL INFORMATION -->
             <div class="row ">
             <div class ="text-center">
@@ -122,8 +150,8 @@ $('a.back-to-top').click(function() {
                 <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
-                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%= issuepostModels[i].userComments.length + issuepostModels[i].comments.length %></h7>&nbsp&nbsp
-                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks +issuepostModels[i].usernumClicks  %></h7>
+                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%= issuepostModels[i].comments.length + issuepostModels[i].userComments.length %></h7>&nbsp&nbsp
+                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks +issuepostModels[i].usernumClicks %></h7>&nbsp&nbsp
                   <% if (issuepostModels[i].numClicks +issuepostModels[i].usernumClicks >15000) { %> 
                     <b><span class="label label-danger">Hot</span></b>
                   <% } %> 
@@ -137,15 +165,18 @@ $('a.back-to-top').click(function() {
         <% if (issuepostModels.length < 1) { %> 
           <div class ="text-center">
           <h3><font size ="8" color ="#FFFFFF"> "<%= searchTitle %>"<font> <font size ="6" color ="#FFFFFF">검색 결과가 없습니다.. sorry<font></h3>
+          <p><a href = "/"><button class="btn btn-danger" style ="center"> 하즐 홈페이지로 돌아가기</button></a></p>
+          <div class="fb-share-button"  data-href="http://www.hazzul.com" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
           </div>
        <% } %> 
 </div>
 
 <a href="#" class="back-to-top">Back to Top</a>
 
-
 <% if (pageCount > 1) { %>  
+
 <div class ="text-center pagelayout">
+
 <ul class="pagination">  
   <% if (currentPage > 1) { %>
       <li><a href="/?page=1">&laquo;</a></li>
@@ -177,23 +208,6 @@ $('a.back-to-top').click(function() {
 </div>
 </div>
 
-<!-- Start of StatCounter Code for Default Guide -->
-<script type="text/javascript">
-var sc_project=10950271; 
-var sc_invisible=0; 
-var sc_security="b7184453"; 
-var scJsHost = (("https:" == document.location.protocol) ?
-"https://secure." : "http://www.");
-document.write("<sc"+"ript type='text/javascript' src='" +
-scJsHost+
-"statcounter.com/counter/counter.js'></"+"script>");
-</script>
-<noscript><div class="statcounter"><a title="website
-statistics" href="http://statcounter.com/free-web-stats/"
-target="_blank"><img class="statcounter"
-src="//c.statcounter.com/10950271/0/b7184453/0/"
-alt="website statistics"></a></div></noscript>
-<!-- End of StatCounter Code for Default Guide -->
 
 
 </body>
