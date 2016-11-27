@@ -150,7 +150,7 @@ $('a.back-to-top').click(function() {
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
                    <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%= issuepostModels[i].comments.length + issuepostModels[i].userComments.length %></h7>&nbsp&nbsp
-                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks + issuepostModels[i].usernumClicks %></h7>&nbsp&nbsp
+                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].myClicks %></h7>&nbsp&nbsp
                   <% if (issuepostModels[i].numClicks +issuepostModels[i].usernumClicks >15000) { %> 
                     <b><span class="label label-danger">Hot</span></b>
                   <% } %> 
@@ -178,14 +178,13 @@ $('a.back-to-top').click(function() {
 
 <ul class="pagination">  
   <% if (currentPage > 1) { %>
-      <li><a href="/?page=1">&laquo;</a></li>
+      <li style ="color:#000000"><a href="/?page=1">&laquo;</a></li>
   <% } %>
   <% var i = 1;
   if (currentPage > 5) {
   i = +currentPage - 4;
   } %>
   <% if (i !== 1) { %>
-      <li class="disabled"><a href="#">...</a></li>
   <% } %>
   <% for (i; i<=pageCount; i++) { %>
     <% if (currentPage == i) { %>
@@ -193,8 +192,7 @@ $('a.back-to-top').click(function() {
     <% } else { %>
         <li><a href="/?page=<%= i %>"><%= i %></a></li>
     <% } %>
-    <% if (i == (currentPage + 4)) { %>
-        <li class="disabled"><a href="#">...</a></li>
+    <% if (i == (currentPage + 1)) { %>
     <% break; } %>
   <% } %>
   <% if (currentPage != pageCount) { %>

@@ -2447,7 +2447,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 
 });
 
-request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, res, body){
+request('http://bhu.co.kr/bbs/board.php?bo_table=temp&page=1&page=9', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
 		
