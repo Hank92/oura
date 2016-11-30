@@ -526,335 +526,14 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 
 
 
-request('http://issuein.com/', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('td.title').each(function(){
-		var issueTitle = $(this).find('a.hx').text();
-		var newHref = $(this).find('a').attr('href');
-		var issueUrl = "http://www.issuein.com"+ newHref;
-	 	
-			request(issueUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var image_url = [];
-				var video_url = [];
-				var comments = [];
-
-				$('article div img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url);	
-				})
-
-				if (image_url.length == 0)
-				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
-				image_url.push(img_url)
-
-				$('div embed').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);
-				})
-
-				$('video').each(function(){
-					var vid_url = $(this).find("source").attr('src');
-					video_url.push(vid_url);
-				})
-
-				$("li.fdb_itm").each(function(){
-						var content =  $(this).find(".xe_content").text();	
-						comments.push({content: content});
-					})//scrape all the comments for the post
-				var numClicks = Math.floor((Math.random() * 1000) + 1);
-
-				// scrape al\ the images for the post
-				issueModel.find({title: issueTitle}, function(err, newPosts){
-				
-				if (!newPosts.length && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && image_url[0].indexOf("http://www.issuein.com/files/attach") !== 0 &&  image_url[0].indexOf("./files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
-					//save data in Mongodb
-
-					var issuePost = new issueModel({
-						title: issueTitle,
-						url: issueUrl,
-						img_url: image_url,
-						video_url: video_url,
-						comments: comments,
-						numClicks: numClicks
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(numClicks);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-
-
-request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('td.title').each(function(){
-		var issueTitle = $(this).find('a.hx').text();
-		var newHref = $(this).find('a').attr('href');
-		var issueUrl = "http://www.issuein.com"+ newHref;
-	 	
-			request(issueUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var image_url = [];
-				var video_url = [];
-				var comments = [];
-
-				$('article div img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url);	
-				})
-
-				$('article_1 a img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url);	
-				})
-
-				$("li.fdb_itm").each(function(){
-						var content =  $(this).find(".xe_content").text();	
-						comments.push({content: content});
-					})//scrape all the comments for the post
-
-				if (image_url.length == 0)
-				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
-				image_url.push(img_url)
-
-				$('div embed').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);
-				})
-				$("li.fdb_itm").each(function(){
-						var content =  $(this).find(".xe_content").text();	
-						comments.push({content: content});
-					})//scrape all the comments for the post
-
-
-				var numClicks = Math.floor((Math.random() * 1000) + 1);
-				// scrape all the images for the post
-				issueModel.find({title: issueTitle}, function(err, newPosts){
-				
-				if (!newPosts.length &&  image_url[0].indexOf("./files/attach") !== 0 && image_url[0].indexOf("http://www.issuein.com/files/attach") !== 0  && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0  ){
-					//save data in Mongodb
-
-					var issuePost = new issueModel({
-						title: issueTitle,
-						url: issueUrl,
-						img_url: image_url,
-						video_url:video_url,
-						comments:comments,
-						numClicks:numClicks
-					
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(numClicks);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-
-request('http://issuein.com/index.php?mid=index&page=3', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('td.title').each(function(){
-		var issueTitle = $(this).find('a.hx').text();
-		var newHref = $(this).find('a').attr('href');
-		var issueUrl = "http://www.issuein.com"+ newHref;
-	 	
-			request(issueUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var image_url = [];
-				var video_url = [];
-				var comments = [];
-
-				$('article div img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url);	
-				})
-
-				if (image_url.length == 0)
-				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
-				image_url.push(img_url)
-
-				$('div embed').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);
-				})
-
-				$("li.fdb_itm").each(function(){
-						var content =  $(this).find(".xe_content").text();	
-						comments.push({content: content});
-					})//scrape all the comments for the post
-
-
-				var numClicks = Math.floor((Math.random() * 1000) + 1);
-				// scrape all the images for the post
-				issueModel.find({title: issueTitle}, function(err, newPosts){
-				
-				if (!newPosts.length  && image_url[0].indexOf("./files/attach") !== 0 && image_url[0].indexOf("http://www.issuein.com/files/attach") !== 0  && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
-					//save data in Mongodb
-
-					var issuePost = new issueModel({
-						title: issueTitle,
-						url: issueUrl,
-						img_url: image_url,
-						video_url:video_url,
-						comments: comments,
-						numClicks: numClicks
-					
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(numClicks);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('td.title').each(function(){
-		var issueTitle = $(this).find('a.hx').text();
-		var newHref = $(this).find('a').attr('href');
-		var issueUrl = "http://www.issuein.com"+ newHref;
-	 	
-			request(issueUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var image_url = [];
-				var video_url = [];
-				var comments = [];
-
-				$('article div img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url);	
-				})
-
-				if (image_url.length == 0)
-				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
-				image_url.push(img_url)
-
-				$('div embed').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);
-				})
-
-				$("li.fdb_itm").each(function(){
-						var content =  $(this).find(".xe_content").text();	
-						comments.push({content: content});
-					})//scrape all the comments for the post
-
-
-				var numClicks = Math.floor(Math.random() * 1000) +3;
-				// scrape all the images for the post
-				issueModel.find({title: issueTitle}, function(err, newPosts){
-				
-				if (!newPosts.length && image_url[0].indexOf("./files/attach") !== 0 && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && image_url[0].indexOf("http://www.issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0   ){
-					//save data in Mongodb
-
-
-					var issuePost = new issueModel({
-						title: issueTitle,
-						url: issueUrl,
-						img_url: image_url,
-						video_url:video_url,
-						comments:comments,
-						numClicks:numClicks
-					
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(numClicks);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-
-
 
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
+// http://www.ilbegarage.com/ilbe/9698199
+//http://www.jjang0u.com/
+//http://romeo1052.net/xe/STAR/128786
+//http://www.wassupfun.com/
+//http://brozforce.com/
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
 request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=1', function(err, res, body){
@@ -925,7 +604,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=1', function(err, res
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -1019,7 +698,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=1', function(err, res
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -1123,7 +802,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -1217,7 +896,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -1323,7 +1002,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -1417,7 +1096,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -1525,7 +1204,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -1619,7 +1298,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -1723,7 +1402,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -1817,7 +1496,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -1921,7 +1600,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -2015,7 +1694,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -2119,7 +1798,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -2213,7 +1892,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -2317,7 +1996,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -2411,7 +2090,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -2515,7 +2194,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -2609,7 +2288,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -2713,7 +2392,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -2807,7 +2486,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -2911,7 +2590,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -3005,7 +2684,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -3109,7 +2788,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -3203,7 +2882,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -3307,7 +2986,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -3401,7 +3080,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -3485,6 +3164,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 					video_url.push(vid_url);	
 				})
 
+				$('.ytp-title-link').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
 					video_url.push(vid_url);	
@@ -3505,7 +3189,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
@@ -3576,6 +3260,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 				
 				})
 
+				$('.ytp-title-link').each(function(){
+					var vid_url = $(this).attr('href');
+					video_url.push(vid_url);
+				})
+
 				// scrape all the images for the post
 				if (image_url.length == 0)
 				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
@@ -3611,7 +3300,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 
 			issueModel.find({title: bhuTitle}, function(err, newPosts){
 				
-				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+				if (!newPosts.length && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
 					var Post = new issueModel({
