@@ -37,6 +37,7 @@ p {
     margin-right: 33px;
     border-radius: 5px;
     overflow: hidden;
+    
 }
 
 .comment-img img {
@@ -122,7 +123,7 @@ p {
 }
 .navbar-brand>img {
   height: 130%;
-  padding: 10px;
+  padding: 40px;
   width: auto;
 }
 

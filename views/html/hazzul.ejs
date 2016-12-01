@@ -17,7 +17,7 @@
     <meta name="author" content ="하즐">
     <meta name="title" content = "하즐 - 하루의 즐거움">
     <meta name='keyword' content="하즐, 하루, 즐거움, 짤, hazzul, 웃긴, 예능, 동영상, hazz, hazzu">
-    <meta name="description" content="하루를 즐겁게 해줄 짤들과 동영상을 담은 플랫">
+    <meta name="description" content="하루를 즐겁게 해줄 짤들과 동영상을 담은 플랫폼">
     <link rel='shortcut icon' href='/images/Favicon.ico' type='image/x-icon'/ >
     
     <!--call the css file -->
@@ -149,8 +149,8 @@ $('a.back-to-top').click(function() {
                 <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
-                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%= issuepostModels[i].comments.length +issuepostModels[i].userComments.length %></h7>&nbsp&nbsp
-                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].usernumClicks +issuepostModels[i].numClicks  %></h7>&nbsp&nbsp
+                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length %></h7>&nbsp&nbsp
+                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].myClicks  %></h7>&nbsp&nbsp
                   <% if (issuepostModels[i].numClicks +issuepostModels[i].usernumClicks >15000) { %> 
                     <b><span class="label label-danger">Hot</span></b>
                   <% } %> 
