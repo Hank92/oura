@@ -1,0 +1,228 @@
+<!-- views/hazzul.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title> 하즐 - 하루의 즐거움 <% if (currentPage > 1) { %> <%= currentPage %> <% } %></title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta name="naver-site-verification" content="8672f68ec19974757430dcc41aa887462bd2a8c5"/>
+    <meta name="google-site-verification" content="UFlAZBpLslwZH5RF8Z4WSu6fiCM-MXNzOvcLsyDh2_Y" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content ="하즐">
+    <meta name="title" content = "하즐 - 하루의 즐거움">
+    <meta name='keyword' content="하즐, 하루, 즐거움, 짤, hazzul, 웃긴, 예능, 동영상, hazz, hazzu">
+    <meta name="description" content="하루를 즐겁게 해줄 짤들과 동영상을 담은 플랫폼">
+    <link rel='shortcut icon' href='/images/Favicon.ico' type='image/x-icon'/ >
+    
+    <!--call the css file -->
+    <link rel='stylesheet' href='/css/hazzulMain.css'>
+
+<script type="text/javascript">
+  $('body').prepend('<a href="#" class="back-to-top">Back to Top</a>');
+</script>
+<script type="text/javascript">
+var amountScrolled = 100;
+
+$(window).scroll(function() {
+  if ( $(window).scrollTop() > amountScrolled ) {
+    $('a.back-to-top').fadeIn('slow');
+  } else {
+    $('a.back-to-top').fadeOut('slow');
+  }
+});
+</script>
+
+<script type="text/javascript">
+$('a.back-to-top').click(function() {
+  $('html, body').animate({
+    scrollTop: 0
+  }, 700);
+  return false;
+});
+</script>
+
+<script>
+    var i = 0;
+    function buttonClick() {
+        i++;
+        document.getElementById('inc').value = i;
+    }
+</script>
+</head>
+
+<body>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.6";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+
+        <div class="navbar-header">
+            <button button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand myLogo" href="/" >
+                <img src="/images/Logo1.jpg">
+            </a>
+        </div>
+        
+        <div id="navbar" class="collapse navbar-collapse navbar-responsive-collapse">
+            
+      <form class="navbar-form navbar-left" role="search" action="/" method="get">
+       
+            <input type="text" name="search" id="search" type="text" class="search-query form-control" class="form-control" placeholder="검색하기">
+            <button id ="searchbutton" style=" border: none;
+  background: #e1e4ea;
+  height: 40px;
+  width: 40px;
+  color: #4f5b66;
+  border-radius: 5px;
+  font-size: 10pt;" class="icon"><i class="fa fa-search"></i></button>
+         
+      </form>
+
+      <div class="navbar-form navbar-right" >
+        
+  <button data-toggle="modal" data-target="#aboutModal" style=" border: none; background: #222222;
+  height: 40px;
+  width: 40px;
+  color: #4f5b66;
+  opacity: none;
+  font-size: 20pt;" class="icon"><i i class="fa fa-question-circle" aria-hidden="true"></i></button> &nbsp; &nbsp;
+  
+      </div>
+      
+    </div>
+
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="exampleModalLabel">하즐 소개</h3>
+      </div>
+      <div class="modal-body">
+        하즐은 하루의 즐거움의 줄임말로서 이용자들에게 매일 재밌는 짤과 동영상을 제공해드립니다
+        <br><br>
+        <div class="fb-share-button"  data-href="http://www.hazzul.com" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">창 닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ </br> </br> </br>
+  <div class="col-sm-12 col-md-12 affix-content">
+    <div class="container">
+     
+           <!-- LOCAL INFORMATION -->
+            <div class="row ">
+            <div class ="text-center">
+
+       <% for(var i = 0; i <  issuepostModels.length;  i++) { %>
+       
+            <a class="thumbnail" href="/hazzul/<%= issuepostModels[i].id %>" style="text-decoration: none;">
+            <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
+                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
+                <div class="text-center">
+                  <h5><%= issuepostModels[i].title %></h5>
+                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length %></h7>&nbsp&nbsp
+                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].myClicks  %></h7>&nbsp&nbsp
+                  <% if (issuepostModels[i].numClicks +issuepostModels[i].usernumClicks >15000) { %> 
+                    <b><span class="label label-danger">Hot</span></b>
+                  <% } %> 
+                </div>
+            </a>
+            </form>
+       <% }%>
+       </div>
+      
+       </br></br>
+        <% if (issuepostModels.length < 1) { %> 
+          <div class ="text-center">
+          <h3><font size ="8" color ="#FFFFFF"> "<%= searchTitle %>"<font> <font size ="6" color ="#FFFFFF">검색 결과가 없습니다.. sorry<font></h3>
+          <p><a href = "/"><button class="btn btn-danger" style ="center"> 하즐 홈페이지로 돌아가기</button></a></p>
+          <div class="fb-share-button"  data-href="http://www.hazzul.com" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
+          </div>
+       <% } %> 
+</div>
+
+<a href="#" class="back-to-top">Back to Top</a>
+
+<% if (pageCount > 1) { %>  
+
+<div class ="text-center pagelayout">
+
+<ul class="pagination">  
+  <% if (currentPage > 1) { %>
+      <li style ="color:#000000"><a href="/?page=1&search=searchTitle">&laquo;</a></li>
+  <% } %>
+  <% var i = 1;
+  if (currentPage > 4) {
+  i = +currentPage - 3;
+  } %>
+  <% if (i !== 1) { %>
+  <% } %>
+  <% for (i; i<=pageCount; i++) { %>
+    <% if (currentPage == i) { %>
+        <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+    <% } else { %>
+        <li><a href="/?page=<%= i %>"><%= i %></a></li>
+    <% } %>
+    <% if (i == (currentPage + 1)) { %>
+    <% break; } %>
+  <% } %>
+  <% if (currentPage != pageCount) { %>
+      <li><a href="/?page=<%= pageCount %>">&raquo;</a></li>
+  <% } %>
+</ul>  
+</div>
+<% } %> 
+
+</div>
+</div>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10950271; 
+var sc_invisible=0; 
+var sc_security="b7184453"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="website
+statistics" href="http://statcounter.com/free-web-stats/"
+target="_blank"><img class="statcounter"
+src="//c.statcounter.com/10950271/0/b7184453/0/"
+alt="website statistics"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+
+</body>
+</html>

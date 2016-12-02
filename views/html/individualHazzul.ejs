@@ -57,8 +57,15 @@
          <div class="embed-responsive embed-responsive-16by9">
             <iframe class ="embed-responsive-item" src="<%= issuepostModel.video_url[i] %>"quality="high" bgcolor="#000000" width="500" height="400" name="NEXT4896413" align="middle" allowscriptaccess="always" allowfullscreen="true" type="application/x-shockwave-flash"></iframe> </br>
           </div>
+            <% } %>  
 
-            <% } %>  </br>  
+            <% for( var i = 0; i < issuepostModel.img_comment.length; i++ ) { %> 
+        <center>
+          <b><font size ="3" color="#000000"> <%= issuepostModel.img_comment[i] %></b>
+        </center>
+ 
+         <% }%> 
+         <br>
         <div class ="text-center">
 <div class="fb-share-button " data-href="www.hazzul.com/hazzul/<%= issuepostModel.id%>" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="www.hazzul.com/hazzul/<%= issuepostModel.id%>">공유하기</a></div>
 </br>
@@ -127,7 +134,24 @@
 </div>               
 </div>
 </br>   
-                    
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10950271; 
+var sc_invisible=0; 
+var sc_security="b7184453"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="website
+statistics" href="http://statcounter.com/free-web-stats/"
+target="_blank"><img class="statcounter"
+src="//c.statcounter.com/10950271/0/b7184453/0/"
+alt="website statistics"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->          
        
 </body>
 

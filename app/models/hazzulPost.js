@@ -5,6 +5,7 @@ var hazzulSchema = mongoose.Schema({
     title: String, 
 	url  : String,
 	img_url: [String],
+	img_comment: [String],
 	video_url:[String],
 	posted: { type: Date, default: Date.now },
 	numClicks: {type: Number, default:0},
