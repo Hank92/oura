@@ -1775,6 +1775,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 				var comments = [];
 				var image_url = [];
 				var video_url = [];
+				var image_comment = [];
 
 				$('span div img').each(function(){
 					
