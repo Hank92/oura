@@ -70,8 +70,9 @@ h7 {
   padding: 0px;
 }
 .navbar-brand>img {
-  height: 130%;
+  height: 110%;
   padding: 10px;
+  align: left;
   width: auto;
 }
 
@@ -174,8 +175,9 @@ h7 {
   padding: 0px;
 }
 .navbar-brand>img {
-  height: 130%;
+  height: 110%;
   padding: 10px;
+  align: left;
   width: auto;
 }
 
@@ -280,8 +282,9 @@ h7 {
   padding: 0px;
 }
 .navbar-brand>img {
-  height: 130%;
+  height: 110%;
   padding: 10px;
+  align: left;
   width: auto;
 }
 
@@ -380,8 +383,9 @@ h7 {
   padding: 0px;
 }
 .navbar-brand>img {
-  height: 130%;
+  height: 110%;
   padding: 10px;
+  align: left;
   width: auto;
 }
 
@@ -504,5 +508,3 @@ a.back-to-top {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-
-.myLogo { padding: 4px; }
