@@ -117,6 +117,52 @@ if(req.query.search){
      });//paginate
 }	
 });
+app.get('/hazzulBest', function (req, res){
+if(req.query.search){
+	hazzulBestModel.findByTitle(req.query.search, function (err, all_pins){
+		var searchTitle = req.query.search;
+		pageSize  = 0;
+		pageCount = 0;
+		totalPosts = 0;
+		currentPage =0;
+		res.render('hazzulBest.ejs', {
+			issuepostModels: all_pins,
+			searchTitle: searchTitle,
+			pageSize: pageSize,
+    		pageCount: pageCount,
+    		totalPosts: totalPosts,
+    		currentPage: currentPage
+		})
+		
+		})
+	}
+	else {
+	var currentPage = 1;
+	if (typeof req.query.page !== 'undefined') {
+        currentPage = +req.query.page;
+    	}
+		hazzulBestModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 20 }, function(err, results) {
+         if(err){
+         console.log("error!!");
+         console.log(err);
+     } else {
+    	    pageSize = results.limit;
+            pageCount = (results.total)/(results.limit);
+    		pageCount = Math.ceil(pageCount);
+    	    totalPosts = results.total;
+    	console.log(results.docs)
+
+    	res.render('hazzulBest.ejs', {
+    		issuepostModels: results.docs,
+    		pageSize: pageSize,
+    		pageCount: pageCount,
+    		totalPosts: totalPosts,
+    		currentPage: currentPage
+    	})//res.render
+     }//else
+     });//paginate
+}	
+});
 
 app.get('/postdelete', function (req, res){
 	issueModel.find({}, function(req, docs){
@@ -3206,9 +3252,6 @@ request('http://www.issuein.com', function(err, res, body){
 
 				$('article div img').each(function(){
 					var img_url = $(this).attr('src');
-					if(img_url.indexOf("http://cdn.ddanzi.com/201611-images/142723302.gif") == -1 ) {
-						image_url.push(img_url);	
-					}
 
 				})
 
@@ -3291,10 +3334,11 @@ request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body
 
 				$('article div img').each(function(){
 					var img_url = $(this).attr('src');
+					/*
 					if(img_url.indexOf("http://cdn.ddanzi.com/201611-images/142723302.gif") == -1 ) {
 						image_url.push(img_url);	
 					}
-
+					*/
 				})
 
 				if (image_url.length == 0)
@@ -3375,9 +3419,11 @@ request('http://issuein.com/index.php?mid=index&page=3', function(err, res, body
 
 				$('article div img').each(function(){
 					var img_url = $(this).attr('src');
+					/*
 					if(img_url.indexOf("http://cdn.ddanzi.com/201611-images/142723302.gif") == -1 ) {
 						image_url.push(img_url);	
 					}
+					*/
 
 				})
 
@@ -3458,9 +3504,11 @@ request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body
 
 				$('article div img').each(function(){
 					var img_url = $(this).attr('src');
+					/*
 					if(img_url.indexOf("http://cdn.ddanzi.com/201611-images/142723302.gif") == -1 ) {
 						image_url.push(img_url);	
 					}
+					*/
 
 				})
 

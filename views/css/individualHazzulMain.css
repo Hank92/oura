@@ -141,3 +141,14 @@ p {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+
+
+.navbar-brand {
+  padding: 5px;
+}
+.navbar-brand>img {
+  height: 110%;
+  padding: 10px;
+  align: left;
+  width: auto;
+}

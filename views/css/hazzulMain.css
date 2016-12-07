@@ -482,14 +482,6 @@ h7 {
 
 }
 
-.btn.btn-circle { border-radius: 50px; color: rgb(255,255,255); position: relative;  padding: 8px 15px; margin:10px auto; }
-.btn.btn-outline { background-color: transparent; }
-
-.thumbnail {
-    position: relative;
-    padding: 0px;
-    margin-bottom: 20px;
-}
 .thumbnail img {
     width: 100%;
 }
@@ -508,3 +500,151 @@ a.back-to-top {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+
+.thumbnail {
+    position: relative;
+    padding: 0px;
+    margin-bottom: 20px;
+    border-radius: 15px; 
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;  
+}
+
+ .thumbnail:hover
+{ 
+  box-shadow: 0px 2px 5px -1px #fff;
+  -moz-box-shadow: 0px 2px 5px -1px #ffffff;
+  -webkit-box-shadow: 0px 2px 5px -1px #000;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 10px;   
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;  
+  border-bottom:2px solid #000000;
+  border-left:2px solid #000000;
+  border-right:2px solid #000000;
+  border-top:2px solid #000000;
+}
+
+.thumbnailBest {
+    position: relative;
+    padding: 0px;
+    margin-bottom: 20px;
+    border-radius: 15px; 
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;  
+}
+
+ .thumbnailBest:hover
+{ 
+  box-shadow: 0px 2px 5px -1px #fff;
+  -moz-box-shadow: 0px 2px 5px -1px #ffffff;
+  -webkit-box-shadow: 0px 2px 5px -1px #000;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 10px;   
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;  
+  border-bottom:2px solid #000000;
+  border-left:2px solid #000000;
+  border-right:2px solid #000000;
+  border-top:2px solid #000000;
+}
+
+.thumbnailHot {
+    position: relative;
+    padding: 0px;
+    margin-bottom: 20px;
+    border-radius: 15px; 
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;  
+}
+
+ .thumbnailHot:hover
+{ 
+  box-shadow: 0px 2px 5px -1px #fff;
+  -moz-box-shadow: 0px 2px 5px -1px #ffffff;
+  -webkit-box-shadow: 0px 2px 5px -1px #000;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 10px;   
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;  
+  border-bottom:2px solid #000000;
+  border-left:2px solid #000000;
+  border-right:2px solid #000000;
+  border-top:2px solid #000000;
+}
+
+a.thumbnail:hover, a.thumbnail:focus {
+    border-color: #ffffff;
+    -webkit-box-shadow: 0 1px 4px rgba(0,105,214,0.25);
+    -moz-box-shadow: 0 1px 4px rgba(0,105,214,0.25);
+    box-shadow: 0 1px 4px rgba(0,105,214,0.25);
+}
+a.thumbnailHot:hover, a.thumbnailHot:focus {
+    border-color: red;
+    -webkit-box-shadow: 0 1px 4px rgba(0,105,214,0.25);
+    -moz-box-shadow: 0 1px 4px rgba(0,105,214,0.25);
+    box-shadow: 0 1px 4px rgba(0,105,214,0.25);
+}
+
+a.thumbnailBest:hover, a.thumbnailBest:focus {
+    border-color: #1abc9c;
+    -webkit-box-shadow: 0 1px 4px rgba(0,105,214,0.25);
+    -moz-box-shadow: 0 1px 4px rgba(0,105,214,0.25);
+    box-shadow: 0 1px 4px rgba(0,105,214,0.25);
+}
+
+.thumbnailBest { background-color: #484848; float:left; padding : 1%; width:200px; height:auto; overflow: hidden; }
+.thumbnailBest img {height:auto; width:100%; margin:10 auto; }
+
+.thumbnailBest {
+   width: 195px;
+   height: 255px;
+   overflow: auto;
+   margin: 20px;
+   border:1px solid #3f3f3f;
+ }
+
+.thumbnailBest > img {
+   width: 198px;
+   height: 172px;
+
+ }
+
+ .thumbnailHot { background-color: #484848; float:left; padding : 1%; width:200px; height:auto; overflow: hidden; }
+.thumbnailHot img {height:auto; width:100%; margin:0 auto; }
+
+.thumbnailHot {
+   width: 195px;
+   height: 255px;
+   overflow: auto;
+   margin: 20px;
+   border:1px solid #3f3f3f;
+ }
+
+.thumbnailHot > img {
+   width: 198px;
+   height: 172px;
+
+ }
+
