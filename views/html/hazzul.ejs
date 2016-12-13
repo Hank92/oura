@@ -143,14 +143,14 @@ $('a.back-to-top').click(function() {
             <div class ="text-center">
 
 
-       <% for(var i = issuepostModels.length-1; i > -1 ; i--) { %>
+       <% for(var i = 0; i <  issuepostModels.length;  i++) { %>
       
             <a class="thumbnail" href="/hazzul/<%= issuepostModels[i].id %>" style="text-decoration: none;">
             <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
                 <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
-
+                  
                    <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length + issuepostModels[i].comments.length %></h7>&nbsp&nbsp
                    <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].usernumClicks + issuepostModels[i].numClicks %></h7>&nbsp&nbsp
                     
