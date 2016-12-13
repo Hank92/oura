@@ -1,3 +1,5 @@
+// app/routes.js
+
 var request = require('request');
 var cheerio = require('cheerio');
 var mongoose = require('mongoose');
@@ -52,6 +54,8 @@ if(req.query.search){
          console.log("error!!");
          console.log(err);
      } else {
+     	
+
     	    pageSize = results.limit;
             pageCount = (results.total)/(results.limit);
     		pageCount = Math.ceil(pageCount);
@@ -59,52 +63,6 @@ if(req.query.search){
     	console.log(results.docs)
 
     	res.render('hazzul.ejs', {
-    		issuepostModels: results.docs,
-    		pageSize: pageSize,
-    		pageCount: pageCount,
-    		totalPosts: totalPosts,
-    		currentPage: currentPage
-    	})//res.render
-     }//else
-     });//paginate
-}	
-});
-app.get('/hazzulBest', function (req, res){
-if(req.query.search){
-	hazzulBestModel.findByTitle(req.query.search, function (err, all_pins){
-		var searchTitle = req.query.search;
-		pageSize  = 0;
-		pageCount = 0;
-		totalPosts = 0;
-		currentPage =0;
-		res.render('hazzulBest.ejs', {
-			issuepostModels: all_pins,
-			searchTitle: searchTitle,
-			pageSize: pageSize,
-    		pageCount: pageCount,
-    		totalPosts: totalPosts,
-    		currentPage: currentPage
-		})
-		
-		})
-	}
-	else {
-	var currentPage = 1;
-	if (typeof req.query.page !== 'undefined') {
-        currentPage = +req.query.page;
-    	}
-		hazzulBestModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 20 }, function(err, results) {
-         if(err){
-         console.log("error!!");
-         console.log(err);
-     } else {
-    	    pageSize = results.limit;
-            pageCount = (results.total)/(results.limit);
-    		pageCount = Math.ceil(pageCount);
-    	    totalPosts = results.total;
-    	console.log(results.docs)
-
-    	res.render('hazzulBest.ejs', {
     		issuepostModels: results.docs,
     		pageSize: pageSize,
     		pageCount: pageCount,
@@ -269,12 +227,14 @@ app.param('id', function(req, res, next, id){
 			}
 			});	
 });
+
 app.get('/mbong19/:id', function(req, res){
 	   res.render('individualmbong19.ejs', {postModel: req.mainpostId});
 	   console.log(req.mainpostId)
 	})
 	
 	//finds the matching object
+
 */
 app.post('/:id/post/hazzul', function (req, res){
 	issueModel.find({_id: req.params.id}, function(err, item){
@@ -322,19 +282,23 @@ request('http://fbissuebox.com/category/1', function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
 				var image_url = [];
+
 				$('#content img').each(function(){
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);	
 				})
+
 				$('#content p img').each(function(){
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);	
 				})
+
 				// scrape al\ the images for the post
 				issueModel.find({title: issueTitle}, function(err, newPosts){
 				
 				if (!newPosts.length){
 					//save data in Mongodb
+
 					var issuePost = new issueModel({
 						title: issueTitle,
 						url: issueUrl,
@@ -347,16 +311,22 @@ request('http://fbissuebox.com/category/1', function(err, res, body){
 							else 
 								console.log(issuePost);
 					})
+
 			//post.save
 				}//if bhuTitle안에 있는 {}
+
 			})//postModel.find
 			
+
 			}//if문
+
 			})//request
+
 			
 		});
 		
 	}//첫 if구문
+
 });
 */
 
@@ -3238,7 +3208,7 @@ request('http://www.issuein.com', function(err, res, body){
 
 				$('article div img').each(function(){
 					var img_url = $(this).attr('src');
-
+					image_url.push(img_url)
 				})
 
 				if (image_url.length == 0)
@@ -3320,6 +3290,7 @@ request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body
 
 				$('article div img').each(function(){
 					var img_url = $(this).attr('src');
+					image_url.push(img_url)
 					/*
 					if(img_url.indexOf("http://cdn.ddanzi.com/201611-images/142723302.gif") == -1 ) {
 						image_url.push(img_url);	
@@ -3405,6 +3376,7 @@ request('http://issuein.com/index.php?mid=index&page=3', function(err, res, body
 
 				$('article div img').each(function(){
 					var img_url = $(this).attr('src');
+					image_url.push(img_url)
 					/*
 					if(img_url.indexOf("http://cdn.ddanzi.com/201611-images/142723302.gif") == -1 ) {
 						image_url.push(img_url);	
@@ -3490,6 +3462,7 @@ request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body
 
 				$('article div img').each(function(){
 					var img_url = $(this).attr('src');
+					image_url.push(img_url)
 					/*
 					if(img_url.indexOf("http://cdn.ddanzi.com/201611-images/142723302.gif") == -1 ) {
 						image_url.push(img_url);	
@@ -3572,22 +3545,27 @@ request('http://ggoorr.com/gg', function(err, res, body){
 				var $ = cheerio.load(body);
 				var image_url = [];
 				var video_url = [];
+
 				$('.rd_body img').each(function(){
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);	
 				})
+
 				if (image_url.length == 0)
 				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
 				image_url.push(img_url)
+
 				$('.rd_body iframe').each(function(){
 					var vid_url = $(this).attr('src');
 					video_url.push(vid_url);
 				})
+
 				// scrape all the images for the post
 				issueModel.find({title: issueTitle}, function(err, newPosts){
 				
 				if (!newPosts.length){
 					//save data in Mongodb
+
 					var issuePost = new issueModel({
 						title: issueTitle,
 						url: issueUrl,
@@ -3602,16 +3580,22 @@ request('http://ggoorr.com/gg', function(err, res, body){
 					else 
 						console.log(issuePost);
 				})
+
 			//post.save
 				}//if bhuTitle안에 있는 {}
+
 			})//postModel.find
 			
+
 			}//if문
+
 			})//request
+
 			
 		});
 		
 	}//첫 if구문
+
 });
 */
 /*
@@ -3629,11 +3613,13 @@ request('https://www.reddit.com/r/funny/rising/', function(err, res, body){
 		if (url.indexOf("/r/") >= 0) {
 			url = "https://www.reddit.com" +url  
 		}
+
 			
 		newsModel.find({image_url: img}, function(err, newPosts){
 		
 		if (!newPosts.length && (img !==undefined) ){
 			//save data in Mongodb
+
 			var newsPost = new newsModel({
 				title: trimmedtitle,
 				url: url,
@@ -3646,12 +3632,16 @@ request('https://www.reddit.com/r/funny/rising/', function(err, res, body){
 			else 
 				console.log(newsPost);
 		})
+
 	//post.save
 		}//if bhuTitle안에 있는 {}
+
 	})//postModel.find
+
 		});
 		
 	}//첫 if구문
+
 });
 */
 /*
@@ -3661,6 +3651,7 @@ request('http://dc.cozo.me/link', function(err, res, body){
 		
 		var $ = cheerio.load(body);
 		
+
 		$('.link').each(function(){
 		
 		var url = $(this).attr('href');
@@ -3684,12 +3675,16 @@ request('http://dc.cozo.me/link', function(err, res, body){
 			else 
 				console.log(newsPost);
 		})
+
 	//post.save
 		}//if bhuTitle안에 있는 {}
+
 	})//postModel.find
+
 		});
 		
 	}//첫 if구문
+
 });
 */
 /*
@@ -3712,5 +3707,6 @@ issueModel.find({}, function(err, newPosts){
 					else 
 						console.log(issuePost);
 				})
+
 });
 */

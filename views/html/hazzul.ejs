@@ -28,6 +28,7 @@
 </script>
 <script type="text/javascript">
 var amountScrolled = 100;
+
 $(window).scroll(function() {
   if ( $(window).scrollTop() > amountScrolled ) {
     $('a.back-to-top').fadeIn('slow');
@@ -141,21 +142,24 @@ $('a.back-to-top').click(function() {
             <div class="row ">
             <div class ="text-center">
 
-       <% for(var i = 0; i <  issuepostModels.length;  i++) { %>
-       
+
+       <% for(var i = issuepostModels.length-1; i > -1 ; i--) { %>
+      
             <a class="thumbnail" href="/hazzul/<%= issuepostModels[i].id %>" style="text-decoration: none;">
             <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
                 <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
-                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length + issuepostModels[i].comments.length %></h7>&nbsp&nbsp
-                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks + issuepostModels[i].usernumClicks %></h7>&nbsp&nbsp
-                  <% if (issuepostModels[i].numClicks +issuepostModels[i].usernumClicks >15000) { %> 
-                    <b><span class="label label-danger">Hot</span></b>
-                  <% } %> 
+
+                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length %></h7>&nbsp&nbsp
+                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].myClicks  %></h7>&nbsp&nbsp
+                    
                 </div>
             </a>
-       <% }%>
+  
+
+       <% } %> 
+
        </div>
       
        </br></br>
@@ -171,7 +175,9 @@ $('a.back-to-top').click(function() {
 <a href="#" class="back-to-top">Back to Top</a>
 
 <% if (pageCount > 1) { %>  
+
 <div class ="text-center pagelayout">
+
 <ul class="pagination">  
   <% if (currentPage > 1) { %>
       <li style ="color:#000000"><a href="/?page=1">&laquo;</a></li>
@@ -200,6 +206,24 @@ $('a.back-to-top').click(function() {
 
 </div>
 </div>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10950271; 
+var sc_invisible=0; 
+var sc_security="b7184453"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="website
+statistics" href="http://statcounter.com/free-web-stats/"
+target="_blank"><img class="statcounter"
+src="//c.statcounter.com/10950271/0/b7184453/0/"
+alt="website statistics"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
 
 </body>
 </html>
