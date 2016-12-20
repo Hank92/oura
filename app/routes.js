@@ -31,7 +31,7 @@ if(req.query.search){
             pageCount = (results.total)/(results.limit);
     		pageCount = Math.ceil(pageCount);
     	    totalPosts = results.total;
-    	console.log(results.docs)
+    	//console.log(results.docs)
 
     	res.render('hazzulSearch.ejs', {
     		issuepostModels: results.docs,
@@ -54,16 +54,35 @@ if(req.query.search){
          console.log("error!!");
          console.log(err);
      } else {
-     	
+     	var args = Array.prototype.slice.call(results.docs);
+    	
+    	args = args.sort(function(a,b) {
+        if ( a.myClicks < b.myClicks )
+            return -1;
+        if ( a.myClicks > b.myClicks)
+            return 1;
+        return 0;
+    } );
+    	var sortId
+    	sortId = args.slice(0);
+    	sortId.splice(15,20);
+    	sortId = sortId.sort(function(a,b) {
+        if ( a._id < b._id )
+            return -1;
+        if ( a._id > b._id)
+            return 1;
+        return 0;
+    } );
 
     	    pageSize = results.limit;
             pageCount = (results.total)/(results.limit);
     		pageCount = Math.ceil(pageCount);
     	    totalPosts = results.total;
-    	console.log(results.docs)
+    	//console.log(results.docs)
 
     	res.render('hazzul.ejs', {
-    		issuepostModels: results.docs,
+    		issuepostModel: sortId,
+    		issuepostModels: args,
     		pageSize: pageSize,
     		pageCount: pageCount,
     		totalPosts: totalPosts,
@@ -73,52 +92,7 @@ if(req.query.search){
      });//paginate
 }	
 });
-app.get('/hazzulBest', function (req, res){
-if(req.query.search){
-	hazzulBestModel.findByTitle(req.query.search, function (err, all_pins){
-		var searchTitle = req.query.search;
-		pageSize  = 0;
-		pageCount = 0;
-		totalPosts = 0;
-		currentPage =0;
-		res.render('hazzulBest.ejs', {
-			issuepostModels: all_pins,
-			searchTitle: searchTitle,
-			pageSize: pageSize,
-    		pageCount: pageCount,
-    		totalPosts: totalPosts,
-    		currentPage: currentPage
-		})
-		
-		})
-	}
-	else {
-	var currentPage = 1;
-	if (typeof req.query.page !== 'undefined') {
-        currentPage = +req.query.page;
-    	}
-		hazzulBestModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 20 }, function(err, results) {
-         if(err){
-         console.log("error!!");
-         console.log(err);
-     } else {
-    	    pageSize = results.limit;
-            pageCount = (results.total)/(results.limit);
-    		pageCount = Math.ceil(pageCount);
-    	    totalPosts = results.total;
-    	console.log(results.docs)
 
-    	res.render('hazzulBest.ejs', {
-    		issuepostModels: results.docs,
-    		pageSize: pageSize,
-    		pageCount: pageCount,
-    		totalPosts: totalPosts,
-    		currentPage: currentPage
-    	})//res.render
-     }//else
-     });//paginate
-}	
-});
 
 app.get('/postdelete', function (req, res){
 	issueModel.find({}, function(req, docs){
@@ -136,21 +110,6 @@ app.get('/postdelete/:id/delete', function(req, res){
 	});
 });
 
-app.get('/bestdelete', function (req, res){
-	hazzulBestModel.find({}, function(req, docs){
-		res.render('hazzulBestDelete.ejs', {postModels: docs})	
-	})
-	
-})
-
-
-app.get('/bestdelete/:id/delete', function(req, res){
-	hazzulBestModel.remove({_id: req.params.id}, 
-	   function(err){
-		if(err) res.json(err);
-		else    res.redirect('/bestDelete');
-	});
-});
 
 app.get('/entertainDelete', function (req, res){
 	dailyModel.find({}, function(req, docs){
@@ -179,18 +138,28 @@ app.param('id', function(req, res, next, id){
 			});	
 });
 
+
+
 app.get('/hazzul/:id', function(req, res){
 	var postId = req.postId;
 	postId.usernumClicks += Math.floor((Math.random() * 10) + 1);	
 	postId.myClicks += 1;
+	
 	postId.save(function (err, data){
 		if (err) res.send(err)
 		else
-			res.render('individualHazzul.ejs', {issuepostModel: postId});
+	issueModel.find({_id: {$lt: postId._id}}).sort({_id: -1}).limit(5).exec(function(err, results) {
+	
+	var prevId = results;
+	console.log(results)
+			res.render('individualHazzul.ejs', {issuepostModel: postId, previousModel: prevId });
 	})
 
-	console.log(postId)//finds the matching object
-});
+	
+	})
+	
+	
+})
 
 
 
@@ -203,17 +172,6 @@ app.param('id', function(req, res, next, id){
 				next();
 			}
 			});	
-});
-
-app.get('/hazzulBest/:id', function(req, res){
-	var postId = req.dailypostId;
-	postId.usernumClicks += Math.floor((Math.random() * 10) + 1);
-	postId.myClicks += 1;	
-	postId.save(function (err, data){
-		if (err) res.send(err)
-		else
-	res.render('individualHazzulBest.ejs', {issuepostModel: postId});
-	})
 });
 
 /*
@@ -249,86 +207,12 @@ app.post('/:id/post/hazzul', function (req, res){
 
 }) //app.post  
 
-app.post('/:id/post/hazzulBest', function (req, res){
-	hazzulBestModel.find({_id: req.params.id}, function(err, item){
-		if(err) return next("error finding blog post.");
-		item[0].userComments.push({userPost : req.body.userPost})
-		item[0].save(function(err, data){
-			if (err) res.send(err)
-			else 
-				res.redirect('/hazzulBest/'+req.params.id )
-		});
-	})
-
-}) //app.post 
 
 
 };
 
 
 
-/*
-request('http://fbissuebox.com/category/1', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('.list-item').each(function(){
-		var issueTitle = $(this).find('h5.title').text();
-		var newHref = $(this).find('a').attr('href');
-		var issueUrl = "http://fbissuebox.com"+ newHref;
-		console.log(issueUrl);
-			request(issueUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var image_url = [];
-
-				$('#content img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url);	
-				})
-
-				$('#content p img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url);	
-				})
-
-				// scrape al\ the images for the post
-				issueModel.find({title: issueTitle}, function(err, newPosts){
-				
-				if (!newPosts.length){
-					//save data in Mongodb
-
-					var issuePost = new issueModel({
-						title: issueTitle,
-						url: issueUrl,
-						img_url: image_url
-					})
-					issuePost.save(function(error){
-							if(error){
-								console.log(error);
-							}
-							else 
-								console.log(issuePost);
-					})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-*/
 
 
 
@@ -344,12 +228,6 @@ request('http://fbissuebox.com/category/1', function(err, res, body){
 
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
-// http://www.ilbegarage.com/ilbe/9698199
-//http://www.jjang0u.com/
-//http://romeo1052.net/xe/STAR/128786
-//http://www.wassupfun.com/
-//http://brozforce.com/
-//ddanzi.com
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
 request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=1', function(err, res, body){
@@ -3187,526 +3065,3 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 	}//첫 if구문
 
 });
-
-request('http://www.issuein.com', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('td.title').each(function(){
-		var issueTitle = $(this).find('a.hx').text();
-		var newHref = $(this).find('a').attr('href');
-		var issueUrl = "http://www.issuein.com"+ newHref;
-	 	
-			request(issueUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var comments = [];
-				var image_url = [];
-				var video_url = [];
-				var image_comment = [];
-
-				$('article div img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url)
-				})
-
-				if (image_url.length == 0)
-				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
-				image_url.push(img_url)
-
-				$('div embed').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);
-				})
-
-				$("li.fdb_itm").each(function(){
-						var content =  $(this).find(".xe_content").text();	
-						comments.push({content: content});
-					})//scrape all the comments for the post
-
-				var repeatedImg = image_url[0];
-				var numClicks = Math.floor((Math.random() * 1000) + 1);
-				// scrape all the images for the post
-				var repeatedImg = image_url[0];
-				console.log(repeatedImg);
-
-				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				if (newPosts.length == 0 && image_url[0].indexOf("./files/attach") !== 0 && image_url[0].indexOf("http://www.issuein.com/files/attach") !== 0  && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
-					//save data in Mongodb
-
-					var issuePost = new issueModel({
-						title: issueTitle,
-						url: issueUrl,
-						img_url: image_url,
-						video_url:video_url,
-						comments: comments,
-						numClicks: numClicks
-					
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(numClicks);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-
-
-request('http://issuein.com/index.php?mid=index&page=2', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('td.title').each(function(){
-		var issueTitle = $(this).find('a.hx').text();
-		var newHref = $(this).find('a').attr('href');
-		var issueUrl = "http://www.issuein.com"+ newHref;
-	 	
-			request(issueUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var comments = [];
-				var image_url = [];
-				var video_url = [];
-				var image_comment = [];
-
-				$('article div img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url)
-					/*
-					if(img_url.indexOf("http://cdn.ddanzi.com/201611-images/142723302.gif") == -1 ) {
-						image_url.push(img_url);	
-					}
-					*/
-				})
-
-				if (image_url.length == 0)
-				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
-				image_url.push(img_url)
-
-				$('div embed').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);
-				})
-
-				$("li.fdb_itm").each(function(){
-						var content =  $(this).find(".xe_content").text();	
-						comments.push({content: content});
-					})//scrape all the comments for the post
-
-				var repeatedImg = image_url[0];
-				var numClicks = Math.floor((Math.random() * 1000) + 1);
-				// scrape all the images for the post
-				var repeatedImg = image_url[0];
-				console.log(repeatedImg);
-
-				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				if (newPosts.length == 0 && image_url[0].indexOf("./files/attach") !== 0 && image_url[0].indexOf("http://www.issuein.com/files/attach") !== 0  && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
-					//save data in Mongodb
-
-					var issuePost = new issueModel({
-						title: issueTitle,
-						url: issueUrl,
-						img_url: image_url,
-						video_url:video_url,
-						comments: comments,
-						numClicks: numClicks
-					
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(numClicks);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-
-request('http://issuein.com/index.php?mid=index&page=3', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('td.title').each(function(){
-		var issueTitle = $(this).find('a.hx').text();
-		var newHref = $(this).find('a').attr('href');
-		var issueUrl = "http://www.issuein.com"+ newHref;
-	 	
-			request(issueUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var comments = [];
-				var image_url = [];
-				var video_url = [];
-				var image_comment = [];
-
-				$('article div img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url)
-					/*
-					if(img_url.indexOf("http://cdn.ddanzi.com/201611-images/142723302.gif") == -1 ) {
-						image_url.push(img_url);	
-					}
-					*/
-
-				})
-
-				if (image_url.length == 0)
-				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
-				image_url.push(img_url)
-
-				$('div embed').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);
-				})
-
-				$("li.fdb_itm").each(function(){
-						var content =  $(this).find(".xe_content").text();	
-						comments.push({content: content});
-					})//scrape all the comments for the post
-
-				var repeatedImg = image_url[0];
-				var numClicks = Math.floor((Math.random() * 1000) + 1);
-				// scrape all the images for the post
-				var repeatedImg = image_url[0];
-				console.log(repeatedImg);
-
-				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				if (newPosts.length == 0 && image_url[0].indexOf("./files/attach") !== 0 && image_url[0].indexOf("http://www.issuein.com/files/attach") !== 0  && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
-					//save data in Mongodb
-
-					var issuePost = new issueModel({
-						title: issueTitle,
-						url: issueUrl,
-						img_url: image_url,
-						video_url:video_url,
-						comments: comments,
-						numClicks: numClicks
-					
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(numClicks);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-request('http://issuein.com/index.php?mid=index&page=4', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('td.title').each(function(){
-		var issueTitle = $(this).find('a.hx').text();
-		var newHref = $(this).find('a').attr('href');
-		var issueUrl = "http://www.issuein.com"+ newHref;
-	 	
-			request(issueUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var comments = [];
-				var image_url = [];
-				var video_url = [];
-				var image_comment = [];
-
-				$('article div img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url)
-					/*
-					if(img_url.indexOf("http://cdn.ddanzi.com/201611-images/142723302.gif") == -1 ) {
-						image_url.push(img_url);	
-					}
-					*/
-
-				})
-
-				if (image_url.length == 0)
-				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
-				image_url.push(img_url)
-
-				$('div embed').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);
-				})
-
-				$("li.fdb_itm").each(function(){
-						var content =  $(this).find(".xe_content").text();	
-						comments.push({content: content});
-					})//scrape all the comments for the post
-
-				var repeatedImg = image_url[0];
-				var numClicks = Math.floor((Math.random() * 1000) + 1);
-				// scrape all the images for the post
-				var repeatedImg = image_url[0];
-				console.log(repeatedImg);
-
-				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				if (newPosts.length == 0 && image_url[0].indexOf("./files/attach") !== 0 && image_url[0].indexOf("http://www.issuein.com/files/attach") !== 0  && image_url[0].indexOf("http://issuein.com/files/attach") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
-					//save data in Mongodb
-
-					var issuePost = new issueModel({
-						title: issueTitle,
-						url: issueUrl,
-						img_url: image_url,
-						video_url:video_url,
-						comments: comments,
-						numClicks: numClicks
-					
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(numClicks);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-
-/*
-request('http://ggoorr.com/gg', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('td.title').each(function(){
-		var issueTitle = $(this).find('a').text();
-		var newHref = $(this).find('a').attr('href');
-		var issueUrl = "http://ggoorr.com/"+ newHref;
-	 	
-			request(issueUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var image_url = [];
-				var video_url = [];
-
-				$('.rd_body img').each(function(){
-					var img_url = $(this).attr('src');
-					image_url.push(img_url);	
-				})
-
-				if (image_url.length == 0)
-				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
-				image_url.push(img_url)
-
-				$('.rd_body iframe').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);
-				})
-
-				// scrape all the images for the post
-				issueModel.find({title: issueTitle}, function(err, newPosts){
-				
-				if (!newPosts.length){
-					//save data in Mongodb
-
-					var issuePost = new issueModel({
-						title: issueTitle,
-						url: issueUrl,
-						img_url: image_url,
-						video_url:video_url
-					
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(issuePost);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-	}//첫 if구문
-
-});
-*/
-/*
-request('https://www.reddit.com/r/funny/rising/', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		$('.thing','#siteTable').each(function(){
-		var title = $(this).find('a.title').text();
-		var url = $(this).find('a').attr('href');
-		var img =$(this).find('img').attr('src');
-	 	var length = 75;
-		var trimmedtitle = title.substring(0, length);
-		if (url.indexOf("/r/") >= 0) {
-			url = "https://www.reddit.com" +url  
-		}
-
-			
-		newsModel.find({image_url: img}, function(err, newPosts){
-		
-		if (!newPosts.length && (img !==undefined) ){
-			//save data in Mongodb
-
-			var newsPost = new newsModel({
-				title: trimmedtitle,
-				url: url,
-				image_url: img
-			})
-	newsPost.save(function(error){
-			if(error){
-				console.log(error);
-			}
-			else 
-				console.log(newsPost);
-		})
-
-	//post.save
-		}//if bhuTitle안에 있는 {}
-
-	})//postModel.find
-
-		});
-		
-	}//첫 if구문
-
-});
-*/
-/*
-request('http://dc.cozo.me/link', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-		
-
-		$('.link').each(function(){
-		
-		var url = $(this).attr('href');
-		var img =$(this).find('img').attr('src');
-		var title = $(this).find('.title').text();
-		
-	// scrape all the images for the post
-		newsModel.find({image_url: img}, function(err, newPosts){
-		
-		if (!newPosts.length && (img !==undefined) ){
-			//save data in Mongodb
-			var newsPost = new newsModel({
-				title: title,
-				url: url,
-				image_url: img
-			})
-	newsPost.save(function(error){
-			if(error){
-				console.log(error);
-			}
-			else 
-				console.log(newsPost);
-		})
-
-	//post.save
-		}//if bhuTitle안에 있는 {}
-
-	})//postModel.find
-
-		});
-		
-	}//첫 if구문
-
-});
-*/
-/*
-issueModel.find({}, function(err, newPosts){
-				
-					//save data in Mongodb
-					var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png";
-					var title = "요즘 언더에서 뜨는 힙합 그룹";
-					var video_url ="http://www.youtube.com/embed/BWixa5Y1E-Y";
-					var issuePost = new issueModel({
-						title: title,
-						img_url: img_url,
-						video_url:video_url
-					
-					})
-			issuePost.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(issuePost);
-				})
-
-});
-*/
