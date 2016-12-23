@@ -140,8 +140,9 @@ app.param('id', function(req, res, next, id){
 
 
 
-app.get('/hazzul/:id', function(req, res){
+app.get('/:page/:id', function(req, res){
 	var postId = req.postId;
+	var pageNum = req.params.page;
 	postId.usernumClicks += Math.floor((Math.random() * 10) + 1);	
 	postId.myClicks += 1;
 	
@@ -152,7 +153,7 @@ app.get('/hazzul/:id', function(req, res){
 	
 	var prevId = results;
 	console.log(results)
-			res.render('individualHazzul.ejs', {issuepostModel: postId, previousModel: prevId });
+			res.render('individualHazzul.ejs', {issuepostModel: postId, previousModel: prevId, pageNum: pageNum });
 	})
 
 	

@@ -156,7 +156,7 @@ $('a.back-to-top').click(function() {
         
              <% if (i > 14 && i != 19) { %> 
              
-              <a class="thumbnailHot" href="/hazzul/<%= issuepostModels[i].id %>" style="text-decoration: none;">
+               <a class="thumbnail" href="/<%= currentPage %>/<%= issuepostModels[i].id %>" style="text-decoration: none;">
 
             <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
                 <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
@@ -177,7 +177,7 @@ $('a.back-to-top').click(function() {
             <% if (i == 19) { %> 
 
             
-              <a class="thumbnailBest" href="/hazzul/<%= issuepostModels[i].id %>" style="text-decoration: none;">
+               <a class="thumbnail" href="/<%= currentPage %>/<%= issuepostModels[i].id %>" style="text-decoration: none;">
 
             <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
                 <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
@@ -203,7 +203,7 @@ $('a.back-to-top').click(function() {
 
 <% for(var i = issuepostModel.length-1; i > -1 ; i--) { %>
 
-              <a class="thumbnail" href="/hazzul/<%= issuepostModel[i].id %>" style="text-decoration: none;">
+              <a class="thumbnail" href="/<%= currentPage %>/<%= issuepostModel[i].id %>" style="text-decoration: none;">
 
             <h7><%= issuepostModel[i].posted.toLocaleDateString() %></h7>
                 <img class="img-responsive" src="<%= issuepostModel[i].img_url[0] || issuepostModel[i].img_url[1] || issuepostModel[i].video_url[1] %>" alt="이미지 로딩중...">
