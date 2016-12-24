@@ -296,7 +296,7 @@ html,body{
 
 .thumbnail {
    width: 203px;
-   height: 255px;
+   height: 275px;
    overflow: auto;
    margin: 20px;
    border:1px solid #3f3f3f;
@@ -313,7 +313,7 @@ html,body{
 
 .thumbnailHot {
    width: 203px;
-   height: 255px;
+   height: 275px;
    overflow: auto;
    margin: 20px;
    border:1px solid #3f3f3f;
@@ -330,7 +330,7 @@ html,body{
 
 .thumbnailBest {
    width: 203px;
-   height: 255px;
+   height: 275px;
    overflow: auto;
    margin: 20px;
    border:1px solid #3f3f3f;
