@@ -295,7 +295,7 @@ html,body{
 .thumbnail img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnail {
-   width: 203px;
+   width: 223px;
    height: 275px;
    overflow: auto;
    margin: 20px;
@@ -303,7 +303,7 @@ html,body{
  }
 
 .thumbnail > img {
-   width: 198px;
+   width: 223px;
    height: 172px;
 
  }
@@ -312,7 +312,7 @@ html,body{
 .thumbnailHot img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnailHot {
-   width: 203px;
+   width: 223px;
    height: 275px;
    overflow: auto;
    margin: 20px;
@@ -320,7 +320,7 @@ html,body{
  }
 
 .thumbnailHot > img {
-   width: 198px;
+   width: 223px;
    height: 172px;
 
  }
@@ -329,7 +329,7 @@ html,body{
 .thumbnailBest img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnailBest {
-   width: 203px;
+   width: 223px;
    height: 275px;
    overflow: auto;
    margin: 20px;
@@ -337,7 +337,7 @@ html,body{
  }
 
 .thumbnailBest > img {
-   width: 198px;
+   width: 223px;
    height: 172px;
 
  }
@@ -392,7 +392,7 @@ h7 {
 
 
 #search {
-  width: 700px;
+  width: 300px;
   height: 40px;
   background: #2b303b;
   border: none;
@@ -565,7 +565,7 @@ h7 {
 
 .thumbnail {
    width: 195px;
-   height: 275px;
+   height: 280px;
    overflow: auto;
    margin: 20px;
    border:1px solid #3f3f3f;
@@ -582,7 +582,7 @@ h7 {
 
 .thumbnailHot {
    width: 195px;
-   height: 275px;
+   height: 280px;
    overflow: auto;
    margin: 20px;
    border:1px solid #3f3f3f;
@@ -599,7 +599,7 @@ h7 {
 
 .thumbnailBest {
    width: 195px;
-   height: 275px;
+   height: 280px;
    overflow: auto;
    margin: 20px;
    border:1px solid #3f3f3f;
@@ -648,6 +648,20 @@ h7 {
   font-family: Book Antiqua, serif;
   font-size:10px;
 
+}
+
+#search {
+  width: 700px;
+  height: 40px;
+  background: #2b303b;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: #fff;
+  padding-left: 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 }
