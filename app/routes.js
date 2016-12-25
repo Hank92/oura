@@ -175,34 +175,15 @@ app.param('id', function(req, res, next, id){
 			});	
 });
 
-/*
-app.param('id', function(req, res, next, id){
-	postModel.findById(id, function(err, docs){
-		if(err) res.json(err);
-		else
-			{
-				req.mainpostId = docs;
-				next();
-			}
-			});	
-});
-
-app.get('/mbong19/:id', function(req, res){
-	   res.render('individualmbong19.ejs', {postModel: req.mainpostId});
-	   console.log(req.mainpostId)
-	})
-	
-	//finds the matching object
-
-*/
-app.post('/:id/post/hazzul', function (req, res){
+app.post('/:id/:page/hazzul', function (req, res){
+	var pageNum = req.params.page;
 	issueModel.find({_id: req.params.id}, function(err, item){
 		if(err) return next("error finding blog post.");
 		item[0].userComments.push({userPost : req.body.userPost})
 		item[0].save(function(err, data){
 			if (err) res.send(err)
 			else 
-				res.redirect('/hazzul/'+req.params.id )
+				res.redirect('/' + pageNum + '/'+req.params.id )
 		});
 	})
 

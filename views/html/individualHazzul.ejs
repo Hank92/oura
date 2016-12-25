@@ -26,7 +26,6 @@
     <link rel='shortcut icon' href='/images/Favicon.ico' type='image/x-icon'/ >
 
 
-
 </head>
 
 <body>
@@ -95,7 +94,7 @@
       </a>
       </a>
       <div class="comment-body">
-        <form name ="myForm" role="form" method="post" action="/<%= issuepostModel.id %>/post/hazzul"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
+        <form name ="myForm" role="form" method="post" action="/<%= issuepostModel.id %>/<%= pageNum[0] %>/hazzul"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
     <div class="form-group">
     <div class ="text">
       <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="5" id="comment" required></textarea>
