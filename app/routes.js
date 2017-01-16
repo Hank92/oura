@@ -41,7 +41,7 @@ if(req.query.search){
     		totalPosts: totalPosts,
     		currentPage: currentPage
     	})//res.render
-		
+
 })
 	}
 	else {
@@ -55,7 +55,7 @@ if(req.query.search){
          console.log(err);
      } else {
      	var args = Array.prototype.slice.call(results.docs);
-    	
+
     	args = args.sort(function(a,b) {
         if ( a.myClicks < b.myClicks )
             return -1;
@@ -90,20 +90,28 @@ if(req.query.search){
     	})//res.render
      }//else
      });//paginate
-}	
+}
 });
 
 
 app.get('/postdelete', function (req, res){
 	issueModel.find({}, function(req, docs){
-		res.render('dramaDelete.ejs', {postModels: docs})	
+		res.render('dramaDelete.ejs', {postModels: docs})
 	})
-	
+
 })
 
+/*
+app.get('/postdelete', function (req, res){
+	issueModel.remove({}, function(err){
+ if(err) res.json(err);
+ else    res.redirect('/postDelete');
+});
+});
+*/
 
 app.get('/postdelete/:id/delete', function(req, res){
-	issueModel.remove({_id: req.params.id}, 
+	issueModel.remove({_id: req.params.id},
 	   function(err){
 		if(err) res.json(err);
 		else    res.redirect('/postDelete');
@@ -113,13 +121,13 @@ app.get('/postdelete/:id/delete', function(req, res){
 
 app.get('/entertainDelete', function (req, res){
 	dailyModel.find({}, function(req, docs){
-		res.render('entertaindelete.ejs', {postModels: docs})	
+		res.render('entertaindelete.ejs', {postModels: docs})
 	})
 })
 
 
 app.get('/entertainDelete/:id/delete', function(req, res){
-	dailyModel.remove({_id: req.params.id}, 
+	dailyModel.remove({_id: req.params.id},
 	   function(err){
 		if(err) res.json(err);
 		else    res.redirect('/entertainDelete');
@@ -135,7 +143,7 @@ app.param('id', function(req, res, next, id){
 				req.postId = docs;
 				next();
 			}
-			});	
+			});
 });
 
 
@@ -143,23 +151,23 @@ app.param('id', function(req, res, next, id){
 app.get('/:page/:id', function(req, res){
 	var postId = req.postId;
 	var pageNum = req.params.page;
-	postId.usernumClicks += Math.floor((Math.random() * 10) + 1);	
+	postId.usernumClicks += Math.floor((Math.random() * 10) + 1);
 	postId.myClicks += 1;
-	
+
 	postId.save(function (err, data){
 		if (err) res.send(err)
 		else
 	issueModel.find({_id: {$lt: postId._id}}).sort({_id: -1}).limit(5).exec(function(err, results) {
-	
+
 	var prevId = results;
 	console.log(results)
 			res.render('individualHazzul.ejs', {issuepostModel: postId, previousModel: prevId, pageNum: pageNum });
 	})
 
-	
+
 	})
-	
-	
+
+
 })
 
 
@@ -172,7 +180,7 @@ app.param('id', function(req, res, next, id){
 				req.dailypostId = docs;
 				next();
 			}
-			});	
+			});
 });
 
 app.post('/:id/:page/hazzul', function (req, res){
@@ -182,12 +190,12 @@ app.post('/:id/:page/hazzul', function (req, res){
 		item[0].userComments.push({userPost : req.body.userPost})
 		item[0].save(function(err, data){
 			if (err) res.send(err)
-			else 
+			else
 				res.redirect('/' + pageNum + '/'+req.params.id )
 		});
 	})
 
-}) //app.post  
+}) //app.post
 
 
 
@@ -213,11 +221,11 @@ app.post('/:id/:page/hazzul', function (req, res){
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
 request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=1', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg0').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -229,8 +237,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=1', function(err, res
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -240,16 +248,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=1', function(err, res
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -264,234 +272,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=1', function(err, res
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
-				})
-				
-				// scrape all the videos for the post
-				
-					$("[style *= 'line-height: 180%']").each(function(){
-						var content =  $(this).text();
-						if (content.indexOf("엠봉") >= 0) {
-						content = content.replace("엠봉", "하즐");
-						comments.push({content: content});
-						} 	
-						comments.push({content: content});
-					})//scrape all the comments for the post
-
-					comments.splice(0,1)
-
-				var repeatedImg = image_url[0];	
-				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
-				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
-					//save data in Mongodb
-
-					var Post = new issueModel({
-						title: bhuTitle,
-						url: bhuUrl,
-						img_url: image_url,
-						video_url: video_url,
-						img_comment: image_comment,
-						comments: comments,
-						numClicks: numClicks
-					})
-			Post.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(Post);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-		
-		$('.bg1').each(function(){
-		var bhuTitle = $(this).find('td.subject a font').text();
-		var numClicks = $(this).find('td.hit').text();
-		if (bhuTitle.indexOf("엠봉") >= 0) {
-			bhuTitle = bhuTitle.replace("엠봉", "하즐");
-			}
-		var newHref = $(this).find('a').attr('href');
-		newHref = newHref.replace("≀","&");
-		newHref = newHref.replace("id","wr_id");
-		newHref = newHref.replace("..",".");
-		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
-			request(bhuUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var comments = [];
-				var image_url = [];
-				var video_url = [];
-				var image_comment = [];
-
-				$('span div img').each(function(){
-					
-					var img_url = $(this).attr('src');
-					image_url.push(img_url);
-				
-				})
-
-				$('span div p').each(function(){
-					var img_comments = $(this).text();
-					image_comment.push(img_comments);
-					
-				})
-
-				// scrape all the images for the post
-				if (image_url.length == 0)
-				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
-				image_url.push(img_url)
-
-				$('span div embed').each(function(){
 					var vid_url = $(this).attr('src');
 					video_url.push(vid_url);
 				})
 
-				$('span div iframe').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
-				})
-
-				$('video source').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
-				})
-				
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
-						comments.push({content: content});
-					})//scrape all the comments for the post
-
-					comments.splice(0,1)
-
-			var repeatedImg = image_url[0];
-
-			
-			issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
-				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
-					//save data in Mongodb
-
-					var Post = new issueModel({
-						title: bhuTitle,
-						url: bhuUrl,
-						img_url: image_url,
-						img_comment: image_comment,
-						video_url: video_url,
-						comments: comments,
-						numClicks: numClicks
-					})
-			Post.save(function(error){
-					if(error){
-						console.log(error);
-					}
-					else 
-						console.log(Post);
-				})
-
-			//post.save
-				}//if bhuTitle안에 있는 {}
-
-			})//postModel.find
-			
-
-			}//if문
-
-			})//request
-
-			
-		});
-
-	}//첫 if구문
-
-});
-
-request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, res, body){
-	
-	if(!err && res.statusCode == 200) {
-		
-		var $ = cheerio.load(body);
-	
-		$('.bg0').each(function(){
-		var bhuTitle = $(this).find('td.subject a font').text();
-		var numClicks = $(this).find('td.hit').text();
-		if (bhuTitle.indexOf("엠봉") >= 0) {
-			bhuTitle = bhuTitle.replace("엠봉", "하즐");
-			}
-		var newHref = $(this).find('a').attr('href');
-		newHref = newHref.replace("≀","&");
-		newHref = newHref.replace("id","wr_id");
-		newHref = newHref.replace("..",".");
-		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
-			request(bhuUrl, function(err, res, body){
-				if(!err && res.statusCode == 200) {
-				var $ = cheerio.load(body);
-				var comments = [];
-				var image_url = [];
-				var video_url = [];
-				var image_comment = [];
-
-				$('span div img').each(function(){
-					
-					var img_url = $(this).attr('src');
-					image_url.push(img_url);
-				
-				})
-
-				// scrape all the images for the post
-				if (image_url.length == 0)
-				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
-				image_url.push(img_url)
-
-				$('span div embed').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);
-				})
-
-				$('span div iframe').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
-				})
-
-				$('video source').each(function(){
-					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
-				})
-				
-				// scrape all the videos for the post
-				
-					$("[style *= 'line-height: 180%']").each(function(){
-						var content =  $(this).text();
-						if (content.indexOf("엠봉") >= 0) {
-						content = content.replace("엠봉", "하즐");
-						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -499,7 +295,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 
 				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -508,6 +304,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 						url: bhuUrl,
 						img_url: image_url,
 						video_url: video_url,
+						img_comment: image_comment,
 						comments: comments,
 						numClicks: numClicks
 					})
@@ -515,7 +312,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -523,15 +320,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
+
 		$('.bg1').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -543,8 +340,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -554,10 +351,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
+				})
+
+				$('span div p').each(function(){
+					var img_comments = $(this).text();
+					image_comment.push(img_comments);
+
 				})
 
 				// scrape all the images for the post
@@ -572,30 +375,139 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
 					comments.splice(0,1)
 
-				var repeatedImg = image_url[0];	
+			var repeatedImg = image_url[0];
+
+
+			issueModel.find({img_url: repeatedImg}, function(err, newPosts){
+
+				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+					//save data in Mongodb
+
+					var Post = new issueModel({
+						title: bhuTitle,
+						url: bhuUrl,
+						img_url: image_url,
+						img_comment: image_comment,
+						video_url: video_url,
+						comments: comments,
+						numClicks: numClicks
+					})
+			Post.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else
+						console.log(Post);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+
+
+			}//if문
+
+			})//request
+
+
+		});
+
+	}//첫 if구문
+
+});
+
+request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, res, body){
+
+	if(!err && res.statusCode == 200) {
+
+		var $ = cheerio.load(body);
+
+		$('.bg0').each(function(){
+		var bhuTitle = $(this).find('td.subject a font').text();
+		var numClicks = $(this).find('td.hit').text();
+		if (bhuTitle.indexOf("엠봉") >= 0) {
+			bhuTitle = bhuTitle.replace("엠봉", "하즐");
+			}
+		var newHref = $(this).find('a').attr('href');
+		newHref = newHref.replace("≀","&");
+		newHref = newHref.replace("id","wr_id");
+		newHref = newHref.replace("..",".");
+		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
+
+
+			request(bhuUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var comments = [];
+				var image_url = [];
+				var video_url = [];
+				var image_comment = [];
+
+				$('span div img').each(function(){
+
+					var img_url = $(this).attr('src');
+					image_url.push(img_url);
+
+				})
+
+				// scrape all the images for the post
+				if (image_url.length == 0)
+				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
+				image_url.push(img_url)
+
+				$('span div embed').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				$('span div iframe').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				$('video source').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				// scrape all the videos for the post
+
+					$("[style *= 'line-height: 180%']").each(function(){
+						var content =  $(this).text();
+						if (content.indexOf("엠봉") >= 0) {
+						content = content.replace("엠봉", "하즐");
+						comments.push({content: content});
+						}
+						comments.push({content: content});
+					})//scrape all the comments for the post
+
+					comments.splice(0,1)
+
+				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -611,7 +523,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -619,13 +531,109 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
+		});
+
+		$('.bg1').each(function(){
+		var bhuTitle = $(this).find('td.subject a font').text();
+		var numClicks = $(this).find('td.hit').text();
+		if (bhuTitle.indexOf("엠봉") >= 0) {
+			bhuTitle = bhuTitle.replace("엠봉", "하즐");
+			}
+		var newHref = $(this).find('a').attr('href');
+		newHref = newHref.replace("≀","&");
+		newHref = newHref.replace("id","wr_id");
+		newHref = newHref.replace("..",".");
+		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
+
+
+			request(bhuUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var comments = [];
+				var image_url = [];
+				var video_url = [];
+				var image_comment = [];
+
+				$('span div img').each(function(){
+
+					var img_url = $(this).attr('src');
+					image_url.push(img_url);
+
+				})
+
+				// scrape all the images for the post
+				if (image_url.length == 0)
+				var img_url = "http://road2himachal.travelexic.com/images/Video-Icon-crop.png"
+				image_url.push(img_url)
+
+				$('span div embed').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				$('span div iframe').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				$('video source').each(function(){
+					var vid_url = $(this).attr('src');
+					video_url.push(vid_url);
+				})
+
+				// scrape all the videos for the post
+
+					$("[style *= 'line-height: 180%']").each(function(){
+						var content =  $(this).text();
+						if (content.indexOf("엠봉") >= 0) {
+						content = content.replace("엠봉", "하즐");
+						comments.push({content: content});
+						}
+						comments.push({content: content});
+					})//scrape all the comments for the post
+
+					comments.splice(0,1)
+
+				var repeatedImg = image_url[0];
+				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
+
+				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
+					//save data in Mongodb
+
+					var Post = new issueModel({
+						title: bhuTitle,
+						url: bhuUrl,
+						img_url: image_url,
+						video_url: video_url,
+						comments: comments,
+						numClicks: numClicks
+					})
+			Post.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else
+						console.log(Post);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+
+
+			}//if문
+
+			})//request
+
+
 		});
 
 	}//첫 if구문
@@ -641,11 +649,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=1', function(err, re
 
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg0').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -657,8 +665,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -668,16 +676,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -692,22 +700,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -715,7 +723,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 
 				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -732,7 +740,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -740,15 +748,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
+
 		$('.bg1').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -760,8 +768,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -771,16 +779,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -795,22 +803,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -818,7 +826,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 
 				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -835,7 +843,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -843,13 +851,13 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
 
 	}//첫 if구문
@@ -857,11 +865,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=2', function(err, re
 });
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg0').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -873,8 +881,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -884,16 +892,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -908,22 +916,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -931,7 +939,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 
 				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -948,7 +956,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -956,15 +964,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
+
 		$('.bg1').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -976,8 +984,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -987,16 +995,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -1011,22 +1019,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -1035,7 +1043,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 				var repeatedImg = image_url[0];
 
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -1052,7 +1060,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -1060,13 +1068,13 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
 
 	}//첫 if구문
@@ -1074,11 +1082,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=3', function(err, re
 });
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg0').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -1090,8 +1098,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -1101,16 +1109,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -1125,22 +1133,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -1148,7 +1156,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 
 				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -1165,7 +1173,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -1173,15 +1181,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
+
 		$('.bg1').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -1193,8 +1201,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -1204,16 +1212,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -1228,22 +1236,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -1268,7 +1276,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -1276,13 +1284,13 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
 
 	}//첫 if구문
@@ -1290,11 +1298,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=4', function(err, re
 });
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg0').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -1306,8 +1314,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -1317,16 +1325,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -1341,22 +1349,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -1364,9 +1372,9 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 
 				var repeatedImg = image_url[0];
 
-			
+
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -1383,7 +1391,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -1391,15 +1399,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
+
 		$('.bg1').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -1411,8 +1419,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -1422,16 +1430,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -1446,22 +1454,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -1469,7 +1477,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 
 				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -1486,7 +1494,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -1494,13 +1502,13 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
 
 	}//첫 if구문
@@ -1508,11 +1516,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=5', function(err, re
 });
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg0').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -1524,8 +1532,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -1535,16 +1543,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_url.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -1559,22 +1567,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -1582,9 +1590,9 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 
 				var repeatedImg = image_url[0];
 
-			
+
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -1601,7 +1609,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -1609,15 +1617,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
+
 		$('.bg1').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -1629,8 +1637,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -1640,16 +1648,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_url.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -1664,22 +1672,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -1687,7 +1695,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 
 				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -1704,7 +1712,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -1712,13 +1720,13 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
 
 	}//첫 if구문
@@ -1726,11 +1734,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=2', function(err, res
 });
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg0').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -1742,8 +1750,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -1753,16 +1761,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -1777,22 +1785,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -1800,7 +1808,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 
 				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -1817,7 +1825,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -1825,15 +1833,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
+
 		$('.bg1').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -1845,8 +1853,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -1856,15 +1864,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -1879,30 +1887,30 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
 					comments.splice(0,1)
 
-				var repeatedImg = image_url[0];		
+				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -1919,7 +1927,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -1927,13 +1935,13 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
 
 	}//첫 if구문
@@ -1941,11 +1949,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free2&page=6', function(err, re
 });
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg0').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -1957,8 +1965,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -1968,16 +1976,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 				// scrape all the images for the post
 				if (image_url.length == 0)
@@ -1991,22 +1999,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -2014,7 +2022,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 
 				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -2031,7 +2039,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -2039,15 +2047,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
+
 		$('.bg1').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -2059,8 +2067,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -2070,16 +2078,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -2094,22 +2102,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -2117,7 +2125,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 
 				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -2134,7 +2142,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -2142,13 +2150,13 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
 
 	}//첫 if구문
@@ -2156,11 +2164,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=3', function(err, res
 });
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg0').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -2172,8 +2180,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -2183,16 +2191,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -2207,22 +2215,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -2230,7 +2238,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 
 				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -2247,7 +2255,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -2255,15 +2263,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
+
 		$('.bg1').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -2275,8 +2283,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -2286,16 +2294,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -2310,22 +2318,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -2333,7 +2341,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 
 				var repeatedImg = image_url[0];
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -2350,7 +2358,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -2358,13 +2366,13 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
 
 	}//첫 if구문
@@ -2372,11 +2380,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=4', function(err, res
 });
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg0').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -2388,8 +2396,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -2399,16 +2407,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -2423,22 +2431,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -2447,7 +2455,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 				var repeatedImg = image_url[0];
 
 				issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 
 					//save data in Mongodb
@@ -2465,7 +2473,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -2473,15 +2481,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
+
 		$('.bg1').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -2493,8 +2501,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -2504,16 +2512,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -2528,22 +2536,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -2551,7 +2559,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 
 			var repeatedImg = image_url[0];
 			issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -2568,7 +2576,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -2576,13 +2584,13 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
 
 	}//첫 if구문
@@ -2590,11 +2598,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=5', function(err, res
 });
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg0').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -2606,8 +2614,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -2617,16 +2625,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -2641,22 +2649,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -2664,7 +2672,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 
 			var repeatedImg = image_url[0];
 			issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -2681,7 +2689,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -2689,15 +2697,15 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
+
 		$('.bg1').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -2709,8 +2717,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -2720,16 +2728,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 				var video_url = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -2744,22 +2752,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -2767,7 +2775,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 
 			var repeatedImg = image_url[0];
 			issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -2784,7 +2792,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -2792,13 +2800,13 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
 
 	}//첫 if구문
@@ -2806,11 +2814,11 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=free&page=6', function(err, res
 });
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg0').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -2822,8 +2830,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -2833,16 +2841,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				// scrape all the images for the post
@@ -2857,7 +2865,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('.ytp-title-link').each(function(){
@@ -2867,17 +2875,17 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -2885,7 +2893,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 
 			var repeatedImg = image_url[0];
 			issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -2902,7 +2910,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -2910,27 +2918,27 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
-		
+
+
 
 	}//첫 if구문
 
 });
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body){
-	
+
 	if(!err && res.statusCode == 200) {
-		
+
 		var $ = cheerio.load(body);
-	
+
 		$('.bg1').each(function(){
 		var bhuTitle = $(this).find('td.subject a font').text();
 		var numClicks = $(this).find('td.hit').text();
@@ -2942,8 +2950,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 		newHref = newHref.replace("id","wr_id");
 		newHref = newHref.replace("..",".");
 		var bhuUrl = "http://www.bhu.co.kr"+ newHref;
-		
-	 	
+
+
 			request(bhuUrl, function(err, res, body){
 				if(!err && res.statusCode == 200) {
 				var $ = cheerio.load(body);
@@ -2953,16 +2961,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 				var image_comment = [];
 
 				$('span div img').each(function(){
-					
+
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);
-				
+
 				})
 
 				$('span div p').each(function(){
 					var img_comments = $(this).text();
 					image_comment.push(img_comments);
-					
+
 				})
 
 				$('.ytp-title-link').each(function(){
@@ -2982,22 +2990,22 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 
 				$('span div iframe').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
 
 				$('video source').each(function(){
 					var vid_url = $(this).attr('src');
-					video_url.push(vid_url);	
+					video_url.push(vid_url);
 				})
-				
+
 				// scrape all the videos for the post
-				
+
 					$("[style *= 'line-height: 180%']").each(function(){
 						var content =  $(this).text();
 						if (content.indexOf("엠봉") >= 0) {
 						content = content.replace("엠봉", "하즐");
 						comments.push({content: content});
-						} 	
+						}
 						comments.push({content: content});
 					})//scrape all the comments for the post
 
@@ -3006,9 +3014,9 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 
 					var repeatedImg = image_url[0];
 
-			
+
 			issueModel.find({img_url: repeatedImg}, function(err, newPosts){
-				
+
 				if (newPosts.length == 0 && image_url[0].indexOf("../data") !== 0 && image_url[0].indexOf("https://etorrent.co.kr/") !== 0  && image_url[0].indexOf("http://bhu.co.kr/data/cheditor4") !== 0 && video_url[0] !== "" && image_url[0].indexOf("http://road2himachal") !== 0 ){
 					//save data in Mongodb
 
@@ -3025,7 +3033,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 					if(error){
 						console.log(error);
 					}
-					else 
+					else
 						console.log(Post);
 				})
 
@@ -3033,16 +3041,16 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=temp', function(err, res, body)
 				}//if bhuTitle안에 있는 {}
 
 			})//postModel.find
-			
+
 
 			}//if문
 
 			})//request
 
-			
+
 		});
-		
-		
+
+
 
 	}//첫 if구문
 
