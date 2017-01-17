@@ -34,6 +34,7 @@ if(req.query.search){
     	//console.log(results.docs)
 
     	res.render('hazzulSearch.ejs', {
+				search: 1,
     		issuepostModels: results.docs,
     		searchTitle: searchTitle,
     		pageSize: pageSize,
@@ -81,6 +82,7 @@ if(req.query.search){
     	//console.log(results.docs)
 
     	res.render('hazzul.ejs', {
+				search: 0,
     		issuepostModel: sortId,
     		issuepostModels: args,
     		pageSize: pageSize,

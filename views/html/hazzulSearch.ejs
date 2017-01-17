@@ -19,7 +19,7 @@
     <meta name='keyword' content="하즐, 하루, 즐거움, 짤, hazzul, 웃긴, 예능, 동영상, hazz, hazzu">
     <meta name="description" content="하루를 즐겁게 해줄 짤들과 동영상을 담은 플랫폼">
     <link rel='shortcut icon' href='/images/Favicon.ico' type='image/x-icon'/ >
-    
+
     <!--call the css file -->
     <link rel='stylesheet' href='/css/hazzulMain.css'>
 
@@ -81,11 +81,11 @@ $('a.back-to-top').click(function() {
                 <img src="/images/Logo1.jpg">
             </a>
         </div>
-        
+
         <div id="navbar" class="collapse navbar-collapse navbar-responsive-collapse">
-            
+
       <form class="navbar-form navbar-left" role="search" action="/" method="get">
-       
+
             <input type="text" name="search" id="search" type="text" class="search-query form-control" class="form-control" placeholder="검색하기">
             <button id ="searchbutton" style=" border: none;
   background: #e1e4ea;
@@ -94,11 +94,11 @@ $('a.back-to-top').click(function() {
   color: #4f5b66;
   border-radius: 5px;
   font-size: 10pt;" class="icon"><i class="fa fa-search"></i></button>
-         
+
       </form>
 
       <div class="navbar-form navbar-right" >
-        
+
         <a href ="https://www.facebook.com/Hazzzzul/"><button style=" border: none; background: #222222;
   height: 40px;
   width: 40px;
@@ -113,9 +113,9 @@ $('a.back-to-top').click(function() {
   color: #4f5b66;
   opacity: none;
   font-size: 20pt;" class="icon"><i i class="fa fa-question-circle" aria-hidden="true"></i></button> &nbsp; &nbsp;
-  
+
       </div>
-      
+
     </div>
 
     </div>
@@ -145,13 +145,13 @@ $('a.back-to-top').click(function() {
  </br> </br> </br>
   <div class="col-sm-12 col-md-12 affix-content">
     <div class="container">
-     
+
            <!-- LOCAL INFORMATION -->
             <div class="row ">
             <div class ="text-center">
 
        <% for(var i = 0; i <  issuepostModels.length;  i++) { %>
-       
+
             <a class="thumbnail" href="/1/<%= issuepostModels[i].id %>" style="text-decoration: none;">
             <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
                 <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
@@ -159,29 +159,29 @@ $('a.back-to-top').click(function() {
                   <h5><%= issuepostModels[i].title %></h5>
                    <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length + issuepostModels[i].comments.length  %></h7>&nbsp&nbsp
                    <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks +issuepostModels[i].usernumClicks  %></h7>&nbsp&nbsp
-                  
+
                 </div>
             </a>
        <% }%>
        </div>
-      
+
        </br></br>
-        <% if (issuepostModels.length < 1) { %> 
+        <% if (issuepostModels.length < 1) { %>
           <div class ="text-center">
           <h3><font size ="8" color ="#FFFFFF"> "<%= searchTitle %>"<font> <font size ="6" color ="#FFFFFF">검색 결과가 없습니다.. sorry<font></h3>
           <p><a href = "/"><button class="btn btn-danger" style ="center"> 하즐 홈페이지로 돌아가기</button></a></p>
           <div class="fb-share-button"  data-href="http://www.hazzul.com" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
           </div>
-       <% } %> 
+       <% } %>
 </div>
 
 <a href="#" class="back-to-top">Back to Top</a>
 
-<% if (pageCount > 1) { %>  
+<% if (pageCount > 1) { %>
 <div class ="text-center pagelayout">
-<ul class="pagination">  
+<ul class="pagination">
   <% if (currentPage > 1) { %>
-      <li><a href="/?page=1">&laquo;</a></li>
+      <li><a href="/?search=<%= searchTitle %>&page=1">&laquo;</a></li>
   <% } %>
   <% var i = 1;
   if (currentPage > 3) {
@@ -194,27 +194,27 @@ $('a.back-to-top').click(function() {
     <% if (currentPage == i) { %>
         <li class="active" style="background: purple;" ><span style="background: #2b303b; border: 1px solid #2b303b;"><%= i %> <span class="sr-only">(current)</span></span></li>
     <% } else { %>
-        <li><a href="/?page=<%= i %>"><%= i %></a></li>
+        <li><a href="/?search=<%= searchTitle %>&page=<%= i %>"><%= i %></a></li>
     <% } %>
     <% if (i == (currentPage + 2)) { %>
         <li class="disabled"><a href="#">...</a></li>
     <% break; } %>
   <% } %>
   <% if (currentPage != pageCount) { %>
-      <li><a href="/?page=<%= pageCount %>">&raquo;</a></li>
+      <li><a href="/?search=<%= searchTitle %>&page=<%= pageCount %>">&raquo;</a></li>
   <% } %>
-</ul>  
+</ul>
 </div>
-<% } %> 
+<% } %>
 
 </div>
 </div>
 
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
-var sc_project=10950271; 
-var sc_invisible=0; 
-var sc_security="b7184453"; 
+var sc_project=10950271;
+var sc_invisible=0;
+var sc_security="b7184453";
 var scJsHost = (("https:" == document.location.protocol) ?
 "https://secure." : "http://www.");
 document.write("<sc"+"ript type='text/javascript' src='" +
