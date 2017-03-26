@@ -4,8 +4,6 @@ var request = require('request'),
 	app = express(),
 	mongoose = require('mongoose'),
 	bodyParser = require('body-parser'),
-	passport = require ('passport'),
-	flash = require ('connect-flash'),
 	methodOverride = require('method-override');
 
 	morgan = require('morgan'),
@@ -17,8 +15,6 @@ var request = require('request'),
 //configuration//
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
-require('./config/passport')(passport);
-
 	app.use(express.static(path.normalize(__dirname) + '/views'))
 	app.use(morgan('dev')); // log every request to the console
 	app.use(bodyParser());// pull information from html in POST
@@ -30,17 +26,9 @@ require('./config/passport')(passport);
 	app.set('views', path.normalize(__dirname) + '/views/html');
 	app.set('view engine', 'html')
 	app.set('view engine', 'ejs'); //set up ejs for templating
-	app.set('port', (process.env.PORT || 5000));
-
-	// required for passport
-	app.use(session({ secret: 'uvahackathon2017firstplace' })); // session secret
-	app.use(passport.initialize());
-	app.use(passport.session()); // persistent login sessions
-	app.use(flash()); // use connect-flash for flash messages stored in session
-
-	// routes ======================================================================
-	require('./app/routes.js')(app, passport); // load our routes and pass in our app
-
+app.set('port', (process.env.PORT || 5000));
+// routes ======================================================================
+require('./app/routes.js')(app); // load our routes and pass in our app
 
 //start the server
 app.listen(app.get('port'), function() {

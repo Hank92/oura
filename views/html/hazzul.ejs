@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="imagetoolbar" content="no" />
     <meta name="naver-site-verification" content="8672f68ec19974757430dcc41aa887462bd2a8c5"/>
-    <meta name="google-site-verification" content="UFlAZBpLslwZH5RF8Z4WSu6fiCM-MXNzOvcLsyDh2_Y" />
+    <meta name="google-site-verification" content="dj23_T0fknqVakUk-BB6mLki7imRrvEhQrS4D35d1_Y" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content ="하즐">
     <meta name="title" content = "하즐 - 하루의 즐거움">
@@ -27,7 +27,7 @@
   $('body').prepend('<a href="#" class="back-to-top">Back to Top</a>');
 </script>
 <script type="text/javascript">
-var amountScrolled = 100;
+var amountScrolled = 30;
 
 $(window).scroll(function() {
   if ( $(window).scrollTop() > amountScrolled ) {
@@ -56,247 +56,7 @@ $('a.back-to-top').click(function() {
 </script>
 </head>
 
-<script>
-
-  $(document).ready(function() {
-    var type = window.location.hash.slice(2);
-    var myVar = <%- JSON.stringify(issuepostModels) %>;
- var idFound;
-
-  if(type) {
-   for(var x=0 ; x <myVar.length; x++){
-    if(myVar[x]._id ==type){
-      idFound=myVar[x]
-    }
-   }
-   var modal = ''
-        modal += '<div class="modal" id="indivModal" tabindex="-1" role="dialog"';
-        modal += 'aria-labelledby="myModalLabel" aria-hidden="true">';
-        modal += '<div class="modal-dialog modal-lg"><div class="modal-content">';
-        modal += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" >&times;</button><h1 class="modal-title" ></h1></div>';
-
-
-        modal += '<div class="modal-body"></div>'
-        modal += '<div class="modal-footer"><div class="col-md-4"></div></div></div></div></div>';
-
-        $('body').append(modal);
-
-        var html = '';
-        var htmltitle = '';
-        var htmlcomment = '';
-
-
-        htmltitle += '<img src="/images/Logo2.jpg" alt="HTML5 Icon" style="width:10%;height:auto;" ></a>&nbsp;&nbsp;<font align=left color=#F0F8FF>' + idFound.title + '</font>'
-
-        var imgTotal = Object.keys(idFound.img_url).length-1;
-        var videoTotal = Object.keys(idFound.video_url).length;
-        var imgCommTotal = Object.keys(idFound.img_comment).length;
-        var commTotal = Object.keys(idFound.comments).length;
-        var userCommTotal = Object.keys(idFound.userComments).length;
-
-
-        for( var x= 0; x < imgTotal; x++){
-
-          html += '<img src="' + idFound.img_url[x] + '" class="img-responsive"/>';
-        }
-
-        html +='<br>'
-        for( var x= 0; x < videoTotal; x++){
-
-          html += '<div style="text-align:center"><iframe ="embed-responsive-item" src= "' + imgFound.video_url[x] + '" bgcolor="#000000" width="500" height="400"  align="middle" allowscriptaccess="always" allowfullscreen="true" type="application/x-shockwave-flash"></iframe></div>';
-        }
-        html += '<br>'
-
-        for( var x= 0; x < imgCommTotal; x++){
-          html += '<div class ="imgcomment"><font color ="#ffffff">' + myVar[a].img_comment[x] +'</font></div>';
-        }
-
-        html += '<br>'
-        html += '<div style="text-align:center"><form name ="myForm" role="form" method="post" action="/' + myVar[a]._id + '/<%= currentPage %>/hazzulFavorite"><button type="submit" class="btn btn-primary btn-lg" >즐겨찾기</button></form></div>'
-        html += '<br>'
-
-        htmlcomment += '<form name ="myForm" role="form" method="post" action="/' + idFound._id + '/<%= pageCount %>/hazzul"><textarea style="color: #2b303b" class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="5" id="comment" required></textarea><br><button type="submit" class="btn btn-danger btn-lg " style ="float:left"><i class="fa fa-edit"></i> 댓글 달기</button></form>';
-
-
-        var totalcomm = commTotal + userCommTotal;
-        htmlcomment += '<font size="5" color ="#ffffff">댓글' + ' ' + totalcomm + '</font>';
-        htmlcomment += '<br><br><br>'
-
-        for( var x= 0; x < commTotal; x++){
-          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="5" color="#F0F8FF">' + idFound.comments[x].content +'</b></div><br>';
-        }
-
-
-        for( var x= 0; x < userCommTotal; x++){
-          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="5" color="#F0F8FF">' + idFound.userComments[x].userPost +'</b></div><br>';
-        }
-
-        $('#indivModal .modal-title').html(htmltitle);
-        $('#indivModal .modal-body').html(html);
-        $('#indivModal .modal-footer').html(htmlcomment);
-
-        $('#indivModal').modal('show')
-      }
-
-});
-
-</script>
-<script>
-
-function getModalSorted(a){
-
-var myVar = <%- JSON.stringify(issuepostModel) %>;
-
-  var modal = '';
-        modal += '<div class="modal" id="bsPhotoGalleryModal" tabindex="-1" role="dialog"';
-        modal += 'aria-labelledby="myModalLabel" aria-hidden="true">';
-        modal += '<div class="modal-dialog modal-lg"><div class="modal-content">';
-        modal += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h1 class="modal-title" ></h1></div>';
-
-
-        modal += '<div class="modal-body"></div>'
-        modal += '<div class="modal-footer"><div class="col-md-4"></div></div></div></div></div>';
-
-        $('body').append(modal);
-
-        var html = '';
-        var htmltitle = '';
-        var htmlcomment = '';
-
-        htmltitle += '<img src="/images/Logo2.jpg" alt="HTML5 Icon" style="width:10%;height:auto;" ></a>&nbsp;&nbsp;<font align=left color=#F0F8FF>' + myVar[a].title + '</font>'
-        var imgTotal = Object.keys(myVar[a].img_url).length-1;
-        var videoTotal = Object.keys(myVar[a].video_url).length;
-        var imgCommTotal = Object.keys(myVar[a].img_comment).length;
-        var commTotal = Object.keys(myVar[a].comments).length;
-        var userCommTotal = Object.keys(myVar[a].userComments).length;
-
-
-        for( var x= 0; x < imgTotal; x++){
-
-          html += '<img src="' + myVar[a].img_url[x] + '" class="img-responsive"/>';
-        }
-
-        html +='<br>'
-        for( var x= 0; x < videoTotal; x++){
-
-          html += '<div style="text-align:center"><iframe ="embed-responsive-item" src= "' + myVar[a].video_url[x] + '" bgcolor="#000000" width="500" height="400" name="NEXT4896413" align="middle" allowscriptaccess="always" allowfullscreen="true" type="application/x-shockwave-flash"></iframe></div>';
-        }
-        html += '<br>'
-
-        for( var x= 0; x < imgCommTotal; x++){
-          html += '<div class ="imgcomment"><font color ="#ffffff">' + myVar[a].img_comment[x] +'</font></div>';
-        }
-
-        html += '<br>'
-        html += '<div style="text-align:center"><form name ="myForm" role="form" method="post" action="/' + myVar[a]._id + '/<%= currentPage %>/hazzulFavorite"><button type="submit" class="btn btn-primary btn-lg" >즐겨찾기</button></form></div>'
-        html += '<br>'
-
-
-        htmlcomment += '<form name ="myForm" role="form" method="post" action="/' + myVar[a]._id + '/<%= currentPage %>/hazzul"><textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="5" id="comment" required></textarea><br><button type="submit" class="btn btn-danger btn-lg " style ="float:left"><i class="fa fa-edit"></i> 댓글 달기</button></form>';
-
-
-        var totalcomm = commTotal + userCommTotal;
-        htmlcomment += '<font size="5" color ="#ffffff">댓글' + ' ' + totalcomm + '</font>';
-        htmlcomment += '<br><br><br>'
-
-        for( var x= 0; x < commTotal; x++){
-          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="5" color="#F0F8FF">' + myVar[a].comments[x].content +'</b></div><br>';
-        }
-
-
-        for( var x= 0; x < userCommTotal; x++){
-          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="5" color="#F0F8FF">' + myVar[a].userComments[x].userPost +'</b></div><br>';
-        }
-
-        $('#bsPhotoGalleryModal .modal-title').html(htmltitle);
-        $('#bsPhotoGalleryModal .modal-body').html(html);
-        $('#bsPhotoGalleryModal .modal-footer').html(htmlcomment);
-
-
-
-}
-
-
-
-
-
-function getModal(a){
-
-var myVar = <%- JSON.stringify(issuepostModels) %>;
-
-  var modal = '';
-        modal += '<div class="modal" id="bsPhotoGalleryModal" tabindex="-1" role="dialog"';
-        modal += 'aria-labelledby="myModalLabel" aria-hidden="true">';
-        modal += '<div class="modal-dialog modal-lg"><div class="modal-content">';
-        modal += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h1 class="modal-title" ></h1></div>';
-
-
-        modal += '<div class="modal-body"></div>'
-        modal += '<div class="modal-footer"><div class="col-md-4"></div></div></div></div></div>';
-
-        $('body').append(modal);
-
-        var html = '';
-        var htmltitle = '';
-        var htmlcomment = '';
-
-        htmltitle += '<img src="/images/Logo2.jpg" alt="HTML5 Icon" style="width:10%;height:auto;" ></a>&nbsp;&nbsp;<font align=left color=#F0F8FF>' + myVar[a].title + '</font>'
-        var imgTotal = Object.keys(myVar[a].img_url).length-1;
-        var videoTotal = Object.keys(myVar[a].video_url).length;
-        var imgCommTotal = Object.keys(myVar[a].img_comment).length;
-        var commTotal = Object.keys(myVar[a].comments).length;
-        var userCommTotal = Object.keys(myVar[a].userComments).length;
-
-
-        for( var x= 0; x < imgTotal; x++){
-
-          html += '<img src="' + myVar[a].img_url[x] + '" class="img-responsive"/>';
-        }
-
-        html +='<br>'
-        for( var x= 0; x < videoTotal; x++){
-
-          html += '<div style="text-align:center"><iframe ="embed-responsive-item" src= "' + myVar[a].video_url[x] + '" bgcolor="#000000" width="500" height="400" name="NEXT4896413" align="middle" allowscriptaccess="always" allowfullscreen="true" type="application/x-shockwave-flash"></iframe></div>';
-        }
-        html += '<br>'
-
-        for( var x= 0; x < imgCommTotal; x++){
-          html += '<div class ="imgcomment"><font color ="#ffffff">' + myVar[a].img_comment[x] +'</font></div>';
-        }
-
-        html += '<br>'
-
-        html += '<div style="text-align:center"><button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">포스트 닫기</button></div>'
-        html += '<div style="text-align:center"><form name ="myForm" role="form" method="post" action="/' + myVar[a]._id + '/<%= currentPage %>/hazzulFavorite"><button type="submit" class="btn btn-primary btn-lg" >즐겨찾기</button></form></div>'
-        html += '<br>'
-
-
-        htmlcomment += '<form name ="myForm" role="form" method="post" action="/' + myVar[a]._id + '/<%= currentPage %>/hazzul"><textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="5" id="comment" required></textarea><br><button type="submit" class="btn btn-danger btn-lg " style ="float:left"><i class="fa fa-edit"></i> 댓글 달기</button></form>';
-
-
-        var totalcomm = commTotal + userCommTotal;
-        htmlcomment += '<font size="5" color ="#ffffff">댓글' + ' ' + totalcomm + '</font>';
-        htmlcomment += '<br><br><br>'
-
-        for( var x= 0; x < commTotal; x++){
-          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="5" color="#F0F8FF">' + myVar[a].comments[x].content +'</b></div><br>';
-        }
-
-
-        for( var x= 0; x < userCommTotal; x++){
-          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="5" color="#F0F8FF">' + myVar[a].userComments[x].userPost +'</b></div><br>';
-        }
-
-        $('#bsPhotoGalleryModal .modal-title').html(htmltitle);
-        $('#bsPhotoGalleryModal .modal-body').html(html);
-        $('#bsPhotoGalleryModal .modal-footer').html(htmlcomment);
-
-}
-</script>
-
-
 <body>
-
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -306,111 +66,61 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
 
-<nav class="navbar-inverse navbar-default" style=" background: #262626;">
-  <div class="container">
-    <ul class="nav navbar-top" >
-		<div class="navbar-header">
-			<button type="navbar-toggler" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-            <a class="navbar-brand myLogo" href="/" >
+        <div class="navbar-header">
+            <button button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+             <a class="navbar-brand myLogo" href="/" >
                 <img src="/images/Logo1.jpg">
             </a>
         </div>
 
-      <div class="collapse navbar-collapse" id="navbar">
-			<ul class="nav navbar-nav navbar-right">
-				<form class="navbar-form navbar-left" role="search" action="/" method="get">
-					<input type="text" name="search" id="search" type="text" class="search-query form-control" placeholder="검색하기">
-					<button id ="searchbutton" style=
-						" border: none;
-						bac kground: #e1e4ea;
-						height: 40px;
-						width: 40px;
-						color: #4f5b66;
-						border-radius: 5px;
-						font-size: 10pt;" class="icon">
-						<i class="fa fa-search"></i>
-					</button>
-				</form>
+        <div id="navbar" class="collapse navbar-collapse navbar-responsive-collapse">
 
-				<li>
-					<a href="/login" class="btn btn-primary btn-sm" style="padding-top:5px; padding-bottom:5px; padding-left:10px; padding-right:10px; margin-top:10px" role="button">
-						<font-color="#000000">Login</font>
-					</a>
-				</li>
-				<li>
-					<a href="/profile" class="btn btn-primary btn-sm" style="padding-top:5px; padding-bottom:5px; padding-left:10px; padding-right:10px; margin-top:10px" role="button">
-						<font-color="#000000">Profile</font>
-					</a>
-				</li>
-				<li>
-					<a href ="" style="padding:15px;">
-					<button style=
-						" border: none; background: #222222;
-						height: 20px;
-						width: 20px;
-						color: #4f5b66;
-						opacity: none;
-						padding:0px;
-						font-size: 20pt;" class="icon">
-						<i class="fa fa-facebook-square" aria-hidden="true"></i>
-					</button>
-					</a>
-				</li>
+      <form class="navbar-form navbar-left" role="search" action="/" method="get">
 
-			</ul>
+            <input type="text" name="search" id="search" type="text" class="search-query form-control" class="form-control" placeholder="검색하기">
+            <button id ="searchbutton" style=" border: none;
+  background: #e1e4ea;
+  height: 40px;
+  width: 40px;
+  color: #4f5b66;
+  border-radius: 5px;
+  font-size: 10pt;" class="icon"><i class="fa fa-search"></i></button>
+
+      </form>
+
+      <div class="navbar-form navbar-right" >
+
+      <a href ="https://www.facebook.com/Hazzzzul/"><button style=" border: none; background: #222222;
+  height: 40px;
+  width: 40px;
+  color: #4f5b66;
+  opacity: none;
+  font-size: 20pt;" class="icon"><i class="fa fa-facebook-square" aria-hidden="true"></i></button></a>
 
 
-			<nav class="navbar-default nav-bottom" style="background: #262626;">
-				<ul class="nav navbar-nav">
-					<li><a href="/"><font color="#fffff">하즐 베스트</a></font></li>
-					<li><a href="#"><font color="#fffff">주간 베스트</a></font></li>
-					<li><a href="/fmkorea"><font color="#fffff">#FM코리아</font></a></li>
-					<li><a href="/dogdrip"><font color="#fffff">#DogDrip</font></a></li>
-					<li><a href="/torrent"><font color="#fffff">#토렌트</font></a></li>
-					<li><a href="/ygosu"><font color="#fffff">#와이고수</font></a></li>
-					<li><a href="/blogspot"><font color="#fffff">#Blogspot</font></a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-							<font color="#fffff">기타
-							<span class="caret"></span></font>
-						</a>
-						<ul class="dropdown-menu" style=" background: #262626;">
-							<li><h6 class="dropdown-header">기타 웹사이트</h6>
-							<li><a href="/pann"><font color="#fffff">#네이트 판</font></a></li>
-							<li><a href="/mhc"><font color="#fffff">#모해유머</font></a></li>
-							<li><a href="/reple"><font color="#fffff">#댓글학원</font></a></li>
-							<li><a href="/instiz"><font color="#fffff">#인스터즈</font></a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="#" data-toggle="modal" data-target="#aboutModal"><font color="#fffff">하즐이란?</font></a></li>
-						</ul>
-					</li>
-				</ul>
-			</nav>
-		</div>
-    </ul>
-  </div>
-</nav>
 
+  <button data-toggle="modal" data-target="#aboutModal" style=" border: none; background: #222222;
+  height: 40px;
+  width: 40px;
+  color: #4f5b66;
+  opacity: none;
+  font-size: 20pt;" class="icon"><i class="fa fa-question-circle" aria-hidden="true"></i></button> &nbsp; &nbsp;
 
-<script>
-	jQuery(document).ready(function() {
-		jQuery('.toggle-nav').click(function(e) {
-			jQuery(this).toggleClass('active');
-			jQuery('.menu ul').toggleClass('active');
-			e.preventDefault();
-		});
-	});
-	jQuery(".nav a").hover(function(){
-		$(".nav").find(".active").removeClass("active");
-		$(this).parent().addClass("active");
-	});
-</script>
+      </div>
+
+    </div>
+
+    </div>
+</div>
+
 
 
 <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel">
@@ -432,9 +142,7 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
   </div>
 </div>
 
-</br>
-
-
+ </br> </br> </br>
   <div class="col-sm-12 col-md-12 affix-content">
     <div class="container">
 
@@ -443,69 +151,68 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
             <div class ="text-center">
 
 
-              <% for(var i = issuepostModels.length-1; i > -1 ; i--) { %>
+      <% for(var i = issuepostModels.length-1; i > -1 ; i--) { %>
 
-                     <% if (i > 14 && i != 19) { %>
+             <% if (i > 14 && i != 19) { %>
 
-                       <a href ="/hazzul/<%= issuepostModels[i]._id %>" class="thumbnailHot" data-toggle="modal" data-target="#bsPhotoGalleryModal" style="text-decoration: none;" onclick= "getModal( <%= i %>)">
+               <a class="thumbnailHot" href="/<%= currentPage %>/<%= issuepostModels[i].id %>" style="text-decoration: none;">
 
-                        <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
-                        <div class="caption">
-                          <h5><%= issuepostModels[i].title %></h5>
-                           <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length %></h7>&nbsp&nbsp
-                           <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].myClicks  %></h7>&nbsp&nbsp
+            <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
+                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
+                <div class="text-center">
+                  <h5><%= issuepostModels[i].title %></h5>
 
-        				   </br></br>
-        				   <p>
-        						<span class="label label-danger" style="text-align: bottom; bottom: 20px;">실시간 인기글</span>
-        						<span class="label label-primary" style="text-align: bottom; bottom: 20px;">#<%= issuepostModels[i].url  %></span>
-        					</p>
-                        </div>
-                       </a>
+                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length + issuepostModels[i].comments.length  %></h7>&nbsp&nbsp
+                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks +issuepostModels[i].usernumClicks  %></h7>&nbsp&nbsp
 
-                    <% } %>
+                   <b><span class="label label-danger">실시간 인기글 <i class="fa fa-star" aria-hidden="true"></i></span></b>
+                </div>
+                </a>
 
-                    <% if (i == 19) { %>
-
-                      <a href ="/hazzul/<%= issuepostModels[i]._id %>" class="thumbnailBest" data-toggle="modal" data-target="#bsPhotoGalleryModal" style="text-decoration: none;" onclick= "getModal( <%= i %>)">
-
-                        <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
-                        <div class="caption">
-                          <h5><%= issuepostModels[i].title %></h5>
-                           <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length %></h7>&nbsp&nbsp
-                           <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].myClicks  %></h7>&nbsp&nbsp
-
-        				  </br></br>
-        				   <p>
-        						<span class="label label-success" style="text-align: bottom; bottom: 20px;">실시간 베스트</span>
-        						<span class="label label-primary" style="text-align: bottom; bottom: 20px;">#<%= issuepostModels[i].url  %></span>
-        					</p>
-                        </div>
-                        </a>
-                    <% } %>
-
-               <% }%>
+                  <% } %>
 
 
-        <% for(var i = issuepostModel.length-1; i > -1 ; i--) { %>
-          <a href ="/hazzul/<%= issuepostModel[i]._id %>" class="thumbnail" data-toggle="modal" data-target="#bsPhotoGalleryModal" style="text-decoration: none;" onclick= "getModalSorted( <%= i %>)">
 
-                        <img class="img-responsive" src="<%= issuepostModel[i].img_url[0] || issuepostModel[i].img_url[1] || issuepostModel[i].video_url[1] %>" alt="이미지 로딩중...">
-                        <div class="caption">
-                          <h5><%= issuepostModel[i].title %></h5>
-                           <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModel[i].userComments.length %></h7>&nbsp&nbsp
-                           <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModel[i].myClicks  %></h7>&nbsp&nbsp
-        				</br></br>
-        				   <p>
-        						<span class="label label-primary"><h7>#<%= issuepostModels[i].url  %></h7></span>
-        					</p>
-                        </div>
-                        </a>
+            <% if (i == 19) { %>
 
-               <% } %>
 
-               </div>
+               <a class="thumbnailBest" href="/<%= currentPage %>/<%= issuepostModels[i].id %>" style="text-decoration: none;">
 
+            <h7><%= issuepostModels[i].posted.toLocaleDateString() %></h7>
+                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
+                <div class="text-center">
+                  <h5><%= issuepostModels[i].title %></h5>
+
+                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length + issuepostModels[i].comments.length  %></h7>&nbsp&nbsp
+                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks +issuepostModels[i].usernumClicks  %></h7>&nbsp&nbsp
+
+                  <b><span class="label label-success">실시간 베스트 <i class="fa fa-thumbs-up" aria-hidden="true"></i></span></b>
+                </div>
+                </a>
+
+
+            <% } %>
+
+       <% }%>
+
+<% for(var i = issuepostModel.length-1; i > -1 ; i--) { %>
+
+              <a class="thumbnail" href="/<%= currentPage %>/<%= issuepostModel[i].id %>" style="text-decoration: none;">
+
+            <h7><%= issuepostModel[i].posted.toLocaleDateString() %></h7>
+                <img class="img-responsive" src="<%= issuepostModel[i].img_url[0] || issuepostModel[i].img_url[1] || issuepostModel[i].video_url[1] %>" alt="이미지 로딩중...">
+                <div class="text-center">
+                  <h5><%= issuepostModel[i].title %></h5>
+
+                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModel[i].userComments.length + issuepostModel[i].comments.length  %></h7>&nbsp&nbsp
+                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModel[i].numClicks +issuepostModel[i].usernumClicks  %></h7>&nbsp&nbsp
+
+                </div>
+                </a>
+
+       <% } %>
+
+       </div>
 
        </br></br>
         <% if (issuepostModels.length < 1) { %>
@@ -552,6 +259,17 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
 </div>
 </div>
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90407049-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
 <!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
 var sc_project=10950271;
@@ -571,7 +289,4 @@ alt="website statistics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 
 </body>
-
-
-
 </html>
