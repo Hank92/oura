@@ -76,8 +76,8 @@ if(req.query.search){
     } );
 
     	    pageSize = results.limit;
-            pageCount = (results.total)/(results.limit);
-    		pageCount = Math.ceil(pageCount);
+          pageCount = (results.total)/(results.limit);
+    			pageCount = Math.ceil(pageCount);
     	    totalPosts = results.total;
     	//console.log(results.docs)
 
@@ -150,27 +150,33 @@ app.param('id', function(req, res, next, id){
 
 
 
-app.get('/:page/:id', function(req, res){
+app.get('/hazzul/:id', function(req, res){
 	var postId = req.postId;
-	var pageNum = req.params.page;
 	postId.usernumClicks += Math.floor((Math.random() * 10) + 1);
 	postId.myClicks += 1;
-
 	postId.save(function (err, data){
 		if (err) res.send(err)
-		else
-	issueModel.find({_id: {$lt: postId._id}}).sort({_id: -1}).limit(5).exec(function(err, results) {
-
-	var prevId = results;
-	console.log(results)
-			res.render('individualHazzul.ejs', {issuepostModel: postId, previousModel: prevId, pageNum: pageNum });
+			else{
+				console.log('accessed')
+			}
 	})
 
+});
 
+app.post('/:id/:page/hazzul', function (req, res){
+	var pageNum = req.params.page;
+	console.log(pageNum)
+	issueModel.find({_id: req.params.id}, function(err, item){
+		if(err) return next("error finding post.");
+		item[0].userComments.push({userPost : req.body.userPost})
+		item[0].save(function(err, data){
+			if (err) res.send(err)
+			else
+				res.redirect('/?page=' + pageNum)
+		});
 	})
 
-
-})
+}) //app.post
 
 
 
@@ -185,19 +191,6 @@ app.param('id', function(req, res, next, id){
 			});
 });
 
-app.post('/:id/:page/hazzul', function (req, res){
-	var pageNum = req.params.page;
-	issueModel.find({_id: req.params.id}, function(err, item){
-		if(err) return next("error finding blog post.");
-		item[0].userComments.push({userPost : req.body.userPost})
-		item[0].save(function(err, data){
-			if (err) res.send(err)
-			else
-				res.redirect('/' + pageNum + '/'+req.params.id )
-		});
-	})
-
-}) //app.post
 
 
 
