@@ -10,14 +10,10 @@
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="imagetoolbar" content="no" />
-    <meta name="naver-site-verification" content="8672f68ec19974757430dcc41aa887462bd2a8c5"/>
-    <meta name="google-site-verification" content="UFlAZBpLslwZH5RF8Z4WSu6fiCM-MXNzOvcLsyDh2_Y" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name='keyword' content="하즐, 하루, 즐거움, 짤, hazzul, 웃긴, 예능, 아는 형님, 드라마, 미드, haz, 영어 짤 ">
     <meta name="description" content="<%= issuepostModel.title %>">
     <meta name="author" content ="하즐">
-    <meta name="title" content="<%= issuepostModel.title %>">
-    <meta property = "og:url" content ="http://www.hazzul.com/hazzul/<%= issuepostModel.id %>">
     <meta property = "og:title" content ="<%= issuepostModel.title %>">
     <meta property = "og:type" content ="website">
     <meta property = "og:site_name" content ="하즐">
@@ -39,32 +35,32 @@
 
  <div class="col-sm-12 col-md-12 affix-content">
     <div class="container">
-      
+
     <header>
       <h2><a href = "/"><img src="/images/Logo2.jpg" alt="HTML5 Icon" style="width:10%;height:auto;" ></a>&nbsp;&nbsp;<%= issuepostModel.title %></h2>
     </header>
     </br>
-     
-    <div class ="thumbnail">
-    <div style ="float:right">  <i class="fa fa-eye" aria-hidden="true"></i> 조회수: <%= issuepostModel.usernumClicks + issuepostModel.numClicks %>&nbsp; &nbsp; <i class="fa fa-comment" aria-hidden="true"></i>댓글: <%= issuepostModel.comments.length + issuepostModel.userComments.length %> &nbsp; </div> 
-    <br><br>
-    <% for( var i = 0; i < issuepostModel.img_url.length; i++ ) { %> 
-         <img src = "<%= issuepostModel.img_url[i] %>"  class="img-responsive">     
-         </br></br>   
-         <% }%> 
 
-         <% for( var i = 0; i < issuepostModel.video_url.length; i++ ) { %> 
+    <div class ="thumbnail">
+    <div style ="float:right">  <i class="fa fa-eye" aria-hidden="true"></i> 조회수: <%= issuepostModel.usernumClicks + issuepostModel.numClicks %>&nbsp; &nbsp; <i class="fa fa-comment" aria-hidden="true"></i>댓글: <%= issuepostModel.comments.length + issuepostModel.userComments.length %> &nbsp; </div>
+    <br><br>
+    <% for( var i = 0; i < issuepostModel.img_url.length; i++ ) { %>
+         <img src = "<%= issuepostModel.img_url[i] %>"  class="img-responsive">
+         </br></br>
+         <% }%>
+
+         <% for( var i = 0; i < issuepostModel.video_url.length; i++ ) { %>
          <div class="embed-responsive embed-responsive-16by9">
             <iframe class ="embed-responsive-item" src="<%= issuepostModel.video_url[i] %>"quality="high" bgcolor="#000000" width="500" height="400" name="NEXT4896413" align="middle" allowscriptaccess="always" allowfullscreen="true" type="application/x-shockwave-flash"></iframe> </br>
           </div>
-            <% } %>  
+            <% } %>
 
-            <% for( var i = 0; i < issuepostModel.img_comment.length; i++ ) { %> 
+            <% for( var i = 0; i < issuepostModel.img_comment.length; i++ ) { %>
         <center>
           <b><font size ="3" color="#000000"> <%= issuepostModel.img_comment[i] %></b>
         </center>
- 
-         <% }%> 
+
+         <% }%>
 
         <div class ="text-center">
 <div class="fb-share-button " data-href="www.hazzul.com/hazzul/<%= issuepostModel.id%>" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="www.hazzul.com/hazzul/<%= issuepostModel.id%>">공유하기</a></div>
@@ -73,8 +69,8 @@
 
 <h3><font color ="#e50658" size="6">추천!!</font></h3>
 
-         <a href="/<%= pageNum[0] %>/<%= previousModel[0].id %>"><font color ="#000000" size="6"><%= previousModel[0].title %> </font> </a> 
-      
+         <a href="/<%= pageNum[0] %>/<%= previousModel[0].id %>"><font color ="#000000" size="6"><%= previousModel[0].title %> </font> </a>
+
 
 
 </div>
@@ -105,7 +101,7 @@
       </div>
     </article><br>
 
-    
+
     <% for( var i = 0; i < issuepostModel.comments.length; i++ ) { %>
     <div class="comment">
       <a class="comment-img" href="#non">
@@ -129,22 +125,22 @@
         <div class="text">
          <b><font size ="5" color="#000000"><%= issuepostModel.userComments[i].userPost %></b>
         </div>
-        
+
       </div>
       </div>
        <% }%>
 
 </div>
 
-            
+
 </div>
 </div>
-</div>               
 </div>
-</br>   
+</div>
+</br>
 
 
-       
+
 </body>
 
 </html>
