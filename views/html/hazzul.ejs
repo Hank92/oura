@@ -121,12 +121,12 @@ $(document).ready(function() {
         htmlcomment += '<br><br><br>'
 
         for( var x= 0; x < commTotal; x++){
-          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="5" color="#F0F8FF">' + idFound.comments[x].content +'</b></div><br>';
+          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="4" color="#F0F8FF">' + idFound.comments[x].content +'</b></div><br>';
         }
 
 
         for( var x= 0; x < userCommTotal; x++){
-          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="5" color="#F0F8FF">' + idFound.userComments[x].userPost +'</b></div><br>';
+          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="4" color="#F0F8FF">' + idFound.userComments[x].userPost +'</b></div><br>';
         }
 
         $('#indivModal .modal-title').html(htmltitle);
@@ -198,12 +198,12 @@ var myVar = <%- JSON.stringify(issuepostModel) %>;
         htmlcomment += '<br><br><br>'
 
         for( var x= 0; x < commTotal; x++){
-          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="5" color="#F0F8FF">' + myVar[a].comments[x].content +'</b></div><br>';
+          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="4" color="#F0F8FF">' + myVar[a].comments[x].content +'</b></div><br>';
         }
 
 
         for( var x= 0; x < userCommTotal; x++){
-          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="5" color="#F0F8FF">' + myVar[a].userComments[x].userPost +'</b></div><br>';
+          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="4" color="#F0F8FF">' + myVar[a].userComments[x].userPost +'</b></div><br>';
         }
 
         $('#bsPhotoGalleryModal .modal-title').html(htmltitle);
@@ -275,12 +275,12 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
         htmlcomment += '<br><br><br>'
 
         for( var x= 0; x < commTotal; x++){
-          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="5" color="#F0F8FF">' + myVar[a].comments[x].content +'</b></div><br>';
+          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="4" color="#F0F8FF">' + myVar[a].comments[x].content +'</b></div><br>';
         }
 
 
         for( var x= 0; x < userCommTotal; x++){
-          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="5" color="#F0F8FF">' + myVar[a].userComments[x].userPost +'</b></div><br>';
+          htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="4" color="#F0F8FF">' + myVar[a].userComments[x].userPost +'</b></div><br>';
         }
 
         $('#bsPhotoGalleryModal .modal-title').html(htmltitle);
@@ -400,7 +400,7 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
                    <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks +issuepostModels[i].usernumClicks  %></h7>&nbsp&nbsp
                  </br></br>
                    <b><span class="label label-danger">실시간 인기글 <i class="fa fa-star" aria-hidden="true"></i></span></b>
-                   
+
                 </div>
                 </a>
 

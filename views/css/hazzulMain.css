@@ -552,8 +552,8 @@ h7 {
 
 @media (min-width: 1220px){
 
-    .affix-content{
-      overflow: auto;
+  .affix-content{
+    overflow: auto;
     padding-left: 50px;
   }
 
@@ -568,38 +568,37 @@ h7 {
   }
 
  .thumbnail { background-color: #484848; float:left; padding : 1%; width:200px; height:auto; overflow: hidden; }
-.thumbnail img {height:auto; width:100%; margin:10 auto; }
+ .thumbnail img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnail {
-   width: 195px;
+   width: 210px;
    height: 280px;
    overflow: auto;
-   margin: 20px;
+   margin: 10px;
    border:1px solid #3f3f3f;
  }
 
 .thumbnail > img {
-   width: 198px;
+   width: 210px;
    height: 172px;
-   border-radius: 3px;
-
+   border-radius: 1px;
  }
 
-  .thumbnailHot { background-color: #484848; float:left; padding : 1%; width:200px; height:auto; overflow: hidden; }
+.thumbnailHot { background-color: #484848; float:left; padding : 1%; width:200px; height:auto; overflow: hidden; }
 .thumbnailHot img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnailHot {
-   width: 195px;
+   width: 210px;
    height: 280px;
    overflow: auto;
-   margin: 20px;
+   margin: 10px;
    border:1px solid #3f3f3f;
  }
 
 .thumbnailHot > img {
-   width: 198px;
+   width: 210px;
    height: 172px;
-   border-radius: 3px;
+   border-radius: 1px;
 
  }
 
@@ -607,15 +606,15 @@ h7 {
 .thumbnailBest img {height:auto; width:100%; margin:10 auto; }
 
 .thumbnailBest {
-   width: 195px;
+   width: 210px;
    height: 280px;
    overflow: auto;
-   margin: 20px;
+   margin: 10px;
    border:1px solid #3f3f3f;
  }
 
 .thumbnailBest > img {
-   width: 198px;
+   width: 210px;
    height: 172px;
    border-radius: 3px;
 
@@ -650,13 +649,12 @@ h1 a {
 h5  {
   color: rgb(255, 255, 255) ;
   font-family: Arial, Helvetica, sans-serif;
-  font-size:14px;
-  font-weight: bold;
+  font-size:15px;
 }
 h7 {
   color:rgb(255, 255, 255) ;
   font-family: Book Antiqua, serif;
-  font-size:10px;
+  font-size:9px;
 
 }
 
