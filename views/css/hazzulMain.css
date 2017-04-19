@@ -554,7 +554,7 @@ h7 {
 
   .affix-content{
     overflow: auto;
-    padding-left: 50px;
+    padding-left: 55px;
   }
 
   .affix-content .container {
@@ -984,3 +984,18 @@ ul.pagination li a:hover {
     color: #fff;
     opacity: 2;
 }
+
+.jumbotron {
+    height: 180px;
+    background-color:#000000;
+    width: 95%;
+}
+
+#banner {
+     background-color: yellow;
+}
+.object-fit_fill { object-fit: fill }
+.object-fit_contain { object-fit: contain }
+.object-fit_cover { object-fit: cover }
+.object-fit_none { object-fit: none }
+.object-fit_scale-down { object-fit: scale-down }
