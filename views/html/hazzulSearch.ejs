@@ -226,6 +226,19 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
 
            <!-- LOCAL INFORMATION -->
             <div class="row ">
+              <% if (issuepostModels.length < 1) { %>
+                <div class ="jumbotron">
+                <h3><font size ="8" color ="#FFFFFF"> "<%= searchTitle %>"<font> <font size ="6" color ="#FFFFFF">검색 결과가 없습니다.. sorry<font></h3>
+                  <center>
+                <br><br><p><a href = "/"><button class="btn btn-danger" style ="center"> 하즐 홈페이지로 돌아가기</button></a></p>
+              </center></div>
+             <% } else { %>
+               <div class ="jumbotron">
+                 <h3><font size ="40" color ="#FFFFFF"> "<%= searchTitle %>"<font> <font size ="6" color ="#FFFFFF">검색 결과<font></h3>
+               </div>
+             <% } %>
+
+
             <div class ="text-center">
 
        <% for(var i = 0; i <  issuepostModels.length;  i++) { %>
@@ -243,13 +256,7 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
        </div>
 
        </br></br>
-        <% if (issuepostModels.length < 1) { %>
-          <div class ="text-center">
-          <h3><font size ="8" color ="#FFFFFF"> "<%= searchTitle %>"<font> <font size ="6" color ="#FFFFFF">검색 결과가 없습니다.. sorry<font></h3>
-          <p><a href = "/"><button class="btn btn-danger" style ="center"> 하즐 홈페이지로 돌아가기</button></a></p>
-          <div class="fb-share-button"  data-href="http://www.hazzul.com" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">공유하기</a></div>
-          </div>
-       <% } %>
+
 </div>
 
 <a href="#" class="back-to-top">Back to Top</a>
