@@ -589,7 +589,7 @@ h7 {
 
 .thumbnailHot {
    width: 210px;
-   height: 280px;
+   height: 290px;
    overflow: auto;
    margin: 10px;
    border:1px solid #3f3f3f;
@@ -607,7 +607,7 @@ h7 {
 
 .thumbnailBest {
    width: 210px;
-   height: 280px;
+   height: 290px;
    overflow: auto;
    margin: 10px;
    border:1px solid #3f3f3f;
