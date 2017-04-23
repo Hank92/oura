@@ -589,7 +589,7 @@ h7 {
 
 .thumbnailHot {
    width: 210px;
-   height: 290px;
+   height: 265px;
    overflow: auto;
    margin: 10px;
    border:1px solid #3f3f3f;
@@ -607,7 +607,7 @@ h7 {
 
 .thumbnailBest {
    width: 210px;
-   height: 290px;
+   height: 265px;
    overflow: auto;
    margin: 10px;
    border:1px solid #3f3f3f;
@@ -673,6 +673,8 @@ h7 {
 }
 
 }
+
+
 
 a.back-to-top {
   display: none;
@@ -994,8 +996,4 @@ ul.pagination li a:hover {
 #banner {
      background-color: yellow;
 }
-.object-fit_fill { object-fit: fill }
-.object-fit_contain { object-fit: contain }
 .object-fit_cover { object-fit: cover }
-.object-fit_none { object-fit: none }
-.object-fit_scale-down { object-fit: scale-down }
