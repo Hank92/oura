@@ -146,7 +146,7 @@ function getModalSorted(a){
 var myVar = <%- JSON.stringify(issuepostModel) %>;
 
   var modal = '';
-        modal += '<div class="modal" id="bsPhotoGalleryModal" tabindex="-1" role="dialog"';
+        modal += '<div class="modal" id="hazzulModal" tabindex="-1" role="dialog"';
         modal += 'aria-labelledby="myModalLabel" aria-hidden="true">';
         modal += '<div class="modal-dialog modal-lg"><div class="modal-content">';
         modal += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h1 class="modal-title" ></h1></div>';
@@ -206,9 +206,9 @@ var myVar = <%- JSON.stringify(issuepostModel) %>;
           htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="4" color="#F0F8FF">' + myVar[a].userComments[x].userPost +'</b></div><br>';
         }
 
-        $('#bsPhotoGalleryModal .modal-title').html(htmltitle);
-        $('#bsPhotoGalleryModal .modal-body').html(html);
-        $('#bsPhotoGalleryModal .modal-footer').html(htmlcomment);
+        $('#hazzulModal .modal-title').html(htmltitle);
+        $('#hazzulModal .modal-body').html(html);
+        $('#hazzulModal .modal-footer').html(htmlcomment);
 
 
 
@@ -219,7 +219,7 @@ function getModal(a){
 var myVar = <%- JSON.stringify(issuepostModels) %>;
 
   var modal = '';
-        modal += '<div class="modal" id="bsPhotoGalleryModal" tabindex="-1" role="dialog"';
+        modal += '<div class="modal" id="hazzulModal" tabindex="-1" role="dialog"';
         modal += 'aria-labelledby="myModalLabel" aria-hidden="true">';
         modal += '<div class="modal-dialog modal-lg"><div class="modal-content">';
         modal += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h1 class="modal-title" ></h1></div>';
@@ -243,7 +243,6 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
 
 
         for( var x= 0; x < imgTotal; x++){
-
           html += '<img src="' + myVar[a].img_url[x] + '" class="img-responsive"/></br>';
         }
 
@@ -279,9 +278,9 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
           htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="4" color="#F0F8FF">' + myVar[a].userComments[x].userPost +'</b></div><br>';
         }
 
-        $('#bsPhotoGalleryModal .modal-title').html(htmltitle);
-        $('#bsPhotoGalleryModal .modal-body').html(html);
-        $('#bsPhotoGalleryModal .modal-footer').html(htmlcomment);
+        $('#hazzulModal .modal-title').html(htmltitle);
+        $('#hazzulModal .modal-body').html(html);
+        $('#hazzulModal .modal-footer').html(htmlcomment);
 
 }
 </script>
@@ -328,6 +327,7 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
       </form>
 
       <div class="navbar-form navbar-right" >
+
 
       <a href ="https://www.facebook.com/Hazzzzul/"><button style=" border: none; background: #222222;
   height: 40px;
@@ -388,15 +388,15 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
 
              <% if (i > 14 && i != 19) { %>
 
-               <a href ="/hazzul/<%= issuepostModels[i]._id %>" class="thumbnailHot" data-toggle="modal" data-target="#bsPhotoGalleryModal" style="text-decoration: none;" onclick= "getModal( <%= i %>)">
+               <a href ="/hazzul/<%= issuepostModels[i]._id %>" class="thumbnailHot" data-toggle="modal" data-target="#hazzulModal" style="text-decoration: none;" onclick= "getModal( <%= i %>)">
 
-                <img class="img-responsive"  src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중..." >
+                <img class="img-responsive"  src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] %>" alt="이미지 로딩중..." >
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
 
-                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length + issuepostModels[i].comments.length  %></h7>&nbsp&nbsp
-                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks +issuepostModels[i].usernumClicks  %></h7>&nbsp&nbsp
-                   <b><span class="label label-danger">실시간 인기글 <i class="fa fa-star" aria-hidden="true"></i></span></b>
+                  <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length + issuepostModels[i].comments.length  %></h7>&nbsp&nbsp
+                  <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks +issuepostModels[i].usernumClicks  %></h7>&nbsp&nbsp
+                  <b><span class="label label-danger">실시간 인기글 <i class="fa fa-star" aria-hidden="true"></i></span></b>
 
                 </div>
                 </a>
@@ -408,16 +408,16 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
             <% if (i == 19) { %>
 
 
-              <a href ="/hazzul/<%= issuepostModels[i]._id %>" class="thumbnailBest" data-toggle="modal" data-target="#bsPhotoGalleryModal" style="text-decoration: none;" onclick= "getModal( <%= i %>)">
+              <a href ="/hazzul/<%= issuepostModels[i]._id %>" class="thumbnailBest" data-toggle="modal" data-target="#hazzulModal" style="text-decoration: none;" onclick= "getModal( <%= i %>)">
 
-                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
+                <img class="img-responsive" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1]  %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
 
-                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length + issuepostModels[i].comments.length  %></h7>&nbsp&nbsp
-                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks +issuepostModels[i].usernumClicks  %></h7>&nbsp&nbsp
+                  <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length + issuepostModels[i].comments.length  %></h7>&nbsp&nbsp
+                  <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks +issuepostModels[i].usernumClicks  %></h7>&nbsp&nbsp
+                 <b><span class="label label-success">실시간 베스트 <i class="fa fa-thumbs-up" aria-hidden="true"></i></span></b>
 
-                  <b><span class="label label-success">실시간 베스트 <i class="fa fa-thumbs-up" aria-hidden="true"></i></span></b>
                 </div>
                 </a>
 
@@ -428,14 +428,14 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
 
 <% for(var i = issuepostModel.length-1; i > -1 ; i--) { %>
 
-          <a href ="/hazzul/<%= issuepostModel[i]._id %>" class="thumbnail" data-toggle="modal" data-target="#bsPhotoGalleryModal" style="text-decoration: none;" onclick= "getModalSorted( <%= i %>)">
+          <a href ="/hazzul/<%= issuepostModel[i]._id %>" class="thumbnail" data-toggle="modal" data-target="#hazzulModal" style="text-decoration: none;" onclick= "getModalSorted( <%= i %>)">
 
-                <img class="object-fit_cover" src="<%= issuepostModel[i].img_url[0] || issuepostModel[i].img_url[1] || issuepostModel[i].video_url[1] %>" alt="이미지 로딩중...">
+                <img class="object-fit_cover" src="<%= issuepostModel[i].img_url[0] || issuepostModel[i].img_url[1]  %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h5><%= issuepostModel[i].title %></h5>
 
-                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModel[i].userComments.length + issuepostModel[i].comments.length  %></h7>&nbsp&nbsp
-                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModel[i].numClicks +issuepostModel[i].usernumClicks  %></h7>&nbsp&nbsp
+                  <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModel[i].userComments.length + issuepostModel[i].comments.length  %></h7>&nbsp&nbsp
+                  <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModel[i].numClicks +issuepostModel[i].usernumClicks  %></h7>&nbsp&nbsp
 
                 </div>
                 </a>

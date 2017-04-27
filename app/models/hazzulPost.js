@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 var hazzulSchema = mongoose.Schema({
-  title: String, 
+  title: String,
 	url  : String,
 	img_url: [String],
 	img_comment: [String],
@@ -11,6 +11,7 @@ var hazzulSchema = mongoose.Schema({
 	numClicks: {type: Number, default:0},
 	usernumClicks: {type: Number, default:0},
 	myClicks: {type: Number, default:0},
+  nickname: String,
 	comments: [{
 		name: String,
 		content: String
@@ -19,7 +20,7 @@ var hazzulSchema = mongoose.Schema({
 		userPost: String
 	}]
 
-     });
+});
 
 hazzulSchema.statics.findByTitle = function(title, cb) {
 	this.find({ title: new RegExp(title, 'i')}, cb);
