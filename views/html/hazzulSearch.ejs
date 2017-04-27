@@ -121,9 +121,9 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
           htmlcomment += '<div class="text-left" ><img src="/images/Favicon.ico" style="width:30px;height:27px;">&nbsp<b><font size ="4" color="#F0F8FF">' + myVar[a].userComments[x].userPost +'</b></div><br>';
         }
 
-        $('#bsPhotoGalleryModal .modal-title').html(htmltitle);
-        $('#bsPhotoGalleryModal .modal-body').html(html);
-        $('#bsPhotoGalleryModal .modal-footer').html(htmlcomment);
+        $('#hazzulModal .modal-title').html(htmltitle);
+        $('#hazzulModal .modal-body').html(html);
+        $('#hazzulModal .modal-footer').html(htmlcomment);
 
 
 
@@ -243,7 +243,7 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
 
        <% for(var i = 0; i <  issuepostModels.length;  i++) { %>
 
-         <a href ="/hazzul/<%= issuepostModels[i]._id %>" class="thumbnail" data-toggle="modal" data-target="#bsPhotoGalleryModal" style="text-decoration: none;" onclick= "getModalSorted( <%= i %>)">
+         <a href ="/hazzul/<%= issuepostModels[i]._id %>" class="thumbnail" data-toggle="modal" data-target="#hazzulModal" style="text-decoration: none;" onclick= "getModalSorted( <%= i %>)">
                 <img class="object-fit_cover" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
