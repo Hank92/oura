@@ -13,7 +13,6 @@ var request = require('request'),
 	mongoosePaginate = require('mongoose-paginate');
 
 //configuration//
-var configDB = require('./config/database.js');
 var mongoUri = process.env.MONGOLAB_URI;
 
 mongoose.connect(mongoUri);
