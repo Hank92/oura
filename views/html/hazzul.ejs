@@ -27,9 +27,6 @@
   $('body').prepend('<a href="#" class="back-to-top">Back to Top</a>');
 </script>
 <script type="text/javascript">
-  $('body').prepend('<a href="#" class="back-to-bottom">Back to Bottom</a>');
-</script>
-<script type="text/javascript">
 var amountScrolled = 30;
 
 $(window).scroll(function() {
@@ -39,29 +36,13 @@ $(window).scroll(function() {
     $('a.back-to-top').fadeOut('slow');
   }
 });
-
-$(window).scroll(function() {
-  if ( $(window).scrollTop() > amountScrolled ) {
-    $('a.back-to-bottom').fadeIn('slow');
-  } else {
-    $('a.back-to-bottom').fadeOut('slow');
-  }
-});
 </script>
 
 <script type="text/javascript">
 $('a.back-to-top').click(function() {
   $('html, body').animate({
     scrollTop: 0
-  }, 500);
-  return false;
-});
-</script>
-<script type="text/javascript">
-$('a.back-to-bottom').click(function() {
-  $('html, body').animate({
-    scrollTop: 0
-  }, 500);
+  }, 700);
   return false;
 });
 </script>
@@ -413,15 +394,9 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
 
-<<<<<<< HEAD
-                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length  %></h7>&nbsp&nbsp
-                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].myClicks  %></h7>&nbsp&nbsp
-                   <b><span class="label label-danger">실시간 인기글 <i class="fa fa-star" aria-hidden="true"></i></span></b>
-=======
                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length + issuepostModels[i].comments.length  %></h7>&nbsp&nbsp
                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks +issuepostModels[i].usernumClicks  %></h7>&nbsp&nbsp
                   <b><span class="label label-danger">실시간 인기글 <i class="fa fa-star" aria-hidden="true"></i></span></b>
->>>>>>> b37775ddecbb54b6da23a85f4fd39dcddb186940
 
                 </div>
                 </a>
@@ -439,14 +414,9 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>
 
-<<<<<<< HEAD
-                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length  %></h7>&nbsp&nbsp
-                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].myClicks  %></h7>&nbsp&nbsp
-=======
                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModels[i].userComments.length + issuepostModels[i].comments.length  %></h7>&nbsp&nbsp
                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModels[i].numClicks +issuepostModels[i].usernumClicks  %></h7>&nbsp&nbsp
                  <b><span class="label label-success">실시간 베스트 <i class="fa fa-thumbs-up" aria-hidden="true"></i></span></b>
->>>>>>> b37775ddecbb54b6da23a85f4fd39dcddb186940
 
                 </div>
                 </a>
@@ -464,13 +434,8 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
                 <div class="text-center">
                   <h5><%= issuepostModel[i].title %></h5>
 
-<<<<<<< HEAD
-                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModel[i].userComments.length   %></h7>&nbsp&nbsp
-                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModel[i].myClicks %></h7>&nbsp&nbsp
-=======
                   <h7><span class="glyphicon glyphicon-comment"></span> &nbsp&nbsp<%=issuepostModel[i].userComments.length + issuepostModel[i].comments.length  %></h7>&nbsp&nbsp
                   <h7><span class="glyphicon glyphicon-eye-open"></span> &nbsp&nbsp&nbsp<%= issuepostModel[i].numClicks +issuepostModel[i].usernumClicks  %></h7>&nbsp&nbsp
->>>>>>> b37775ddecbb54b6da23a85f4fd39dcddb186940
 
                 </div>
                 </a>
@@ -484,7 +449,6 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
 </div>
 
 <a href="#" class="back-to-top">Back to Top</a>
-<a href="#" class="back-to-bottom">Back to Bottom</a>
 
 <% if (pageCount > 1) { %>
 <div class ="text-center pagelayout">
