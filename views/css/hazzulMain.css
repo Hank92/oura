@@ -892,33 +892,33 @@ ul.pagination li a:hover {
 }
 
 
-#bsPhotoGalleryModal .modal-dialog img {
+#hazzulModal .modal-dialog img {
     border-radius: 3px;
     text-align:center;
     margin:0 auto;
     width:80%;
 }
 
- #bsPhotoGalleryModal iframe {
+ #hazzulModal iframe {
     text-align:center;
     margin:0 auto;
     width:80%;
 }
 
-#bsPhotoGalleryModal .imgcomment {
+#hazzulModal .imgcomment {
     text-align:center;
     margin:0 auto;
     font-size:16px;
 }
 
-#bsPhotoGalleryModal .modal-header {
+#hazzulModal .modal-header {
     margin:0 auto;
     font-weight: bold;
     font-size: 5px;
     width:80%;
 }
 
-#bsPhotoGalleryModal .modal-footer {
+#hazzulModal .modal-footer {
     margin:0 auto;
     width:90%;
 
