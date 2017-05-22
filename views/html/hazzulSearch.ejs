@@ -23,8 +23,7 @@
 
 <script type="text/javascript">
   $('body').prepend('<a href="#" class="back-to-top">Back to Top</a>');
-</script>
-<script type="text/javascript">
+
 var amountScrolled = 100;
 
 $(window).scroll(function() {
@@ -44,15 +43,6 @@ $('a.back-to-top').click(function() {
   return false;
 });
 </script>
-
-<script>
-    var i = 0;
-    function buttonClick() {
-        i++;
-        document.getElementById('inc').value = i;
-    }
-</script>
-
 
 <script>
 
@@ -101,7 +91,7 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
         }
 
         html += '<br>'
-        html += '<div style="text-align:center"><button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">포스트 닫기</button></div>'
+        html += '<div style="text-align:center"><a href ="/?search=<%= searchTitle %>"><button type="button" class="btn btn-primary btn-lg">포스트 닫기</button></a></div>'
         html += '<br>'
 
 
@@ -129,7 +119,20 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
 
 }
 
+$(window).load(function() {
+$('a[data-toggle="modal"]').click(function(){
+            window.location.hash = $(this).attr('href');
 
+        });
+
+  $(window.location.hash).modal('show');
+
+})
+document.onkeydown = function(e){
+   if (window.event.keyCode == 27) {
+      history.go(-1);
+   }
+};
 </script>
 
 </head>
@@ -243,7 +246,7 @@ var myVar = <%- JSON.stringify(issuepostModels) %>;
 
        <% for(var i = 0; i <  issuepostModels.length;  i++) { %>
 
-         <a href ="/hazzul/<%= issuepostModels[i]._id %>" class="thumbnail" data-toggle="modal" data-target="#hazzulModal" style="text-decoration: none;" onclick= "getModalSorted( <%= i %>)">
+         <a href ="/<%= issuepostModels[i]._id %>" class="thumbnail" data-toggle="modal" data-target="#hazzulModal" style="text-decoration: none;" onclick= "getModalSorted( <%= i %>)">
                 <img class="object-fit_cover" src="<%= issuepostModels[i].img_url[0] || issuepostModels[i].img_url[1] || issuepostModels[i].video_url[1] %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h5><%= issuepostModels[i].title %></h5>

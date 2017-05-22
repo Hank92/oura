@@ -1,19 +1,12 @@
 // app/routes.js
 
 var request = require('request');
-var cheerio = require('cheerio');
-var mongoose = require('mongoose');
-var	methodOverride = require('method-override');
 
 var issueModel = require('../app/models/hazzulPost');
 var hazzulBestModel = require('../app/models/hazzulBestPost');
 
 
 module.exports = function (app, passport){
-
-app.get('/about', function (req, res){
-	res.render('about.ejs');
-})
 
 app.get('/', function (req, res){
 
@@ -149,7 +142,7 @@ app.param('id', function(req, res, next, id){
 
 
 
-app.get('/hazzul/:id', function(req, res){
+app.get('/:id', function(req, res){
 	var postId = req.postId;
 	postId.usernumClicks += Math.floor((Math.random() * 10) + 1);
 	postId.myClicks += 1;
